@@ -37,7 +37,6 @@
     <exclude-output />
     <content url="file://$MODULE_DIR$/../../../shared/src/jvmMain">
       <sourceFolder url="file://$MODULE_DIR$/../../../shared/src/jvmMain/kotlin" type="kotlin-source" />
-      <sourceFolder url="file://$MODULE_DIR$/../../../shared/src/jvmMain/kotlin" type="kotlin-source" />
     </content>
     <orderEntry type="jdk" jdkName="Kotlin SDK" jdkType="KotlinSDK" />
     <orderEntry type="sourceFolder" forTests="false" />
