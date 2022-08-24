@@ -2,51 +2,38 @@
 <module external.linked.project.id=":shared:iosX64Test" external.linked.project.path="$MODULE_DIR$/../../../shared" external.root.project.path="$MODULE_DIR$/../../.." external.system.id="GRADLE" external.system.module.group="oradore" external.system.module.type="sourceSet" external.system.module.version="unspecified" type="JAVA_MODULE" version="4">
   <component name="FacetManager">
     <facet type="kotlin-language" name="Kotlin">
-      <configuration version="5" platform="Native (ios_x64) " allPlatforms="Native []/Native [ios_x64]" useProjectSettings="false" isTestModule="true" externalProjectId=":shared" isHmppProject="true">
+      <configuration version="4" platform="Common (experimental) " allPlatforms="JVM [1.8]/Native []/Native [general]" useProjectSettings="false" isTestModule="false" externalProjectId=":shared" isHmppProject="true">
         <dependsOnModuleNames>
           <dependsOn>:shared:commonTest</dependsOn>
           <dependsOn>:shared:iosTest</dependsOn>
         </dependsOnModuleNames>
-        <sourceSets>
-          <sourceSet>oradore.shared.commonTest</sourceSet>
-          <sourceSet>oradore.shared.iosTest</sourceSet>
-          <sourceSet>oradore.shared.iosX64Main</sourceSet>
-          <sourceSet>oradore.shared.commonMain</sourceSet>
-          <sourceSet>oradore.shared.iosMain</sourceSet>
-        </sourceSets>
-        <newMppModelJpsModuleKind>COMPILATION_AND_SOURCE_SET_HOLDER</newMppModelJpsModuleKind>
-        <externalSystemTestTasks>
-          <externalSystemTestTask>iosX64Test|:shared|iosX64</externalSystemTestTask>
-        </externalSystemTestTasks>
+        <newMppModelJpsModuleKind>SOURCE_SET_HOLDER</newMppModelJpsModuleKind>
         <compilerSettings />
         <compilerArguments>
-          <flagArguments>
-            <flagArg name="multiPlatform" arg="true" />
-          </flagArguments>
-          <stringArguments>
-            <stringArg name="apiVersion" arg="1.7" />
-            <stringArg name="languageVersion" arg="1.7" />
-          </stringArguments>
-          <arrayArguments>
-            <arrayArg name="pluginClasspaths" />
-            <arrayArg name="pluginOptions" />
-          </arrayArguments>
+          <option name="languageVersion" value="1.7" />
+          <option name="apiVersion" value="1.7" />
+          <option name="pluginOptions">
+            <array />
+          </option>
+          <option name="pluginClasspaths">
+            <array>
+              <option value="$KOTLIN_BUNDLED$/lib/kotlinx-serialization-compiler-plugin.jar" />
+            </array>
+          </option>
+          <option name="multiPlatform" value="true" />
         </compilerArguments>
       </configuration>
     </facet>
   </component>
-  <component name="NewModuleRootManager">
-    <output-test url="file://$MODULE_DIR$/../../../shared/build/classes/kotlin/iosX64/test/klib" />
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
     <content url="file://$MODULE_DIR$/../../../shared/src/iosX64Test" />
     <orderEntry type="jdk" jdkName="Kotlin SDK" jdkType="KotlinSDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - stdlib" level="project" />
-    <orderEntry type="module" module-name="oradore.shared.commonMain" scope="TEST" />
-    <orderEntry type="module" module-name="oradore.shared.commonTest" scope="TEST" production-on-test="" />
-    <orderEntry type="module" module-name="oradore.shared.iosMain" scope="TEST" />
-    <orderEntry type="module" module-name="oradore.shared.iosTest" scope="TEST" production-on-test="" />
-    <orderEntry type="module" module-name="oradore.shared.iosX64Main" scope="TEST" />
+    <orderEntry type="module" module-name="oradore.shared.commonMain" />
+    <orderEntry type="module" module-name="oradore.shared.commonTest" />
+    <orderEntry type="module" module-name="oradore.shared.iosTest" />
     <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - ARKit | ios_x64" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - AVFAudio | ios_x64" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - AVFoundation | ios_x64" level="project" />
@@ -195,6 +182,8 @@
     <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - objc | ios_x64" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - posix | ios_x64" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - zlib | ios_x64" level="project" />
+    <orderEntry type="library" name="Gradle: org.jetbrains.kotlin:kotlin-stdlib-common:1.7.10" level="project" />
+    <orderEntry type="library" name="Gradle: org.jetbrains.kotlin:kotlin-test-common:1.7.10" level="project" />
+    <orderEntry type="library" name="Gradle: org.jetbrains.kotlin:kotlin-test-annotations-common:1.7.10" level="project" />
   </component>
-  <component name="TestModuleProperties" production-module="oradore.shared.iosX64Main" />
 </module>

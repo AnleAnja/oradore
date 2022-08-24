@@ -2,35 +2,30 @@
 <module external.linked.project.id=":shared:iosArm64Main" external.linked.project.path="$MODULE_DIR$/../../../shared" external.root.project.path="$MODULE_DIR$/../../.." external.system.id="GRADLE" external.system.module.group="oradore" external.system.module.type="sourceSet" external.system.module.version="unspecified" type="JAVA_MODULE" version="4">
   <component name="FacetManager">
     <facet type="kotlin-language" name="Kotlin">
-      <configuration version="5" platform="Native (ios_arm64) " allPlatforms="Native []/Native [ios_arm64]" useProjectSettings="false" isTestModule="false" externalProjectId=":shared" isHmppProject="true">
+      <configuration version="4" platform="Common (experimental) " allPlatforms="JVM [1.8]/Native []/Native [general]" useProjectSettings="false" isTestModule="false" externalProjectId=":shared" isHmppProject="true">
         <dependsOnModuleNames>
           <dependsOn>:shared:commonMain</dependsOn>
           <dependsOn>:shared:iosMain</dependsOn>
         </dependsOnModuleNames>
-        <sourceSets>
-          <sourceSet>oradore.shared.commonMain</sourceSet>
-          <sourceSet>oradore.shared.iosMain</sourceSet>
-        </sourceSets>
-        <newMppModelJpsModuleKind>COMPILATION_AND_SOURCE_SET_HOLDER</newMppModelJpsModuleKind>
+        <newMppModelJpsModuleKind>SOURCE_SET_HOLDER</newMppModelJpsModuleKind>
         <compilerSettings />
         <compilerArguments>
-          <flagArguments>
-            <flagArg name="multiPlatform" arg="true" />
-          </flagArguments>
-          <stringArguments>
-            <stringArg name="apiVersion" arg="1.7" />
-            <stringArg name="languageVersion" arg="1.7" />
-          </stringArguments>
-          <arrayArguments>
-            <arrayArg name="pluginClasspaths" />
-            <arrayArg name="pluginOptions" />
-          </arrayArguments>
+          <option name="languageVersion" value="1.7" />
+          <option name="apiVersion" value="1.7" />
+          <option name="pluginOptions">
+            <array />
+          </option>
+          <option name="pluginClasspaths">
+            <array>
+              <option value="$KOTLIN_BUNDLED$/lib/kotlinx-serialization-compiler-plugin.jar" />
+            </array>
+          </option>
+          <option name="multiPlatform" value="true" />
         </compilerArguments>
       </configuration>
     </facet>
   </component>
-  <component name="NewModuleRootManager">
-    <output url="file://$MODULE_DIR$/../../../shared/build/classes/kotlin/iosArm64/main/klib" />
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
     <content url="file://$MODULE_DIR$/../../../shared/src/iosArm64Main" />
     <orderEntry type="jdk" jdkName="Kotlin SDK" jdkType="KotlinSDK" />
@@ -186,5 +181,6 @@
     <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - objc | ios_arm64" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - posix | ios_arm64" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - zlib | ios_arm64" level="project" />
+    <orderEntry type="library" name="Gradle: org.jetbrains.kotlin:kotlin-stdlib-common:1.7.10" level="project" />
   </component>
 </module>

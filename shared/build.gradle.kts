@@ -1,9 +1,13 @@
 plugins {
     kotlin("multiplatform")
+    kotlin("plugin.serialization") version "1.6.10"
+    //application
+    //id("kotlinx-serialization")
     id("com.android.library")
 }
 
 kotlin {
+    jvm ()
     android()
     
     listOf(
@@ -17,10 +21,19 @@ kotlin {
     }
 
     sourceSets {
-        val commonMain by getting
+        val commonMain by getting {
+            dependencies {
+
+            }
+        }
         val commonTest by getting {
             dependencies {
                 implementation(kotlin("test"))
+            }
+        }
+        val jvmMain by getting {
+            dependencies {
+
             }
         }
         val androidMain by getting

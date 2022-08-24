@@ -4,7 +4,7 @@
     <facet type="android-gradle" name="Android-Gradle">
       <configuration>
         <option name="GRADLE_PROJECT_PATH" value=":androidApp" />
-        <option name="LAST_SUCCESSFUL_SYNC_AGP_VERSION" />
+        <option name="LAST_SUCCESSFUL_SYNC_AGP_VERSION" value="7.2.2" />
         <option name="LAST_KNOWN_AGP_VERSION" value="7.2.2" />
       </configuration>
     </facet>
@@ -35,11 +35,32 @@
     </content>
     <orderEntry type="jdk" jdkName="Android API 32 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module" module-name="oradore.shared.androidAndroidTest" />
+    <orderEntry type="module" module-name="oradore.shared.androidAndroidTestDebug" />
     <orderEntry type="module" module-name="oradore.shared.androidAndroidTestRelease" />
+    <orderEntry type="module" module-name="oradore.shared.androidDebug" />
+    <orderEntry type="module" module-name="oradore.shared.androidDebugAndroidTest" />
+    <orderEntry type="module" module-name="oradore.shared.androidDebugUnitTest" />
+    <orderEntry type="module" module-name="oradore.shared.androidMain" />
+    <orderEntry type="module" module-name="oradore.shared.androidRelease" />
+    <orderEntry type="module" module-name="oradore.shared.androidReleaseUnitTest" />
+    <orderEntry type="module" module-name="oradore.shared.androidTest" />
+    <orderEntry type="module" module-name="oradore.shared.androidTestDebug" />
     <orderEntry type="module" module-name="oradore.shared.androidTestFixtures" />
     <orderEntry type="module" module-name="oradore.shared.androidTestFixturesDebug" />
     <orderEntry type="module" module-name="oradore.shared.androidTestFixturesRelease" />
+    <orderEntry type="module" module-name="oradore.shared.androidTestRelease" />
     <orderEntry type="module" module-name="oradore.shared.commonMain" />
-    <orderEntry type="module" module-name="oradore.shared.main" />
+    <orderEntry type="module" module-name="oradore.shared.commonTest" />
+    <orderEntry type="module" module-name="oradore.shared.iosArm64Main" />
+    <orderEntry type="module" module-name="oradore.shared.iosArm64Test" />
+    <orderEntry type="module" module-name="oradore.shared.iosMain" />
+    <orderEntry type="module" module-name="oradore.shared.iosSimulatorArm64Main" />
+    <orderEntry type="module" module-name="oradore.shared.iosSimulatorArm64Test" />
+    <orderEntry type="module" module-name="oradore.shared.iosTest" />
+    <orderEntry type="module" module-name="oradore.shared.iosX64Main" />
+    <orderEntry type="module" module-name="oradore.shared.iosX64Test" />
+    <orderEntry type="module" module-name="oradore.shared.jvmMain" />
+    <orderEntry type="module" module-name="oradore.shared.jvmTest" />
   </component>
 </module>
