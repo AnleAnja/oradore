@@ -191,8 +191,34 @@
     <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - objc | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - posix | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - zlib | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="module-library" scope="PROVIDED">
+      <library name="Gradle: io.ktor:ktor-utils-cinterop-threadUtils | [(ios_arm32, ios_arm64, ios_simulator_arm64, ios_x64)]">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../../.gradle/kotlin/sourceSetMetadata/shared.oradore/iosMain/cinterop/io.ktor-ktor-utils/io.ktor_ktor-utils-cinterop-threadUtils.klib!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="library" name="Gradle: io.ktor:ktor-serialization-kotlinx-json:commonMain:2.0.3" level="project" />
     <orderEntry type="library" name="Gradle: org.jetbrains.kotlin:kotlin-stdlib-common:1.7.10" level="project" />
+    <orderEntry type="library" name="Gradle: org.jetbrains.kotlinx:kotlinx-serialization-json:commonMain:1.3.3" level="project" />
+    <orderEntry type="library" name="Gradle: io.ktor:ktor-client-json:commonMain:2.0.3" level="project" />
+    <orderEntry type="library" name="Gradle: io.ktor:ktor-client-logging:commonMain:2.0.3" level="project" />
+    <orderEntry type="library" name="Gradle: io.ktor:ktor-client-content-negotiation:commonMain:2.0.3" level="project" />
+    <orderEntry type="library" name="Gradle: io.ktor:ktor-client-core:commonMain:2.0.3" level="project" />
+    <orderEntry type="library" name="Gradle: org.jetbrains.kotlinx:kotlinx-coroutines-core:commonMain:1.6.4" level="project" />
+    <orderEntry type="library" name="Gradle: org.jetbrains.kotlinx:kotlinx-coroutines-core:concurrentMain:1.6.4" level="project" />
+    <orderEntry type="library" name="Gradle: io.ktor:ktor-serialization-kotlinx:commonMain:2.0.3" level="project" />
+    <orderEntry type="library" name="Gradle: io.ktor:ktor-http:commonMain:2.0.3" level="project" />
+    <orderEntry type="library" name="Gradle: org.jetbrains.kotlinx:kotlinx-serialization-core:commonMain:1.3.3" level="project" />
+    <orderEntry type="library" name="Gradle: io.ktor:ktor-serialization:commonMain:2.0.3" level="project" />
+    <orderEntry type="library" name="Gradle: io.ktor:ktor-events:commonMain:2.0.3" level="project" />
+    <orderEntry type="library" name="Gradle: io.ktor:ktor-websocket-serialization:commonMain:2.0.3" level="project" />
+    <orderEntry type="library" name="Gradle: io.ktor:ktor-utils:commonMain:2.0.3" level="project" />
     <orderEntry type="library" name="Gradle: org.jetbrains.kotlin:kotlin-test-common:1.7.10" level="project" />
+    <orderEntry type="library" name="Gradle: io.ktor:ktor-websockets:commonMain:2.0.3" level="project" />
     <orderEntry type="library" name="Gradle: org.jetbrains.kotlin:kotlin-test-annotations-common:1.7.10" level="project" />
+    <orderEntry type="library" name="Gradle: io.ktor:ktor-io:commonMain:2.0.3" level="project" />
   </component>
 </module>

@@ -181,6 +181,40 @@
     <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - objc | ios_x64" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - posix | ios_x64" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - zlib | ios_x64" level="project" />
+    <orderEntry type="library" name="Gradle: io.ktor:ktor-serialization-kotlinx-json:commonMain:2.0.3" level="project" />
     <orderEntry type="library" name="Gradle: org.jetbrains.kotlin:kotlin-stdlib-common:1.7.10" level="project" />
+    <orderEntry type="library" name="Gradle: org.jetbrains.kotlinx:kotlinx-serialization-json:commonMain:1.3.3" level="project" />
+    <orderEntry type="library" name="Gradle: org.jetbrains.kotlinx:kotlinx-serialization-json:nativeMain:1.3.3" level="project" />
+    <orderEntry type="library" name="Gradle: io.ktor:ktor-client-json:commonMain:2.0.3" level="project" />
+    <orderEntry type="library" name="Gradle: io.ktor:ktor-client-json:posixMain:2.0.3" level="project" />
+    <orderEntry type="library" name="Gradle: io.ktor:ktor-client-logging:commonMain:2.0.3" level="project" />
+    <orderEntry type="library" name="Gradle: io.ktor:ktor-client-logging:posixMain:2.0.3" level="project" />
+    <orderEntry type="library" name="Gradle: io.ktor:ktor-client-content-negotiation:commonMain:2.0.3" level="project" />
+    <orderEntry type="library" name="Gradle: io.ktor:ktor-client-content-negotiation:posixMain:2.0.3" level="project" />
+    <orderEntry type="library" name="Gradle: io.ktor:ktor-client-core:commonMain:2.0.3" level="project" />
+    <orderEntry type="library" name="Gradle: io.ktor:ktor-client-core:posixMain:2.0.3" level="project" />
+    <orderEntry type="library" name="Gradle: org.jetbrains.kotlinx:kotlinx-coroutines-core:commonMain:1.6.4" level="project" />
+    <orderEntry type="library" name="Gradle: org.jetbrains.kotlinx:kotlinx-coroutines-core:concurrentMain:1.6.4" level="project" />
+    <orderEntry type="library" name="Gradle: org.jetbrains.kotlinx:kotlinx-coroutines-core:nativeDarwinMain:1.6.4" level="project" />
+    <orderEntry type="library" name="Gradle: org.jetbrains.kotlinx:kotlinx-coroutines-core:nativeMain:1.6.4" level="project" />
+    <orderEntry type="library" name="Gradle: io.ktor:ktor-serialization-kotlinx:commonMain:2.0.3" level="project" />
+    <orderEntry type="library" name="Gradle: io.ktor:ktor-http:commonMain:2.0.3" level="project" />
+    <orderEntry type="library" name="Gradle: io.ktor:ktor-http:posixMain:2.0.3" level="project" />
+    <orderEntry type="library" name="Gradle: org.jetbrains.kotlinx:atomicfu:commonMain:0.17.3" level="project" />
+    <orderEntry type="library" name="Gradle: org.jetbrains.kotlinx:atomicfu:nativeInterop:0.17.3" level="project" />
+    <orderEntry type="library" name="Gradle: org.jetbrains.kotlinx:atomicfu:nativeMain:0.17.3" level="project" />
+    <orderEntry type="library" name="Gradle: org.jetbrains.kotlinx:kotlinx-serialization-core:commonMain:1.3.3" level="project" />
+    <orderEntry type="library" name="Gradle: io.ktor:ktor-serialization:commonMain:2.0.3" level="project" />
+    <orderEntry type="library" name="Gradle: org.jetbrains.kotlinx:kotlinx-serialization-core:nativeMain:1.3.3" level="project" />
+    <orderEntry type="library" name="Gradle: io.ktor:ktor-events:commonMain:2.0.3" level="project" />
+    <orderEntry type="library" name="Gradle: io.ktor:ktor-websocket-serialization:commonMain:2.0.3" level="project" />
+    <orderEntry type="library" name="Gradle: io.ktor:ktor-utils:commonMain:2.0.3" level="project" />
+    <orderEntry type="library" name="Gradle: io.ktor:ktor-utils:darwinMain:2.0.3" level="project" />
+    <orderEntry type="library" name="Gradle: io.ktor:ktor-utils:nixMain:2.0.3" level="project" />
+    <orderEntry type="library" name="Gradle: io.ktor:ktor-utils:posixMain:2.0.3" level="project" />
+    <orderEntry type="library" name="Gradle: io.ktor:ktor-websockets:commonMain:2.0.3" level="project" />
+    <orderEntry type="library" name="Gradle: io.ktor:ktor-io:commonMain:2.0.3" level="project" />
+    <orderEntry type="library" name="Gradle: io.ktor:ktor-websockets:posixMain:2.0.3" level="project" />
+    <orderEntry type="library" name="Gradle: io.ktor:ktor-io:posixMain:2.0.3" level="project" />
   </component>
 </module>

@@ -1,3 +1,8 @@
+val serializationVersion = "1.3.3"
+val ktorVersion = "2.0.3"
+val coroutineVersion = "1.6.4"
+val slf4jVersion = "1.7.30"
+
 plugins {
     kotlin("multiplatform")
     kotlin("plugin.serialization") version "1.6.10"
@@ -23,7 +28,14 @@ kotlin {
     sourceSets {
         val commonMain by getting {
             dependencies {
+                implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:$serializationVersion")
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutineVersion")
 
+                implementation("io.ktor:ktor-client-core:$ktorVersion")
+                implementation("io.ktor:ktor-client-json:$ktorVersion")
+                implementation("io.ktor:ktor-client-logging:$ktorVersion")
+                implementation("io.ktor:ktor-client-content-negotiation:$ktorVersion")
+                implementation("io.ktor:ktor-serialization-kotlinx-json:$ktorVersion")
             }
         }
         val commonTest by getting {
@@ -33,7 +45,8 @@ kotlin {
         }
         val jvmMain by getting {
             dependencies {
-
+                implementation("io.ktor:ktor-client-java:$ktorVersion")
+                implementation("org.slf4j:slf4j-simple:$slf4jVersion")
             }
         }
         val androidMain by getting

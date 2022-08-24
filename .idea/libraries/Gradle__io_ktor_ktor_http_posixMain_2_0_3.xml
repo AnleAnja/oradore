@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: io.ktor:ktor-http:posixMain:2.0.3" type="kotlin.native">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/.gradle/kotlin/sourceSetMetadata/shared.oradore/iosMain/implementation/io.ktor-ktor-http/io.ktor-ktor-http-posixMain.klib!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.ktor/ktor-http/2.0.3/b6b064239a35a20e5c6cca2f541cddd2c398d846/ktor-http-2.0.3-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

@@ -9,3 +9,4 @@ pluginManagement {
 rootProject.name = "oradore"
 include(":androidApp")
 include(":shared")
+include(":backend")
