@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module external.linked.project.id=":shared:iosMain" external.linked.project.path="$MODULE_DIR$/../../../shared" external.root.project.path="$MODULE_DIR$/../../.." external.system.id="GRADLE" external.system.module.group="oradore" external.system.module.type="sourceSet" external.system.module.version="unspecified" type="JAVA_MODULE" version="4">
+  <component name="FacetManager">
+    <facet type="kotlin-language" name="Kotlin">
+      <configuration version="5" platform="Common (experimental) " allPlatforms="Native []/Native [ios_arm64]/Native [ios_simulator_arm64]/Native [ios_x64]" useProjectSettings="false" isTestModule="false" externalProjectId=":shared" isHmppProject="true">
+        <dependsOnModuleNames>:shared:commonMain</dependsOnModuleNames>
+        <newMppModelJpsModuleKind>SOURCE_SET_HOLDER</newMppModelJpsModuleKind>
+        <compilerSettings />
+        <compilerArguments>
+          <flagArguments>
+            <flagArg name="multiPlatform" arg="true" />
+          </flagArguments>
+          <stringArguments>
+            <stringArg name="apiVersion" arg="1.7" />
+            <stringArg name="languageVersion" arg="1.7" />
+          </stringArguments>
+          <arrayArguments>
+            <arrayArg name="pluginClasspaths">
+              <args>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-scripting-jvm/1.7.10/c1e3bade3e9795023867dce31404736995037e4f/kotlin-scripting-jvm-1.7.10.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-scripting-common/1.7.10/bddf009658701ba5fb98e40e7877dcce7d8695ee/kotlin-scripting-common-1.7.10.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib/1.7.10/d2abf9e77736acc4450dc4a3f707fa2c10f5099d/kotlin-stdlib-1.7.10.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib-common/1.7.10/bac80c520d0a9e3f3673bc2658c6ed02ef45a76a/kotlin-stdlib-common-1.7.10.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains/annotations/13.0/919f0dfe192fb4e063e7dacadee7f8bb9a2672a9/annotations-13.0.jar</arg>
+                <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-script-runtime/1.7.10/c99c87a6988d8fd8d5142e9ed5c9f34a7cf561ee/kotlin-script-runtime-1.7.10.jar</arg>
+              </args>
+            </arrayArg>
+            <arrayArg name="pluginOptions" />
+          </arrayArguments>
+        </compilerArguments>
+      </configuration>
+    </facet>
+  </component>
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$/../../../shared/src/iosMain">
+      <sourceFolder url="file://$MODULE_DIR$/../../../shared/src/iosMain/kotlin" type="kotlin-source" />
+    </content>
+    <orderEntry type="jdk" jdkName="Kotlin SDK" jdkType="KotlinSDK" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - stdlib" level="project" />
+    <orderEntry type="module" module-name="oradore.shared.commonMain" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - ARKit | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - AVFAudio | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - AVFoundation | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - AVKit | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - Accelerate | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - Accessibility | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - Accounts | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - AdServices | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - AdSupport | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - AddressBook | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - AddressBookUI | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - AppClip | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - AppTrackingTransparency | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - AssetsLibrary | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - AudioToolbox | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - AuthenticationServices | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - AutomaticAssessmentConfiguration | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - BackgroundTasks | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - BusinessChat | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - CFNetwork | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - CallKit | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - CarPlay | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - ClassKit | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - ClockKit | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - CloudKit | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - CommonCrypto | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - Contacts | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - ContactsUI | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - CoreAudio | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - CoreAudioKit | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - CoreAudioTypes | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - CoreBluetooth | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - CoreData | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - CoreFoundation | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - CoreGraphics | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - CoreHaptics | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - CoreImage | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - CoreLocation | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - CoreLocationUI | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - CoreMIDI | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - CoreML | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - CoreMedia | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - CoreMotion | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - CoreNFC | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - CoreServices | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - CoreSpotlight | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - CoreTelephony | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - CoreText | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - CoreVideo | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - CryptoTokenKit | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - DataDetection | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - DeviceCheck | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - EAGL | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - EventKit | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - EventKitUI | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - ExposureNotification | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - ExternalAccessory | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - FileProvider | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - FileProviderUI | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - Foundation | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - GLKit | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - GSS | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - GameController | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - GameKit | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - GameplayKit | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - HealthKit | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - HealthKitUI | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - HomeKit | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - IOSurface | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - IdentityLookup | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - IdentityLookupUI | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - ImageCaptureCore | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - ImageIO | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - Intents | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - IntentsUI | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - JavaScriptCore | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - LinkPresentation | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - LocalAuthentication | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - MLCompute | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - MapKit | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - MediaAccessibility | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - MediaPlayer | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - MediaSetup | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - MediaToolbox | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - MessageUI | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - Messages | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - Metal | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - MetalKit | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - MetalPerformanceShaders | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - MetalPerformanceShadersGraph | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - MetricKit | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - MobileCoreServices | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - ModelIO | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - MultipeerConnectivity | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - NaturalLanguage | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - NearbyInteraction | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - Network | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - NetworkExtension | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - NewsstandKit | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - NotificationCenter | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - OpenAL | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - OpenGLES | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - OpenGLES2 | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - OpenGLES3 | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - OpenGLESCommon | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - PDFKit | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - PHASE | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - PassKit | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - PencilKit | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - Photos | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - PhotosUI | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - PushKit | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - QuartzCore | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - QuickLook | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - QuickLookThumbnailing | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - ReplayKit | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - SafariServices | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - SceneKit | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - ScreenTime | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - Security | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - SensorKit | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - ShazamKit | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - Social | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - SoundAnalysis | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - Speech | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - SpriteKit | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - StoreKit | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - SystemConfiguration | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - ThreadNetwork | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - Twitter | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - UIKit | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - UniformTypeIdentifiers | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - UserNotifications | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - UserNotificationsUI | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - VideoSubscriberAccount | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - VideoToolbox | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - Vision | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - VisionKit | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - WatchConnectivity | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - WebKit | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - _CoreData_CloudKit | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - builtin | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - darwin | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - iAd | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - iconv | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - objc | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - posix | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Kotlin/Native 1.7.10 - zlib | [(ios_arm64, ios_simulator_arm64, ios_x64)]" level="project" />
+    <orderEntry type="library" name="Gradle: org.jetbrains.kotlin:kotlin-stdlib-common:1.7.10" level="project" />
+  </component>
+</module>

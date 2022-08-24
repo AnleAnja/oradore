@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/oradore.iml" filepath="$PROJECT_DIR$/.idea/modules/oradore.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/androidApp/oradore.androidApp.iml" filepath="$PROJECT_DIR$/.idea/modules/androidApp/oradore.androidApp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/androidApp/oradore.androidApp.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/androidApp/oradore.androidApp.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/androidApp/oradore.androidApp.main.iml" filepath="$PROJECT_DIR$/.idea/modules/androidApp/oradore.androidApp.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/androidApp/oradore.androidApp.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/androidApp/oradore.androidApp.unitTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/shared/oradore.shared.iml" filepath="$PROJECT_DIR$/.idea/modules/shared/oradore.shared.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/shared/oradore.shared.androidAndroidTestRelease.iml" filepath="$PROJECT_DIR$/.idea/modules/shared/oradore.shared.androidAndroidTestRelease.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/shared/oradore.shared.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/shared/oradore.shared.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/shared/oradore.shared.androidTestFixtures.iml" filepath="$PROJECT_DIR$/.idea/modules/shared/oradore.shared.androidTestFixtures.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/shared/oradore.shared.androidTestFixturesDebug.iml" filepath="$PROJECT_DIR$/.idea/modules/shared/oradore.shared.androidTestFixturesDebug.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/shared/oradore.shared.androidTestFixturesRelease.iml" filepath="$PROJECT_DIR$/.idea/modules/shared/oradore.shared.androidTestFixturesRelease.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/shared/oradore.shared.commonMain.iml" filepath="$PROJECT_DIR$/.idea/modules/shared/oradore.shared.commonMain.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/shared/oradore.shared.commonTest.iml" filepath="$PROJECT_DIR$/.idea/modules/shared/oradore.shared.commonTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/shared/oradore.shared.iosArm64Main.iml" filepath="$PROJECT_DIR$/.idea/modules/shared/oradore.shared.iosArm64Main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/shared/oradore.shared.iosArm64Test.iml" filepath="$PROJECT_DIR$/.idea/modules/shared/oradore.shared.iosArm64Test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/shared/oradore.shared.iosMain.iml" filepath="$PROJECT_DIR$/.idea/modules/shared/oradore.shared.iosMain.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/shared/oradore.shared.iosSimulatorArm64Main.iml" filepath="$PROJECT_DIR$/.idea/modules/shared/oradore.shared.iosSimulatorArm64Main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/shared/oradore.shared.iosSimulatorArm64Test.iml" filepath="$PROJECT_DIR$/.idea/modules/shared/oradore.shared.iosSimulatorArm64Test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/shared/oradore.shared.iosTest.iml" filepath="$PROJECT_DIR$/.idea/modules/shared/oradore.shared.iosTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/shared/oradore.shared.iosX64Main.iml" filepath="$PROJECT_DIR$/.idea/modules/shared/oradore.shared.iosX64Main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/shared/oradore.shared.iosX64Test.iml" filepath="$PROJECT_DIR$/.idea/modules/shared/oradore.shared.iosX64Test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/shared/oradore.shared.main.iml" filepath="$PROJECT_DIR$/.idea/modules/shared/oradore.shared.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/shared/oradore.shared.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/shared/oradore.shared.unitTest.iml" />
+    </modules>
+  </component>
+</project>
