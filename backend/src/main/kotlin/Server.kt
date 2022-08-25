@@ -28,7 +28,7 @@ fun main() {
             get("/hello") {
                 call.respondText(greet())
             }
-            get("/programm") {
+            get("/program") {
                 val result = api.fetchProgram()
                 call.respond(result)
             }

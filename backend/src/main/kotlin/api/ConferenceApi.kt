@@ -4,8 +4,10 @@ import io.ktor.client.*
 import io.ktor.client.call.*
 import io.ktor.client.request.*
 import io.ktor.http.*
-import io.ktor.server.plugins.contentnegotiation.*
+import io.ktor.client.plugins.contentnegotiation.*
+import io.ktor.serialization.kotlinx.json.*
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.buildJsonArray
 
 @Serializable
@@ -45,7 +47,11 @@ data class PostBody(
 class ConferenceApi(val url: String) {
 
     private val http = HttpClient() {
-
+        install(ContentNegotiation) {
+            json(Json {
+                ignoreUnknownKeys = true
+            })
+        }
     }
 
     suspend fun fetchProgram(): ProgramResult {

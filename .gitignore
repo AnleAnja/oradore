@@ -30,4 +30,6 @@ hs_err_pid*
 androidApp/build/
 backend/build/
 shared/build/
+.gradle/
 *.salive
+*.lock
