@@ -6,12 +6,27 @@ import io.ktor.client.request.*
 import io.ktor.http.*
 import io.ktor.client.plugins.contentnegotiation.*
 import io.ktor.serialization.kotlinx.json.*
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
+import kotlinx.serialization.descriptors.SerialKind
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.buildJsonArray
 
 @Serializable
-data class ProgramEntry(val description: String, val name: String)
+data class ProgramEntry(
+    val name: String,
+    @SerialName("lectureId")
+    val id: String,
+    val description: String,
+    val tags: List<Category>,
+    @SerialName("dateTimeRange")
+    val timeRange: TimeRange,
+    val roomId: String,
+    val speakers: List<String>,
+    val speakerRole: Map<String, String>,
+    val isCanceled: Boolean,
+    val format: Format,
+    )
 
 @Serializable
 data class ProgramResult(val lectures: List<ProgramEntry>)
@@ -43,6 +58,56 @@ data class PostBody(
     val cursor: String,
     val limit: Int,
 )
+
+data class Speaker(val id: String, val role: Role)
+
+enum class Role(val label: String) {
+    SPEAKER("Speaker"),
+    MODERATOR("Moderation")
+}
+
+@Serializable
+data class TimeRange (val start: Long, val end: Long)
+
+@Serializable
+enum class Format(val label: String) {
+    @SerialName("wxp")
+    LIGHTNING_TALK("Kurzvortrag"),
+    @SerialName("snh")
+    TALK("Vortrag"),
+    @SerialName("vjv")
+    WORKSHOP("Workshop"),
+    @SerialName("qdn")
+    DISCUSSION("Podiumsdiskussion"),
+    @SerialName("ctj")
+    TOUR("Führung"),
+    @SerialName("nci")
+    KEYNOTE("Keynote");
+
+    override fun toString(): String {
+        return label
+    }
+}
+
+@Serializable
+enum class Category(val label: String) {
+    @SerialName("rwm")
+    DATA_DRIVEN("Data Driven"),
+    @SerialName("ygj")
+    PRIVACY("Privacy + Datenschutz"),
+    @SerialName("cxh")
+    DIGITAL_FACTORY("Digital Factory"),
+    @SerialName("euf")
+    DIGITALIZATION("Digitalisierung im Public Sector"),
+    @SerialName("xoo")
+    IT_DRIVEN("IT Driven"),
+    @SerialName("irf")
+    DIGITAL_PRODUCTS("Digitale Produkte + Geschäftsmodelle"),
+    @SerialName("tlj")
+    AGILE_ORGANIZATION("Auf dem Weg zur agilen Organisation"),
+    @SerialName("uww")
+    CUSTOMER_MARKET_CENTRALIZATION("Digitale Kunden- und Marktzentrierung")
+}
 
 class ConferenceApi(val url: String) {
 
