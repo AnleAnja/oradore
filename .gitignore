@@ -31,5 +31,6 @@ androidApp/build/
 backend/build/
 shared/build/
 .gradle/
+.idea/
 *.salive
 *.lock
