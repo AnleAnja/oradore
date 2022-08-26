@@ -3,6 +3,8 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 val serializationVersion = "1.3.3"
 val ktorVersion = "2.0.3"
 val coroutineVersion = "1.6.4"
+val exposedVersion = "0.39.2"
+val postgresVersion = "42.5.0"
 
 plugins {
     id("kotlin-platform-jvm")
@@ -11,6 +13,11 @@ plugins {
 }
 
 dependencies {
+    implementation("org.jetbrains.exposed:exposed-core:$exposedVersion")
+    implementation("org.jetbrains.exposed:exposed-dao:$exposedVersion")
+    implementation("org.jetbrains.exposed:exposed-jdbc:$exposedVersion")
+    implementation("org.postgresql:postgresql:$postgresVersion")
+
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:$serializationVersion")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutineVersion")
 
