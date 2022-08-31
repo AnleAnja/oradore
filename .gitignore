@@ -34,3 +34,4 @@ shared/build/
 .idea/
 *.salive
 *.lock
+local.properties
