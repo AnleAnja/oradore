@@ -10,9 +10,9 @@ data class Speaker(
     val firstName: String,
     val lastName: String,
     @SerialName("photoMedium")
-    val imgLarge: String,
+    val imgLarge: String?,
     @SerialName("photo")
-    val imgPreview: String,
+    val imgPreview: String?,
     val bio: String,
     @SerialName("companyName")
     val company: String,

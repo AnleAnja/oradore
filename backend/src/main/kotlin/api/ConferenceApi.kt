@@ -1,6 +1,8 @@
 package api
 
 import database.ProgramEntryDao
+import database.RoomDao
+import database.SpeakerDao
 import io.ktor.client.*
 import io.ktor.client.call.*
 import io.ktor.client.plugins.contentnegotiation.*
@@ -173,12 +175,23 @@ enum class Category(val abbrev: String) {
 }
 
 @Serializable
-data class SpeakerApiResult(val speakerById: Map<String, Map<String, Speaker>>)
+data class SpeakerResult(val model: Speaker)
 
 @Serializable
-data class RoomApiResult(val roomById: Map<String, Map<String, Room>>)
+data class SpeakerApiResult(val speakerById: Map<String, SpeakerResult>)
 
-class ConferenceApi(val url: String) {
+@Serializable
+data class RoomResult(val model: Room)
+
+@Serializable
+data class RoomApiResult(val roomById: Map<String, RoomResult>)
+
+class ConferenceApi(
+    val url: String,
+    val programEntryDao: ProgramEntryDao,
+    val roomDao: RoomDao,
+    val speakerDao: SpeakerDao
+) {
 
     private val http = HttpClient() {
         install(ContentNegotiation) {
@@ -201,7 +214,7 @@ class ConferenceApi(val url: String) {
         100
     )
 
-    suspend fun fetchProgram() {
+    suspend fun fetchAndSaveProgram() {
         val programEntries = fetchProgramEntries()
         val roomIds = programEntries.map {
             it.roomId
@@ -214,19 +227,9 @@ class ConferenceApi(val url: String) {
         val allSpeakers = fetchSpeakers(speakerIds)
         val allRooms = fetchRooms(roomIds)
 
-        val program = programEntries.map { programEntry ->
-            val room = allRooms.find { it.id == programEntry.roomId } !!
-            val speakers = allSpeakers.filter { s ->
-                programEntry.speakers.any {
-                    it.id == s.id
-                }
-            }
-            Triple(programEntry, room, speakers)
-        }
-        val dao = ProgramEntryDao()
-        program.forEach { (programEntry, room, speakers) ->
-            dao.insert(room, speakers, programEntry)
-        }
+        roomDao.insertRooms(allRooms)
+        speakerDao.insertSpeakers(allSpeakers)
+        programEntryDao.insertProgramEntries(programEntries)
     }
 
     suspend fun fetchSpeakers(speakerIds: List<String>): List<Speaker> {
@@ -252,11 +255,7 @@ class ConferenceApi(val url: String) {
                 )
             )
         }.body<SpeakerApiResult>()
-            .speakerById.flatMap { speakers ->
-                speakers.value.map {
-                    it.value
-                }
-            }
+            .speakerById.map { it.value.model }
     }
 
     suspend fun fetchRooms(roomIds: List<String>): List<Room> {
@@ -282,11 +281,7 @@ class ConferenceApi(val url: String) {
                 )
             )
         }.body<RoomApiResult>()
-            .roomById.flatMap { rooms ->
-                rooms.value.map {
-                    it.value
-                }
-            }
+            .roomById.map { it.value.model }
     }
 
     suspend fun fetchProgramEntries(): List<ProgramEntry> {

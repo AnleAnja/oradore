@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="Kotlin/Native 1.7.10 - CoreNFC | [(ios_arm64, ios_simulator_arm64, ios_x64)]" type="kotlin.native">
-    <CLASSES>
-      <root url="file://$USER_HOME$/.konan/kotlin-native-prebuilt-macos-x86_64-1.7.10/klib/commonized/1.7.10/(ios_arm64, ios_simulator_arm64, ios_x64)/org.jetbrains.kotlin.native.platform.CoreNFC" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>

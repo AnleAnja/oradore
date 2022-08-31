@@ -1,7 +1,9 @@
 import api.ConferenceApi
 import com.example.oradore.Greeting
 import database.DatabaseFactory
-import io.ktor.client.plugins.*
+import database.ProgramEntryDao
+import database.RoomDao
+import database.SpeakerDao
 import io.ktor.http.*
 import io.ktor.serialization.kotlinx.json.*
 import io.ktor.server.application.*
@@ -17,8 +19,12 @@ fun greet(): String {
 }
 
 fun main() {
-    DatabaseFactory.init(false)
-    val api = ConferenceApi("https://event.talque.com/view/v1")
+    DatabaseFactory.init(true)
+    val programEntryDao = ProgramEntryDao()
+    val roomDao = RoomDao()
+    val speakerDao = SpeakerDao()
+    val api =
+        ConferenceApi("https://event.talque.com/view/v1", programEntryDao, roomDao, speakerDao)
 
     embeddedServer(Netty, 9090) {
         install(ContentNegotiation) {
@@ -31,9 +37,21 @@ fun main() {
             get("/hello") {
                 call.respondText(greet())
             }
+            post("/program") {
+                api.fetchAndSaveProgram()
+                call.respond(HttpStatusCode(200, "ok"))
+            }
             get("/program") {
-                val result = api.fetchProgramEntries()
+                val result = programEntryDao.getAllProgramEntries()
                 call.respond(result)
+            }
+            get("/rooms") {
+                val rooms = roomDao.getAllRooms()
+                call.respond(rooms)
+            }
+            get("/speakers") {
+                val speakers = speakerDao.getAllSpeakers()
+                call.respond(speakers)
             }
         }
     }.start(wait = true)
