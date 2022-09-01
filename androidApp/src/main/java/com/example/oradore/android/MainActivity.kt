@@ -44,11 +44,22 @@ fun currentRoute(navController: NavHostController): String? {
 fun NavigationConfig(
     navController: NavHostController
 ) {
-    NavHost(navController = navController, startDestination = BottomNavigationScreens.Program.route) {
-        composable(BottomNavigationScreens.Program.route) { }
-        composable(BottomNavigationScreens.Speakers.route) { }
-        composable(BottomNavigationScreens.Rooms.route) { }
-        composable(BottomNavigationScreens.Favorites.route) { }
+    NavHost(
+        navController = navController,
+        startDestination = BottomNavigationScreens.Program.route
+    ) {
+        composable(BottomNavigationScreens.Program.route) {
+            Text("Programm Liste")
+        }
+        composable(BottomNavigationScreens.Speakers.route) {
+            Text("Speaker Liste")
+        }
+        composable(BottomNavigationScreens.Rooms.route) {
+            Text("Raum Liste")
+        }
+        composable(BottomNavigationScreens.Favorites.route) {
+            Text("Favoriten Liste")
+        }
     }
 }
 
@@ -85,7 +96,7 @@ fun Frame() {
                 }
             }
         }
-    ) {
+    ) { _ ->
         NavigationConfig(navController)
     }
 }
