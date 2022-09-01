@@ -19,10 +19,10 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 
 sealed class BottomNavigationScreens(val route: String, val icon: ImageVector) {
-    object Program : BottomNavigationScreens("Program", Icons.Rounded.List)
-    object Speakers : BottomNavigationScreens("Speakers", Icons.Rounded.People)
-    object Rooms : BottomNavigationScreens("Rooms", Icons.Rounded.Room)
-    object Favorites : BottomNavigationScreens("Favorites", Icons.Rounded.Grade)
+    object Program : BottomNavigationScreens("Programm", Icons.Rounded.List)
+    object Speakers : BottomNavigationScreens("Speaker", Icons.Rounded.People)
+    object Rooms : BottomNavigationScreens("Räume", Icons.Rounded.Room)
+    object Favorites : BottomNavigationScreens("Favoriten", Icons.Rounded.Grade)
 }
 
 class MainActivity : AppCompatActivity() {
@@ -50,15 +50,31 @@ fun NavigationConfig(
     ) {
         composable(BottomNavigationScreens.Program.route) {
             Text("Programm Liste")
+            TopAppBar(
+                title = { Text("Programm") },
+                backgroundColor = MaterialTheme.colors.primary
+            )
         }
         composable(BottomNavigationScreens.Speakers.route) {
             Text("Speaker Liste")
+            TopAppBar(
+                title = { Text("Speaker") },
+                backgroundColor = MaterialTheme.colors.primary
+            )
         }
         composable(BottomNavigationScreens.Rooms.route) {
             Text("Raum Liste")
+            TopAppBar(
+                title = { Text("Räume") },
+                backgroundColor = MaterialTheme.colors.primary
+            )
         }
         composable(BottomNavigationScreens.Favorites.route) {
             Text("Favoriten Liste")
+            TopAppBar(
+                title = { Text("Favoriten") },
+                backgroundColor = MaterialTheme.colors.primary
+            )
         }
     }
 }
@@ -73,12 +89,6 @@ fun Frame() {
         BottomNavigationScreens.Favorites
     )
     Scaffold(
-        topBar = {
-            TopAppBar(
-                title = { Text("Titel") },
-                backgroundColor = MaterialTheme.colors.primary
-            )
-        },
         bottomBar = {
             BottomNavigation {
                 val currentRoute = currentRoute(navController)
