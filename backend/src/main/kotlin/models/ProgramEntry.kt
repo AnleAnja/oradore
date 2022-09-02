@@ -1,5 +1,8 @@
 package models
 
+import com.example.oradore.models.Category
+import com.example.oradore.models.Format
+import com.example.oradore.models.TimeRange
 import kotlinx.serialization.Serializable
 
 @Serializable

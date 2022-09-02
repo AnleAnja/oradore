@@ -1,5 +1,6 @@
-package models
+package com.example.oradore.models
 
+import com.example.oradore.models.*
 import kotlinx.serialization.Serializable
 
 @Serializable

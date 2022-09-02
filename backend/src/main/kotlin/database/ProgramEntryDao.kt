@@ -1,13 +1,13 @@
 package database
 
-import models.Category
-import models.Format
+import com.example.oradore.models.Category
+import com.example.oradore.models.Format
 import models.ProgramEntry
-import models.TimeRange
+import com.example.oradore.models.TimeRange
 import database.DatabaseFactory.dbQuery
-import models.ProgramEntryPreview
-import models.Room
-import models.SpeakerPreview
+import com.example.oradore.models.ProgramEntryPreview
+import com.example.oradore.models.Room
+import com.example.oradore.models.SpeakerPreview
 import org.jetbrains.exposed.sql.insert
 import org.jetbrains.exposed.sql.selectAll
 

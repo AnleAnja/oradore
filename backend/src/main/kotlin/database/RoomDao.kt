@@ -3,7 +3,7 @@ package database
 import database.DatabaseFactory.dbQuery
 import database.Rooms.id
 import database.Rooms.name
-import models.Room
+import com.example.oradore.models.Room
 import org.jetbrains.exposed.sql.insert
 import org.jetbrains.exposed.sql.selectAll
 

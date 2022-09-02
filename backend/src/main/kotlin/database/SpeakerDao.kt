@@ -1,7 +1,7 @@
 package database
 
 import database.DatabaseFactory.dbQuery
-import models.Speaker
+import com.example.oradore.models.Speaker
 import org.jetbrains.exposed.sql.insert
 import org.jetbrains.exposed.sql.selectAll
 
