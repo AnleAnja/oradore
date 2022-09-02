@@ -15,7 +15,7 @@ struct MainView: View {
         }.tag(2)
       RoomsView()
         .tabItem {
-          Label("Räume", systemImage: "mappin.circle")
+          Label("Räume", systemImage: "location")
         }.tag(3)
       FavoritesView()
         .tabItem {
