@@ -20,26 +20,32 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import androidx.lifecycle.viewmodel.compose.viewModel
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            var screen by remember { mutableStateOf(0) }
-            Scaffold(
-                topBar = { TopBar(screen) }
-            ) { padding -> // We need to pass scaffold's inner padding to content. That's why we use Box.
-                Box(modifier = Modifier.padding(padding)) {
-                    Navigation()
-                }
-            }
+            Content()
         }
     }
 }
 
 @Composable
-fun TopBar(screen: Int) {
-    when (screen) {
+fun Content() {
+    var viewModel: AppViewModel = viewModel()
+    Scaffold(
+        topBar = { TopBar(viewModel) }
+    ) { padding -> // We need to pass scaffold's inner padding to content. That's why we use Box.
+        Box(modifier = Modifier.padding(padding)) {
+            Navigation(viewModel)
+        }
+    }
+}
+
+@Composable
+fun TopBar(viewModel: AppViewModel) {
+    when (viewModel.screen) {
         0 -> TopAppBar(
             title = { Text("Programm") },
             backgroundColor = MaterialTheme.colors.primary
@@ -60,11 +66,11 @@ fun TopBar(screen: Int) {
 }
 
 @Composable
-fun Navigation() {
+fun Navigation(viewModel: AppViewModel) {
     val navController = rememberNavController()
     NavHost(navController = navController, startDestination = "main") {
         composable("main") {
-            MainScreen(navController = navController)
+            MainScreen(navController = navController, viewModel)
         }
         composable(
             "details/{item}",
@@ -78,11 +84,11 @@ fun Navigation() {
 }
 
 @Composable
-fun MainScreen(navController: NavController) {
+fun MainScreen(navController: NavController, viewModel: AppViewModel) {
     val textState = remember { mutableStateOf(TextFieldValue("")) }
     Column {
         SearchView(textState)
         List(navController = navController, state = textState)
-        Frame()
+        BottomBar(viewModel)
     }
 }

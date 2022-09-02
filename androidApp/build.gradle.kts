@@ -34,6 +34,7 @@ dependencies {
     implementation("androidx.appcompat:appcompat:1.5.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     implementation("androidx.compose.ui:ui:1.2.1")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.5.1")
     // Tooling support (Previews, etc.)
     implementation("androidx.compose.ui:ui-tooling:1.2.1")
     // Foundation (Border, Background, Box, Image, Scroll, shapes, animations, etc.)

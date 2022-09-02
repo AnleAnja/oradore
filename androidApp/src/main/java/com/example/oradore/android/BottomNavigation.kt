@@ -14,12 +14,13 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import androidx.lifecycle.viewmodel.compose.viewModel
 
-sealed class BottomNavigationScreens(val route: String, val icon: ImageVector) {
-    object Program : BottomNavigationScreens("Programm", Icons.Rounded.List)
-    object Speakers : BottomNavigationScreens("Speaker", Icons.Rounded.People)
-    object Rooms : BottomNavigationScreens("Räume", Icons.Rounded.Room)
-    object Favorites : BottomNavigationScreens("Favoriten", Icons.Rounded.Grade)
+sealed class BottomNavigationScreens(val route: String, val icon: ImageVector, val index: Int) {
+    object Program : BottomNavigationScreens("Programm", Icons.Rounded.List, 0)
+    object Speakers : BottomNavigationScreens("Speaker", Icons.Rounded.People, 1)
+    object Rooms : BottomNavigationScreens("Räume", Icons.Rounded.Room, 2)
+    object Favorites : BottomNavigationScreens("Favoriten", Icons.Rounded.Grade, 3)
 }
 
 @Composable
@@ -48,7 +49,9 @@ fun NavigationConfig(
 }
 
 @Composable
-fun Frame() {
+fun BottomBar(
+    viewModel: AppViewModel
+) {
     val navController = rememberNavController()
     val navItems = listOf(
         BottomNavigationScreens.Program,
@@ -66,6 +69,7 @@ fun Frame() {
                         label = { Text(screen.route) },
                         selected = currentRoute == screen.route,
                         onClick = {
+                            viewModel.screen = screen.index
                             if (currentRoute != screen.route) {
                                 navController.navigate(screen.route)
                             }
