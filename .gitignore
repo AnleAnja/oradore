@@ -35,6 +35,7 @@ shared/build/
 .idea/
 *.salive
 *.lock
+local.properties
 
 # --- iOS ---
 # Xcode
