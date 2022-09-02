@@ -1,9 +1,9 @@
 package database
 
-import api.Room
 import database.DatabaseFactory.dbQuery
 import database.Rooms.id
 import database.Rooms.name
+import models.Room
 import org.jetbrains.exposed.sql.insert
 import org.jetbrains.exposed.sql.selectAll
 
@@ -19,12 +19,13 @@ class RoomDao {
         }
     }
 
-    suspend fun getAllRooms(): List<Room> = dbQuery {
-        Rooms.selectAll().map {
-            Room(
-                it[id],
-                it[name]
-            )
+    suspend fun getAllRooms(): List<Room> =
+        dbQuery {
+            Rooms.selectAll().map {
+                Room(
+                    it[id],
+                    it[name]
+                )
+            }
         }
-    }
 }

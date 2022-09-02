@@ -12,9 +12,10 @@ import io.ktor.serialization.kotlinx.json.*
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
+import models.*
 
 @Serializable
-data class ProgramEntryJson(
+private data class ProgramEntryJson(
     val name: String,
     @SerialName("lectureId")
     val id: String,
@@ -30,23 +31,22 @@ data class ProgramEntryJson(
 )
 
 @Serializable
-data class ProgramEntry(
-    val name: String,
-    val id: String,
-    val description: String,
-    val tags: List<Category>,
-    val timeRange: TimeRange,
-    val roomId: String,
-    val speakers: List<SpeakerRef>,
-    val isCanceled: Boolean,
-    val format: Format,
-)
+private data class ProgramResult(val lectures: List<ProgramEntryJson>)
 
 @Serializable
-data class ProgramResult(val lectures: List<ProgramEntryJson>)
+private data class SpeakerResult(val model: Speaker)
 
 @Serializable
-data class DetailPostBody(
+private data class SpeakerApiResult(val speakerById: Map<String, SpeakerResult>)
+
+@Serializable
+private data class RoomResult(val model: Room)
+
+@Serializable
+private data class RoomApiResult(val roomById: Map<String, RoomResult>)
+
+@Serializable
+private data class DetailPostBody(
     val sessionId: String,
     val locale: String,
     val config: Boolean,
@@ -65,7 +65,7 @@ data class DetailPostBody(
 )
 
 @Serializable
-data class ProgramPostBody(
+private data class ProgramPostBody(
     val sessionId: String,
     val locale: String,
     val orgId: String,
@@ -78,119 +78,11 @@ data class ProgramPostBody(
     val limit: Int,
 )
 
-@Serializable
-data class SpeakerRef(val id: String, val role: Role)
-
-@Serializable
-enum class Role(val label: String) {
-    @SerialName("speaker")
-    SPEAKER("Speaker"),
-
-    @SerialName("moderation")
-    MODERATOR("Moderation")
-}
-
-@Serializable
-data class TimeRange(val start: Long, val end: Long)
-
-@Serializable
-enum class Format(val abbrev: String) {
-    @SerialName("Kurzvortrag")
-    LIGHTNING_TALK("wxp"),
-
-    @SerialName("Vortrag")
-    TALK("snh"),
-
-    @SerialName("Workshop")
-    WORKSHOP("vjv"),
-
-    @SerialName("Podiumsdiskussion")
-    DISCUSSION("qdn"),
-
-    @SerialName("Führung")
-    TOUR("ctj"),
-
-    @SerialName("Keynote")
-    KEYNOTE("nci"),
-
-    @SerialName("")
-    OTHER("");
-
-    companion object {
-        fun fromAbbrev(abbrev: String) = when (abbrev) {
-            "wxp" -> LIGHTNING_TALK
-            "snh" -> TALK
-            "vjv" -> WORKSHOP
-            "qdn" -> DISCUSSION
-            "ctj" -> TOUR
-            "nci" -> KEYNOTE
-            else -> OTHER
-        }
-    }
-
-}
-
-@Serializable
-enum class Category(val abbrev: String) {
-    @SerialName("Data Driven")
-    DATA_DRIVEN("rwm"),
-
-    @SerialName("Privacy + Datenschutz")
-    PRIVACY("ygj"),
-
-    @SerialName("Digital Factory")
-    DIGITAL_FACTORY("cxh"),
-
-    @SerialName("Digitalisierung im Public Sector")
-    DIGITALIZATION("euf"),
-
-    @SerialName("IT Driven")
-    IT_DRIVEN("xoo"),
-
-    @SerialName("Digitale Produkte + Geschäftsmodelle")
-    DIGITAL_PRODUCTS("irf"),
-
-    @SerialName("Auf dem Weg zur agilen Organisation")
-    AGILE_ORGANIZATION("tlj"),
-
-    @SerialName("Digitale Kunden- und Marktzentrierung")
-    CUSTOMER_MARKET_CENTRALIZATION("uww"),
-
-    @SerialName("")
-    OTHER("");
-
-    companion object {
-        fun fromAbbrev(abbrev: String) = when (abbrev) {
-            "rwm" -> DATA_DRIVEN
-            "ygj" -> PRIVACY
-            "cxh" -> DIGITAL_FACTORY
-            "euf" -> DIGITALIZATION
-            "xoo" -> IT_DRIVEN
-            "irf" -> DIGITAL_PRODUCTS
-            "tlj" -> AGILE_ORGANIZATION
-            "uww" -> CUSTOMER_MARKET_CENTRALIZATION
-            else -> OTHER
-        }
-    }
-}
-
-@Serializable
-data class SpeakerResult(val model: Speaker)
-
-@Serializable
-data class SpeakerApiResult(val speakerById: Map<String, SpeakerResult>)
-
-@Serializable
-data class RoomResult(val model: Room)
-
-@Serializable
-data class RoomApiResult(val roomById: Map<String, RoomResult>)
-
 class ConferenceApi(
-    val url: String,
-    val programEntryDao: ProgramEntryDao,
-    val roomDao: RoomDao,
-    val speakerDao: SpeakerDao
+    private val baseUrl: String,
+    private val programEntryDao: ProgramEntryDao,
+    private val roomDao: RoomDao,
+    private val speakerDao: SpeakerDao
 ) {
 
     private val http = HttpClient() {
@@ -216,14 +108,12 @@ class ConferenceApi(
 
     suspend fun fetchAndSaveProgram() {
         val programEntries = fetchProgramEntries()
-        val roomIds = programEntries.map {
-            it.roomId
-        }.distinct()
-        val speakerIds = programEntries.flatMap { speakerRef ->
-            speakerRef.speakers.map {
-                it.id
-            }
-        }.distinct()
+        val roomIds = programEntries
+            .map { it.roomId }
+            .distinct()
+        val speakerIds = programEntries
+            .flatMap { speakerRef -> speakerRef.speakers.map { it.id } }
+            .distinct()
         val allSpeakers = fetchSpeakers(speakerIds)
         val allRooms = fetchRooms(roomIds)
 
@@ -232,8 +122,8 @@ class ConferenceApi(
         programEntryDao.insertProgramEntries(programEntries)
     }
 
-    suspend fun fetchSpeakers(speakerIds: List<String>): List<Speaker> {
-        return http.post(url + "/read") {
+    private suspend fun fetchSpeakers(speakerIds: List<String>): List<Speaker> =
+        http.post("$baseUrl/read") {
             contentType(ContentType.Application.Json)
             setBody(
                 DetailPostBody(
@@ -256,10 +146,9 @@ class ConferenceApi(
             )
         }.body<SpeakerApiResult>()
             .speakerById.map { it.value.model }
-    }
 
-    suspend fun fetchRooms(roomIds: List<String>): List<Room> {
-        return http.post(url + "/read") {
+    private suspend fun fetchRooms(roomIds: List<String>): List<Room> =
+        http.post("$baseUrl/read") {
             contentType(ContentType.Application.Json)
             setBody(
                 DetailPostBody(
@@ -282,16 +171,14 @@ class ConferenceApi(
             )
         }.body<RoomApiResult>()
             .roomById.map { it.value.model }
-    }
 
-    suspend fun fetchProgramEntries(): List<ProgramEntry> {
-        return http.post(url + "/list/lectures") {
+    private suspend fun fetchProgramEntries(): List<ProgramEntry> =
+        http.post("$baseUrl/list/lectures") {
             contentType(ContentType.Application.Json)
             setBody(programPostBody)
         }.body<ProgramResult>()
             .lectures
             .map(::toProgramEntry)
-    }
 
     private fun toProgramEntry(entry: ProgramEntryJson) =
         ProgramEntry(

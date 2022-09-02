@@ -1,7 +1,7 @@
 package database
 
-import api.Speaker
 import database.DatabaseFactory.dbQuery
+import models.Speaker
 import org.jetbrains.exposed.sql.insert
 import org.jetbrains.exposed.sql.selectAll
 
@@ -30,25 +30,26 @@ class SpeakerDao {
         }
     }
 
-    suspend fun getAllSpeakers(): List<Speaker> = dbQuery {
-        Speakers.selectAll().map {
-            Speaker(
-                it[Speakers.id],
-                it[Speakers.firstName],
-                it[Speakers.lastName],
-                it[Speakers.imgLarge],
-                it[Speakers.imgPreview],
-                it[Speakers.bio],
-                it[Speakers.company],
-                it[Speakers.jobTitle],
-                it[Speakers.location],
-                it[Speakers.website],
-                it[Speakers.linkedin],
-                it[Speakers.xing],
-                it[Speakers.twitter],
-                it[Speakers.instagram],
-                it[Speakers.facebook]
-            )
+    suspend fun getAllSpeakers(): List<Speaker> =
+        dbQuery {
+            Speakers.selectAll().map {
+                Speaker(
+                    it[Speakers.id],
+                    it[Speakers.firstName],
+                    it[Speakers.lastName],
+                    it[Speakers.imgLarge],
+                    it[Speakers.imgPreview],
+                    it[Speakers.bio],
+                    it[Speakers.company],
+                    it[Speakers.jobTitle],
+                    it[Speakers.location],
+                    it[Speakers.website],
+                    it[Speakers.linkedin],
+                    it[Speakers.xing],
+                    it[Speakers.twitter],
+                    it[Speakers.instagram],
+                    it[Speakers.facebook]
+                )
+            }
         }
-    }
 }

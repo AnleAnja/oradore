@@ -1,32 +1,15 @@
 package database
 
-import api.*
+import models.Category
+import models.Format
+import models.ProgramEntry
+import models.TimeRange
 import database.DatabaseFactory.dbQuery
-import kotlinx.serialization.Serializable
+import models.ProgramEntryPreview
+import models.Room
+import models.SpeakerPreview
 import org.jetbrains.exposed.sql.insert
 import org.jetbrains.exposed.sql.selectAll
-
-@Serializable
-data class ProgramEntryPreview(
-    val name: String,
-    val id: String,
-    val tags: Category,
-    val timeRange: TimeRange,
-    val room: Room,
-    val speakers: List<SpeakerPreview>,
-    val isCanceled: Boolean,
-    val format: Format
-)
-
-@Serializable
-data class SpeakerPreview(
-    val id: String,
-    val firstName: String,
-    val lastName: String,
-    val imgPreview: String?,
-    val company: String,
-    val jobTitle: String
-)
 
 class ProgramEntryDao {
 
@@ -56,44 +39,45 @@ class ProgramEntryDao {
         }
     }
 
-    suspend fun getAllProgramEntries(): List<ProgramEntryPreview> = dbQuery {
-        ProgramEntries
-            .innerJoin(Rooms)
-            .innerJoin(ProgramSpeakers)
-            .innerJoin(Speakers)
-            .selectAll()
-            .map {
-                ProgramEntryPreview(
-                    it[ProgramEntries.name],
-                    it[ProgramEntries.id],
-                    Category.fromAbbrev(it[ProgramEntries.tag]),
-                    TimeRange(
-                        it[ProgramEntries.startTime],
-                        it[ProgramEntries.endTime]
-                    ),
-                    Room(
-                        it[Rooms.id],
-                        it[Rooms.name],
-                    ),
-                    listOf(
-                        SpeakerPreview(
-                            it[Speakers.id],
-                            it[Speakers.firstName],
-                            it[Speakers.lastName],
-                            it[Speakers.imgPreview],
-                            it[Speakers.company],
-                            it[Speakers.jobTitle]
-                        )
-                    ),
-                    it[ProgramEntries.isCanceled],
-                    Format.fromAbbrev(it[ProgramEntries.format])
-                )
-            }
-            .groupBy { it.id }
-            .map {
-                it.value.first().copy(speakers = it.value.map {
-                    it.speakers.first()
-                })
-            }
-    }
+    suspend fun getAllProgramEntries(): List<ProgramEntryPreview> =
+        dbQuery {
+            ProgramEntries
+                .innerJoin(Rooms)
+                .innerJoin(ProgramSpeakers)
+                .innerJoin(Speakers)
+                .selectAll()
+                .map {
+                    ProgramEntryPreview(
+                        it[ProgramEntries.name],
+                        it[ProgramEntries.id],
+                        Category.fromAbbrev(it[ProgramEntries.tag]),
+                        TimeRange(
+                            it[ProgramEntries.startTime],
+                            it[ProgramEntries.endTime]
+                        ),
+                        Room(
+                            it[Rooms.id],
+                            it[Rooms.name],
+                        ),
+                        listOf(
+                            SpeakerPreview(
+                                it[Speakers.id],
+                                it[Speakers.firstName],
+                                it[Speakers.lastName],
+                                it[Speakers.imgPreview],
+                                it[Speakers.company],
+                                it[Speakers.jobTitle]
+                            )
+                        ),
+                        it[ProgramEntries.isCanceled],
+                        Format.fromAbbrev(it[ProgramEntries.format])
+                    )
+                }
+                .groupBy { it.id }
+                .map {
+                    it.value.first().copy(
+                        speakers = it.value.map { it.speakers.first() }
+                    )
+                }
+        }
 }
