@@ -1,5 +1,4 @@
 import api.ConferenceApi
-import com.example.oradore.Greeting
 import database.DatabaseFactory
 import database.ProgramEntryDao
 import database.RoomDao
