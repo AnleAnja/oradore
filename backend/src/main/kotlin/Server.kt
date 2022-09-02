@@ -14,10 +14,6 @@ import io.ktor.server.plugins.cors.routing.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 
-fun greet(): String {
-    return Greeting().greeting()
-}
-
 fun main() {
     DatabaseFactory.init(true)
     val programEntryDao = ProgramEntryDao()
@@ -34,9 +30,6 @@ fun main() {
             anyHost()
         }
         routing {
-            get("/hello") {
-                call.respondText(greet())
-            }
             post("/program") {
                 api.fetchAndSaveProgram()
                 call.respond(HttpStatusCode(200, "ok"))
