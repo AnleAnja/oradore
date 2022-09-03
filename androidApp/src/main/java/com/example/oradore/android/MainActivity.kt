@@ -23,7 +23,6 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.example.oradore.models.ProgramEntryPreview
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -99,14 +98,18 @@ fun MainScreen(navController: NavController, viewModel: AppViewModel) {
                 viewModel.fetchProgramEntries()
                 textState.value = TextFieldValue("") // reset search
                 ProgramListView(viewModel.programEntries, textState) { programEntry ->
-                    navigateToProgramEntryDetailScreen(navController, programEntry)
+                    navigateToDetailScreen(navController, programEntry.id)
                 }
             }
             composable(BottomNavigationScreens.Speakers.route) {
                 Text("B")
             }
             composable(BottomNavigationScreens.Rooms.route) {
-                Text("C")
+                viewModel.fetchRooms()
+                textState.value = TextFieldValue("") // reset search
+                RoomListView(viewModel.rooms, textState) { room ->
+                    navigateToDetailScreen(navController, room.id)
+                }
             }
             composable(BottomNavigationScreens.Favorites.route) {
                 Text("D")
@@ -115,11 +118,11 @@ fun MainScreen(navController: NavController, viewModel: AppViewModel) {
     }
 }
 
-fun navigateToProgramEntryDetailScreen(
+fun navigateToDetailScreen(
     navController: NavController,
-    programEntry: ProgramEntryPreview
+    id: String
 ) {
-    navController.navigate("details/${programEntry.id}") {
+    navController.navigate("details/$id") {
         popUpTo("main") { saveState = true }
         launchSingleTop = true
         restoreState = true
