@@ -2,7 +2,7 @@ package database
 
 import com.example.oradore.models.Category
 import com.example.oradore.models.Format
-import models.ProgramEntry
+import com.example.oradore.models.ProgramEntry
 import com.example.oradore.models.TimeRange
 import database.DatabaseFactory.dbQuery
 import com.example.oradore.models.ProgramEntryPreview
