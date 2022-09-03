@@ -3,6 +3,7 @@ package com.example.oradore.api
 import com.example.oradore.models.*
 
 object DummyData {
+
     fun ProgramEntriesPreview(): List<ProgramEntryPreview> {
         return listOf(
             ProgramEntryPreview(
@@ -106,6 +107,7 @@ object DummyData {
             )
         )
     }
+
     fun ProgramEntries(): List<ProgramEntry> {
         return listOf(
             ProgramEntry(
@@ -178,7 +180,7 @@ object DummyData {
                     1663418400000,
                     1663419600000
                 ),
-                    "sF1w3rpkux6tnJbLDxJd",
+                "sF1w3rpkux6tnJbLDxJd",
 
                 listOf(
                     SpeakerRef(
@@ -192,4 +194,118 @@ object DummyData {
         )
     }
 
+    fun Speakers(): List<Speaker> {
+        return listOf(
+            Speaker(
+                "4XEBwxPK45xEAKiJcZAX",
+                "Prof. Dr. Christian",
+                "Kohls",
+                "https://lh3.googleusercontent.com/P1d-hcFUDhp66KP4DbVRrMN2ALN2LsPLBOiv_cxvNHhLwuNsqILfPZLr2MgQnyw56fnGtccsQvATow4M0uOcoyqDmSHobUZe",
+                "https://lh3.googleusercontent.com/LVMaavah77lrbrDtE_TSqrZgoEFyQy-EfSuVxjlPMJCzk7V2yw7Gz5xwVNZQMxz7IQXry0MRwJjla2xwWT7saEYKfr13keFd",
+                "",
+                "TH Köln",
+                "Dekan",
+                "Köln",
+                "",
+                "",
+                "",
+                "",
+                "",
+                ""
+            ),
+            Speaker(
+                "s9OWMkGDmr2j1xHDpfWD",
+                "Torsten",
+                "Winterberg",
+                "https://lh3.googleusercontent.com/QlIbMelebRB7Gf7lm8RiITj8ZdnJp6rkdWgaKAdPGHFdnbmFXB82hmnZpIQliidV_hue7lnNcACgt4aCtkZW9z3Ia5kg6Nmi1-w",
+                "https://lh3.googleusercontent.com/b8tNeS2Zl_-agfWyUQ12PK949Zbozp4QZhmCxAKL6PoRxQXG7XfOsC7wfXLnwSFNNuHO4urtwc-VJADjcXls3jWSPJbUYcLv",
+                "",
+                "OPITZ CONSULTING / Innovation Hub",
+                "Director / Geschäftsführer",
+                "Gummersbach",
+                "",
+                "",
+                "",
+                "",
+                "",
+                ""
+            ),
+            Speaker(
+                "Hsy8aJRoXTHyjpkvE0zy",
+                "Anja",
+                "Bertels",
+                "https://lh3.googleusercontent.com/up0NNRX7lZcT1Ztkfhk9ryM_xObj0zdLZQEJDCwjridi8trtGP10SHs9WqJwRRDgcxtZCdsjBGNf8sLeIwWT7XKvgmlwHRUt6Q",
+                "https://lh3.googleusercontent.com/RqwR-9xipWVLXPrp_QiO1p7a5P60LiUmwBe1UAtijNNF-pEaaww0tdrlCsHVKZvoRbSOkr3MLSDBbTsE5Wi96cjNJS65qJhjDg",
+                "",
+                "TH Köln",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                ""
+            ),
+            Speaker(
+                "tNtYblnu6AzGB6BR1zl3",
+                "Alex",
+                "Dobrynin",
+                "https://lh3.googleusercontent.com/wzWSP9EI7j1_n0VA3JXt5qzWjb3fIZCXs6RVr1iuFgGREHzVhYLiZ0KqTliDyWqfjGFNWB__s_Km4WxrFTt1ceMwgyn_AFXnpQ",
+                "https://lh3.googleusercontent.com/Chko2wf0JS10BoJ7hVhbQwL0vU-3nCdoirzP7qrcXewtXH0yEX5Fg5iMqabO6Vlis_i1elbHg04VHj8w2sK5QFpT8ZW4X6Hy",
+                "Softwaredeveloper, Autor, Dozent",
+                "TH Köln",
+                "Wissenschaftlicher Mitarbeiter",
+                "Gummersbach",
+                "www.alex-dobrynin.com",
+                "/in/alex-dobrynin-6a345b245/",
+                "profile/Alex_Dobrynin/cv",
+                "alexdobry",
+                "",
+                ""
+            ),
+            Speaker(
+                "ASGNjBJw5G91x979hKoR",
+                "Dominik",
+                "Deimel",
+                "https://lh3.googleusercontent.com/f8Ma7YUGE_VzkNF23LHLjdHtLTM1-uJSe7iMmnmjCepk6mnyDGhrD8BUwJE3f88F-B7qBKg1QrFuSvvlVFCtHt0k5LqRvmtUpDY",
+                "https://lh3.googleusercontent.com/tJpbbka7EkmgqwwqO4Q3W4KYSZUFb7BY3v_KyEZjNA2io6apV3cUjA-tzq0BX7ykjkyZdhuK8HukPJNbPUo8ABrjeLEOFI3n",
+                "",
+                "TH Köln",
+                "Wissenschaftlicher Mitarbeiter",
+                "Gummersbach",
+                "",
+                "",
+                "",
+                "",
+                "",
+                ""
+            )
+        )
+    }
+
+    fun Rooms(): List<Room> {
+        return listOf(
+            Room(
+                "ka2ITleGSa6l92ZjzjNR",
+                "Raum 3106 | Steinmüller-Babcock-Hörsaal"
+            ),
+            Room(
+                "8HpEkr7FJ6aXMhyChcuo",
+                "Raum 3103"
+            ),
+            Room(
+                "q5ziDJLrl5LRgDTKqx0a",
+                "Raum 3102 | PFERD-Hörsaal"
+            ),
+            Room(
+                "Jj7lxXz7Jw8CKS1vnSVf",
+                "Raum 0401/0402 | FERCHAU-Hörsaal"
+            ),
+            Room(
+                "Z47wC8xGHqBvyMa6DDtu",
+                "Serious Playground | Halle 51"
+            )
+        )
+    }
 }
