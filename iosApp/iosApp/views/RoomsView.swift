@@ -7,31 +7,41 @@
 //
 
 import SwiftUI
+import shared
+
+let rooms = DummyData.shared.ProgramEntriesPreview().map {
+    $0.room
+}
 
 struct RoomsView: View {
-  let rooms = ["room 1", "room 2", "room 3", "room 4"]
-  
-  @State private var searchText = ""
-  
-  private var searchResults: [String] {
-    if searchText.isEmpty {
-      return rooms
-    } else {
-      return rooms.filter { $0.contains(searchText) }
-    }
-  }
-  
-  var body: some View {
-    NavigationView {
-      List {
-        ForEach(searchResults, id: \.self) { room in
-          NavigationLink(destination: Text(room)) {
-            Text(room)
-          }
+    
+    @State private var searchText = ""
+    
+    private var searchResults: [Room] {
+        if searchText.isEmpty {
+            return rooms
+        } else {
+            return rooms.filter {
+                $0.name.contains(searchText)
+            }
         }
-      }
-      .navigationTitle("Räume")
-      .searchable(text: $searchText)
     }
-  }
+    
+    var body: some View {
+        NavigationView {
+            List {
+                ForEach(searchResults, id: \.self) { room in
+                    NavigationLink(destination: Text(room.id)) {
+                        VStack(alignment: .leading) {
+                            Spacer()
+                            Text(room.name)
+                            Spacer()
+                        }
+                    }
+                }
+                .navigationTitle("Räume")
+                .searchable(text: $searchText)
+            }
+        }
+    }
 }
