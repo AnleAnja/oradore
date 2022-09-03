@@ -7,12 +7,15 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.CircularProgressIndicator
-import androidx.compose.material.Divider
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.KeyboardArrowDown
+import androidx.compose.material.icons.filled.KeyboardArrowRight
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
@@ -45,23 +48,60 @@ fun ProgramListView(
         }
     }
 
-    LazyColumn(modifier = Modifier.fillMaxWidth()) {
-        visibleProgramEntries
-            .groupBy { it.timeRange.start }
+    val entries = visibleProgramEntries
+        .groupBy { it.timeRange.start }
+
+    val collapsed = remember { mutableStateOf(emptySet<Long>()) }
+
+    LazyColumn( // LazyVStack / List
+        modifier = Modifier.fillMaxWidth()
+    ) {
+        entries
             .forEach { (start, entries) ->
                 stickyHeader {
-                    Text(
-                        text = "··· ab ${timestampLabel(start)} ···",
+                    Row(
                         modifier = Modifier
                             .fillParentMaxWidth()
-                            .background(Color.White),
-                        textAlign = TextAlign.Center,
-                        style = MaterialTheme.typography.body2,
-                        fontWeight = FontWeight.Bold
-                    )
+                            .background(Color.White)
+                            .height(25.dp),
+                        horizontalArrangement = Arrangement.Center,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Spacer(modifier = Modifier.weight(1f))
+                        Text(
+                            text = "··· ab ${timestampLabel(start)} ···",
+                            textAlign = TextAlign.Center,
+                            style = MaterialTheme.typography.body2,
+                            fontWeight = FontWeight.Bold
+                        )
+                        Spacer(modifier = Modifier.weight(1f))
+                        IconButton(
+                            modifier = Modifier
+                                .padding(end = 10.dp)
+                                .size(30.dp),
+                            onClick = {
+                                if (collapsed.value.contains(start)) {
+                                    collapsed.value -= start
+                                } else {
+                                    collapsed.value += start
+                                }
+                            },
+                        ) {
+                            val icon =
+                                if (collapsed.value.contains(start)) Icons.Filled.KeyboardArrowRight
+                                else Icons.Filled.KeyboardArrowDown
+                            Icon(
+                                icon,
+                                contentDescription = "Localized description",
+                                tint = MaterialTheme.colors.primary,
+                            )
+                        }
+                    }
                 }
-                items(entries) { entry ->
-                    ProgramEntryPreviewView(entry, onClick)
+                if (!collapsed.value.contains(start)) {
+                    items(entries) { entry -> // ForEach
+                        ProgramEntryPreviewView(entry, onClick)
+                    }
                 }
             }
     }
@@ -74,7 +114,7 @@ fun ProgramEntryPreviewView(
 ) {
     val typo = MaterialTheme.typography
 
-    Row(
+    Row( // HStack
         modifier = Modifier
             .clickable(onClick = { onClick(programEntry) })
             .padding(8.dp)
@@ -88,7 +128,7 @@ fun ProgramEntryPreviewView(
                 .fillMaxHeight(1f)
                 .width(2.dp)
         )
-        Column(Modifier.padding(start = 8.dp)) {
+        Column(Modifier.padding(start = 8.dp)) { // VStack
             Text(
                 text = programEntry.format.label,
                 style = typo.body2,
@@ -179,5 +219,7 @@ private fun containsSearchText(entry: ProgramEntryPreview, searchText: String): 
             entry.speakers.any { speaker ->
                 speaker.firstName.lowercase().contains(searchText) ||
                         speaker.lastName.lowercase().contains(searchText) ||
-                        speaker.company.lowercase().contains(searchText)
-            }
+                        speaker.company.lowercase().contains(searchText) ||
+                        speaker.jobTitle.lowercase().contains(searchText)
+            } ||
+            entry.format.label.lowercase().contains(searchText)

@@ -78,11 +78,11 @@ fun Navigation(viewModel: AppViewModel) {
             MainScreen(navController, viewModel)
         }
         composable(
-            "details/{item}",
-            arguments = listOf(navArgument("item") { type = NavType.StringType })
+            "details/{id}",
+            arguments = listOf(navArgument("id") { type = NavType.StringType })
         ) { backStackEntry ->
-            backStackEntry.arguments?.getString("item")?.let { item ->
-                DetailsScreen(item = item)
+            backStackEntry.arguments?.getString("id")?.let { id ->
+                DetailsScreen(id)
             }
         }
     }
@@ -119,7 +119,7 @@ fun navigateToProgramEntryDetailScreen(
     navController: NavController,
     programEntry: ProgramEntryPreview
 ) {
-    navController.navigate("details/${programEntry.name}") {
+    navController.navigate("details/${programEntry.id}") {
         popUpTo("main") { saveState = true }
         launchSingleTop = true
         restoreState = true
