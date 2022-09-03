@@ -1,6 +1,5 @@
 package com.example.oradore.android
 
-import DetailsScreen
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
@@ -77,12 +76,18 @@ fun Navigation(viewModel: AppViewModel) {
             MainScreen(navController, viewModel)
         }
         composable(
-            "details/{id}",
+            "program/{id}",
             arguments = listOf(navArgument("id") { type = NavType.StringType })
         ) { backStackEntry ->
-            backStackEntry.arguments?.getString("id")?.let { id ->
-                DetailsScreen(id)
-            }
+            backStackEntry.arguments?.getString("id")
+                // TODO all of this can be removed as soon as we hit the actual http api in shared
+                ?.let { viewModel.programEntryById(it) }
+                ?.let { e ->
+                    val maybeRoom = viewModel.roomById(e.roomId) ?: return@let null
+                    val mayBeSpeakers = viewModel.speakerPreviewByProgramId(e.id) ?: return@let null
+                    Triple(e, maybeRoom, mayBeSpeakers)
+                }
+                ?.let { (e, r, s) -> ProgramDetailView(e, r, s, viewModel) }
         }
     }
 }
@@ -126,7 +131,8 @@ fun navigateToDetailScreen(
     navController: NavController,
     id: String
 ) {
-    navController.navigate("details/$id") {
+
+    navController.navigate("program/${programEntry.id}") {
         popUpTo("main") { saveState = true }
         launchSingleTop = true
         restoreState = true

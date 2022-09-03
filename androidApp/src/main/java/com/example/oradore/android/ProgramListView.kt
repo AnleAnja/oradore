@@ -27,9 +27,6 @@ import androidx.compose.ui.unit.dp
 import coil.compose.SubcomposeAsyncImage
 import com.example.oradore.models.ProgramEntryPreview
 import com.example.oradore.models.SpeakerPreview
-import com.example.oradore.models.TimeRange
-import java.text.SimpleDateFormat
-import java.util.*
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -69,7 +66,7 @@ fun ProgramListView(
                     ) {
                         Spacer(modifier = Modifier.weight(1f))
                         Text(
-                            text = "··· ab ${timestampLabel(start)} ···",
+                            text = "··· ab ${start.formated} ···",
                             textAlign = TextAlign.Center,
                             style = MaterialTheme.typography.body2,
                             fontWeight = FontWeight.Bold
@@ -92,7 +89,7 @@ fun ProgramListView(
                                 else Icons.Filled.KeyboardArrowDown
                             Icon(
                                 icon,
-                                contentDescription = "Localized description",
+                                contentDescription = "collapse program entries",
                                 tint = MaterialTheme.colors.primary,
                             )
                         }
@@ -108,7 +105,7 @@ fun ProgramListView(
 }
 
 @Composable
-fun ProgramEntryPreviewView(
+private fun ProgramEntryPreviewView(
     programEntry: ProgramEntryPreview,
     onClick: (ProgramEntryPreview) -> Unit
 ) {
@@ -137,7 +134,7 @@ fun ProgramEntryPreviewView(
                 fontWeight = FontWeight.Bold
             )
             Text(
-                text = "${timeRangeLabel(programEntry.timeRange)} in ${programEntry.room.name}",
+                text = "${programEntry.timeRange.formated} in ${programEntry.room.name}",
                 style = typo.body2,
                 modifier = Modifier.padding(bottom = 4.dp)
             )
@@ -155,7 +152,7 @@ fun ProgramEntryPreviewView(
 }
 
 @Composable
-fun SpeakerPreviewView(speaker: SpeakerPreview, isLast: Boolean) {
+private fun SpeakerPreviewView(speaker: SpeakerPreview, isLast: Boolean) {
     val typo = MaterialTheme.typography
 
     Row(
@@ -197,20 +194,6 @@ fun SpeakerPreviewView(speaker: SpeakerPreview, isLast: Boolean) {
                 .size(55.dp)
         )
     }
-
-}
-
-private fun timeRangeLabel(timeRange: TimeRange): String {
-    val f = SimpleDateFormat("HH:mm")
-    val s = f.format(Date(timeRange.start))
-    val e = f.format(Date(timeRange.end))
-    return "$s - $e Uhr"
-}
-
-private fun timestampLabel(timestamp: Long): String {
-    val f = SimpleDateFormat("HH:mm")
-    val s = f.format(Date(timestamp))
-    return "$s Uhr"
 }
 
 private fun containsSearchText(entry: ProgramEntryPreview, searchText: String): Boolean =
