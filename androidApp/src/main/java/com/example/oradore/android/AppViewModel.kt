@@ -8,6 +8,9 @@ import androidx.lifecycle.ViewModel
 import com.example.oradore.api.DummyData
 import com.example.oradore.models.ProgramEntry
 import com.example.oradore.models.ProgramEntryPreview
+import com.example.oradore.models.Room
+import com.example.oradore.models.Speaker
+import com.example.oradore.models.SpeakerPreview
 
 class AppViewModel(
     private val savedState: SavedStateHandle
@@ -18,7 +21,13 @@ class AppViewModel(
     var programEntries by mutableStateOf(emptyList<ProgramEntryPreview>())
         private set
 
+
     private var favoriteProgramEntries by mutableStateOf(setOf<ProgramEntry>())
+
+    var rooms by mutableStateOf(emptyList<Room>())
+        private set
+
+    var speakers by mutableStateOf(emptyList<Speaker>())
         private set
 
     fun fetchProgramEntries() {
@@ -51,4 +60,13 @@ class AppViewModel(
         else
             fav(programEntry)
     }
+
+    fun fetchRooms() {
+        rooms = DummyData.Rooms()
+    }
+
+    fun fetchSpeakers() {
+        speakers = DummyData.Speakers()
+    }
+
 }
