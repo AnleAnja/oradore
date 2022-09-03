@@ -54,7 +54,7 @@ struct ProgramEntriesView: View {
                                         .frame(maxWidth:2)
                                         .background(formatColor)
                                     VStack (alignment: .leading) {
-                                        listContent(programEntry: entry, formatColor: formatColor)
+                                        ProgramEntryView(programEntry: entry, formatColor: formatColor)
                                     }
                                 }
                             }
@@ -66,52 +66,6 @@ struct ProgramEntriesView: View {
             .navigationTitle("Programm")
             .searchable(text: $searchText)
         }
-    }
-    
-    @ViewBuilder
-    func listContent(programEntry: ProgramEntryPreview, formatColor: SwiftUI.Color) -> some View {
-        VStack (alignment: .leading) {
-            HStack {
-                Text(programEntry.format.label)
-                    .foregroundColor(formatColor)
-                    .font(.caption)
-                Spacer()
-                Image(systemName: "star")
-                    .foregroundColor(.yellow)
-            }
-            VStack (alignment: .leading) {
-                Text(timeFormatter(time: programEntry.timeRange.start) + " - " + timeFormatter(time: programEntry.timeRange.end) + " Uhr")
-                Text(programEntry.room.name)
-            }.font(.caption2)
-            Text(programEntry.name).font(.title)
-        }
-        Spacer()
-        ForEach(programEntry.speakers, id: \.self) { speaker in
-            HStack {
-                VStack (alignment: .leading) {
-                    Text(speaker.firstName + " " + speaker.lastName).font(.headline)
-                    VStack (alignment: .leading) {
-                        Text(speaker.company)
-                        Text(speaker.jobTitle)
-                    }.font(.caption)
-                }
-                Spacer()
-                AsyncImage(url: URL(string: speaker.imgPreview ?? "")) { image in
-                    image.resizable()
-                } placeholder: {
-                    ProgressView()
-                }
-                .frame(width: 64, height: 64)
-                .cornerRadius(64)
-            }
-        }
-    }
-    
-    func timeFormatter(time: Int64) -> String {
-        let formatter = DateFormatter()
-        let timeAsDate = Date(timeIntervalSince1970: Double(time)/1000.0)
-        formatter.dateFormat = "HH:mm"
-        return formatter.string(from: timeAsDate)
     }
     
     func hexStringToUIColor (hex:String) -> UIColor {
@@ -135,4 +89,64 @@ struct ProgramEntriesView: View {
             alpha: CGFloat(1.0)
         )
     }
+}
+
+struct ProgramEntryView : View {
+    let programEntry: ProgramEntryPreview
+    let formatColor: SwiftUI.Color
+    var body: some View {
+        VStack (alignment: .leading) {
+            HStack {
+                Text(programEntry.format.label)
+                    .foregroundColor(formatColor)
+                    .font(.caption)
+                Spacer()
+                Image(systemName: "star")
+                    .foregroundColor(.yellow)
+            }
+            VStack (alignment: .leading) {
+                Text(timeFormatter(time: programEntry.timeRange.start) + " - " + timeFormatter(time: programEntry.timeRange.end) + " Uhr")
+                Text(programEntry.room.name)
+            }.font(.caption2)
+            Text(programEntry.name).font(.title)
+        }
+        Spacer()
+        SpeakerPreviewView(speakers: programEntry.speakers)
+    }
+}
+
+struct SpeakerPreviewView : View {
+    let speakers: [SpeakerPreview]
+    var body: some View {
+        ForEach(speakers, id: \.self) { speaker in
+            HStack {
+                VStack (alignment: .leading) {
+                    Text(speaker.firstName + " " + speaker.lastName).font(.headline)
+                    VStack (alignment: .leading) {
+                        Text(speaker.company)
+                        Text(speaker.jobTitle)
+                    }.font(.caption)
+                }
+                Spacer()
+                if speaker.imgPreview != nil {
+                    AsyncImage(url: URL(string: speaker.imgPreview!)) { image in
+                        image.resizable()
+                    } placeholder: {
+                        ProgressView()
+                    }
+                    .frame(width: 64, height: 64)
+                    .cornerRadius(64)
+                } else {
+                    EmptyView()
+                }
+            }
+        }
+    }
+}
+
+func timeFormatter(time: Int64) -> String {
+    let formatter = DateFormatter()
+    let timeAsDate = Date(timeIntervalSince1970: Double(time)/1000.0)
+    formatter.dateFormat = "HH:mm"
+    return formatter.string(from: timeAsDate)
 }
