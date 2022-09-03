@@ -23,7 +23,7 @@ class AppViewModel(
     var rooms by mutableStateOf(emptyList<Room>())
         private set
 
-    var speakers by mutableStateOf(emptyList<SpeakerPreview>())
+    var speakers by mutableStateOf(emptyList<Speaker>())
         private set
 
     fun fetchProgramEntries() {
@@ -31,11 +31,11 @@ class AppViewModel(
     }
 
     fun fetchRooms() {
-        rooms = DummyData.ProgramEntriesPreview().map { it.room }
+        rooms = DummyData.Rooms()
     }
 
     fun fetchSpeakers() {
-        speakers = DummyData.ProgramEntriesPreview().flatMap { it.speakers }
+        speakers = DummyData.Speakers()
     }
 
 }

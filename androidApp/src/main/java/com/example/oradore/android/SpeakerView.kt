@@ -17,14 +17,13 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import coil.compose.SubcomposeAsyncImage
-import com.example.oradore.models.Room
-import com.example.oradore.models.SpeakerPreview
+import com.example.oradore.models.Speaker
 
 @Composable
 fun SpeakerListView(
-    allSpeakers: List<SpeakerPreview>,
+    allSpeakers: List<Speaker>,
     state: MutableState<TextFieldValue>,
-    onClick: (SpeakerPreview) -> Unit
+    onClick: (Speaker) -> Unit
 ) {
     val searchedText = state.value.text.lowercase()
 
@@ -48,8 +47,8 @@ fun SpeakerListView(
 
 @Composable
 fun SpeakerView(
-    speaker: SpeakerPreview,
-    onClick: (SpeakerPreview) -> Unit
+    speaker: Speaker,
+    onClick: (Speaker) -> Unit
 ) {
     val typo = MaterialTheme.typography
     Row(
