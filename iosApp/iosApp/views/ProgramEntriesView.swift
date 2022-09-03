@@ -9,7 +9,7 @@
 import SwiftUI
 import shared
 
-let programEntries = Dictionary(grouping: DummyData.shared.ProgramEntries(), by: { $0.timeRange.start })
+let programEntries = Dictionary(grouping: DummyData.shared.ProgramEntriesPreview(), by: { $0.timeRange.start })
 
 struct ProgramEntriesView: View {
     
