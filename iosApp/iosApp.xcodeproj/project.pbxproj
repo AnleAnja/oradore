@@ -16,6 +16,8 @@
 		FA068EDD28BFFC0B00FEA85B /* SpeakersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA068EDC28BFFC0B00FEA85B /* SpeakersView.swift */; };
 		FA068EDF28BFFC1F00FEA85B /* RoomsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA068EDE28BFFC1F00FEA85B /* RoomsView.swift */; };
 		FA068EE128BFFC3600FEA85B /* FavoritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA068EE028BFFC3600FEA85B /* FavoritesView.swift */; };
+		FAB1CD6828C4160400CCCB94 /* SpeakerImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB1CD6728C4160400CCCB94 /* SpeakerImageView.swift */; };
+		FAB1CD6A28C416D700CCCB94 /* SpeakerPreviewContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB1CD6928C416D700CCCB94 /* SpeakerPreviewContent.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -43,6 +45,8 @@
 		FA068EDC28BFFC0B00FEA85B /* SpeakersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeakersView.swift; sourceTree = "<group>"; };
 		FA068EDE28BFFC1F00FEA85B /* RoomsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomsView.swift; sourceTree = "<group>"; };
 		FA068EE028BFFC3600FEA85B /* FavoritesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesView.swift; sourceTree = "<group>"; };
+		FAB1CD6728C4160400CCCB94 /* SpeakerImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeakerImageView.swift; sourceTree = "<group>"; };
+		FAB1CD6928C416D700CCCB94 /* SpeakerPreviewContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeakerPreviewContent.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,11 +110,21 @@
 			children = (
 				7555FF82242A565900829871 /* MainView.swift */,
 				FA068EDA28BFFBC400FEA85B /* ProgramEntriesView.swift */,
-				FA068EDC28BFFC0B00FEA85B /* SpeakersView.swift */,
 				FA068EDE28BFFC1F00FEA85B /* RoomsView.swift */,
 				FA068EE028BFFC3600FEA85B /* FavoritesView.swift */,
+				FAB1CD6B28C4180200CCCB94 /* speaker */,
 			);
 			path = views;
+			sourceTree = "<group>";
+		};
+		FAB1CD6B28C4180200CCCB94 /* speaker */ = {
+			isa = PBXGroup;
+			children = (
+				FA068EDC28BFFC0B00FEA85B /* SpeakersView.swift */,
+				FAB1CD6728C4160400CCCB94 /* SpeakerImageView.swift */,
+				FAB1CD6928C416D700CCCB94 /* SpeakerPreviewContent.swift */,
+			);
+			path = speaker;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -205,8 +219,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FAB1CD6A28C416D700CCCB94 /* SpeakerPreviewContent.swift in Sources */,
 				2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */,
 				7555FF83242A565900829871 /* MainView.swift in Sources */,
+				FAB1CD6828C4160400CCCB94 /* SpeakerImageView.swift in Sources */,
 				850C836C28C362DA00161640 /* AppViewModel.swift in Sources */,
 				FA068EE128BFFC3600FEA85B /* FavoritesView.swift in Sources */,
 				FA068EDD28BFFC0B00FEA85B /* SpeakersView.swift in Sources */,
