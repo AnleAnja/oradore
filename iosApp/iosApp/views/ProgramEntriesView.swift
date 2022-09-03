@@ -9,40 +9,59 @@
 import SwiftUI
 import shared
 
-let programEntries = DummyData.shared.ProgramEntries().sorted(by: {$0.timeRange.start < $1.timeRange.start})
+let programEntries = Dictionary(grouping: DummyData.shared.ProgramEntries(), by: { $0.timeRange.start })
 
 struct ProgramEntriesView: View {
     
     @State private var searchText = ""
     
-    private var searchResults: [ProgramEntryPreview] {
+    private var searchResults: [Int64 : [ProgramEntryPreview]] {
         if searchText.isEmpty {
             return programEntries
         } else {
-            return programEntries //.filter { $0.contains(searchText) }
+            return programEntries.filter { key, value in
+                value.contains { entry in
+                    entry.name.lowercased().contains(searchText.lowercased()) ||
+                    entry.room.name.lowercased().contains(searchText.lowercased()) ||
+                    entry.speakers.contains { speaker in
+                        speaker.firstName.lowercased().contains(searchText.lowercased()) ||
+                        speaker.lastName.lowercased().contains(searchText.lowercased()) ||
+                        speaker.company.lowercased().contains(searchText.lowercased()) ||
+                        speaker.jobTitle.lowercased().contains(searchText.lowercased())
+                    } ||
+                    entry.format.label.lowercased().contains(searchText.lowercased())
+                }
+            }
         }
     }
     
     var body: some View {
         NavigationView {
             List {
-                Section(header: HStack {
-                    VStack { Divider() }
-                    Text(timeFormatter(timeRange: programEntries[0].timeRange)[0])
-                        .font(.headline)
-                    VStack { Divider() }
-                  }) {
-                ForEach(searchResults, id: \.self) { programEntry in
-                    NavigationLink(destination: Text(programEntry.id)) {
-                        HStack {
-                            Divider().background(.red)
-                            VStack (alignment: .leading) {
-                                listContent(programEntry: programEntry)
+                ForEach(Array(searchResults.keys), id: \.self) { start in
+                    Section(header: HStack {
+                        VStack { Divider() }
+                        Text(timeFormatter(time: start))
+                            .font(.headline)
+                        VStack { Divider() }
+                    }                        )
+                    {
+                        ForEach(searchResults[start]!, id: \.self) { entry in
+                            let formatColor = Color(hexStringToUIColor(hex: entry.format.hexColor))
+                            NavigationLink(destination: Text(entry.id)) {
+                                HStack {
+                                    Divider()
+                                        .frame(maxWidth:2)
+                                        .background(formatColor)
+                                    VStack (alignment: .leading) {
+                                        listContent(programEntry: entry, formatColor: formatColor)
+                                    }
+                                }
                             }
                         }
                     }
                 }
-                }
+                
             }
             .navigationTitle("Programm")
             .searchable(text: $searchText)
@@ -50,22 +69,18 @@ struct ProgramEntriesView: View {
     }
     
     @ViewBuilder
-    func listContent(programEntry: ProgramEntryPreview) -> some View {
-        let formatColor = Color(UIColor(hex: programEntry.format.hexColor) ?? UIColor(Color.red))
-        let formattedTime = timeFormatter(timeRange: programEntry.timeRange)
+    func listContent(programEntry: ProgramEntryPreview, formatColor: SwiftUI.Color) -> some View {
         VStack (alignment: .leading) {
             HStack {
                 Text(programEntry.format.label)
                     .foregroundColor(formatColor)
-                    .padding(6)
-                    .overlay(RoundedRectangle(cornerRadius: 20)
-                                .stroke(formatColor, lineWidth: 1))
+                    .font(.caption)
                 Spacer()
                 Image(systemName: "star")
                     .foregroundColor(.yellow)
             }
             VStack (alignment: .leading) {
-                Text(formattedTime[0] + " - " + formattedTime[1] + " Uhr")
+                Text(timeFormatter(time: programEntry.timeRange.start) + " - " + timeFormatter(time: programEntry.timeRange.end) + " Uhr")
                 Text(programEntry.room.name)
             }.font(.caption2)
             Text(programEntry.name).font(.title)
@@ -92,49 +107,32 @@ struct ProgramEntriesView: View {
         }
     }
     
-    func timeFormatter(timeRange: TimeRange) -> [String] {
+    func timeFormatter(time: Int64) -> String {
         let formatter = DateFormatter()
-        let start = Date(timeIntervalSince1970: Double(timeRange.start)/1000.0)
-        let end = Date(timeIntervalSince1970: Double(timeRange.end)/1000.0)
+        let timeAsDate = Date(timeIntervalSince1970: Double(time)/1000.0)
         formatter.dateFormat = "HH:mm"
-        return [formatter.string(from: start), formatter.string(from: end)]
+        return formatter.string(from: timeAsDate)
     }
-}
-
-extension UIColor {
-    public convenience init?(hex: String) {
-        let r, g, b, a: CGFloat
+    
+    func hexStringToUIColor (hex:String) -> UIColor {
+        var cString:String = hex.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
         
-        if hex.hasPrefix("#") {
-            let start = hex.index(hex.startIndex, offsetBy: 1)
-            let hexColor = String(hex[start...])
-            
-            if hexColor.count == 8 {
-                let scanner = Scanner(string: hexColor)
-                var hexNumber: UInt64 = 0
-                
-                if scanner.scanHexInt64(&hexNumber) {
-                    r = CGFloat((hexNumber & 0xff000000) >> 24) / 255
-                    g = CGFloat((hexNumber & 0x00ff0000) >> 16) / 255
-                    b = CGFloat((hexNumber & 0x0000ff00) >> 8) / 255
-                    a = CGFloat(hexNumber & 0x000000ff) / 255
-                    
-                    self.init(red: r, green: g, blue: b, alpha: a)
-                    return
-                }
-            }
+        if (cString.hasPrefix("#")) {
+            cString.remove(at: cString.startIndex)
         }
         
-        return nil
+        if ((cString.count) != 6) {
+            return UIColor.gray
+        }
+        
+        var rgbValue:UInt64 = 0
+        Scanner(string: cString).scanHexInt64(&rgbValue)
+        
+        return UIColor(
+            red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0,
+            green: CGFloat((rgbValue & 0x00FF00) >> 8) / 255.0,
+            blue: CGFloat(rgbValue & 0x0000FF) / 255.0,
+            alpha: CGFloat(1.0)
+        )
     }
 }
-
-//func generateSearchableString(programEntry: ProgramEntryPreview) {
-//    let programEntriesString = [String]
-//    ForEach(programEntries, id: \.self) { programEntry in
-//        let programEntryString =
-//        programEntry.name
-//        + programEntry.tags.name
-//        + programEntry.room.name
-//    }
-//}
