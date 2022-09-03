@@ -11,29 +11,34 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.TextFieldValue
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.oradore.models.ProgramEntryPreview
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            Content()
+            OradoreTheme {
+                Content()
+            }
         }
     }
 }
 
 @Composable
 fun Content() {
-    var viewModel: AppViewModel = viewModel()
+    val viewModel: AppViewModel = viewModel()
     Scaffold(
         topBar = { TopBar(viewModel) }
     ) { padding -> // We need to pass scaffold's inner padding to content. That's why we use Box.
@@ -70,14 +75,14 @@ fun Navigation(viewModel: AppViewModel) {
     val navController = rememberNavController()
     NavHost(navController = navController, startDestination = "main") {
         composable("main") {
-            MainScreen(navController = navController, viewModel)
+            MainScreen(navController, viewModel)
         }
         composable(
-            "details/{item}",
-            arguments = listOf(navArgument("item") { type = NavType.StringType })
+            "details/{id}",
+            arguments = listOf(navArgument("id") { type = NavType.StringType })
         ) { backStackEntry ->
-            backStackEntry.arguments?.getString("item")?.let { item ->
-                DetailsScreen(item = item)
+            backStackEntry.arguments?.getString("id")?.let { id ->
+                DetailsScreen(id)
             }
         }
     }
@@ -86,9 +91,37 @@ fun Navigation(viewModel: AppViewModel) {
 @Composable
 fun MainScreen(navController: NavController, viewModel: AppViewModel) {
     val textState = remember { mutableStateOf(TextFieldValue("")) }
+
     Column {
         SearchView(textState)
-        List(navController = navController, state = textState)
-        BottomBar(viewModel)
+        BottomBar(viewModel) {
+            composable(BottomNavigationScreens.Program.route) {
+                viewModel.fetchProgramEntries()
+                textState.value = TextFieldValue("") // reset search
+                ProgramListView(viewModel.programEntries, textState) { programEntry ->
+                    navigateToProgramEntryDetailScreen(navController, programEntry)
+                }
+            }
+            composable(BottomNavigationScreens.Speakers.route) {
+                Text("B")
+            }
+            composable(BottomNavigationScreens.Rooms.route) {
+                Text("C")
+            }
+            composable(BottomNavigationScreens.Favorites.route) {
+                Text("D")
+            }
+        }
+    }
+}
+
+fun navigateToProgramEntryDetailScreen(
+    navController: NavController,
+    programEntry: ProgramEntryPreview
+) {
+    navController.navigate("details/${programEntry.id}") {
+        popUpTo("main") { saveState = true }
+        launchSingleTop = true
+        restoreState = true
     }
 }
