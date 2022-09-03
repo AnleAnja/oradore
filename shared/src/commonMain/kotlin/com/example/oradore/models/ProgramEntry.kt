@@ -1,4 +1,4 @@
-package models
+package com.example.oradore.models
 
 import com.example.oradore.models.Category
 import com.example.oradore.models.Format
