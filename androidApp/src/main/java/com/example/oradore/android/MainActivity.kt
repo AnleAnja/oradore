@@ -102,7 +102,11 @@ fun MainScreen(navController: NavController, viewModel: AppViewModel) {
                 }
             }
             composable(BottomNavigationScreens.Speakers.route) {
-                Text("B")
+                viewModel.fetchSpeakers()
+                textState.value = TextFieldValue("")
+                SpeakerListView(viewModel.speakers, textState) { speaker ->
+                    navigateToDetailScreen(navController, speaker.id)
+                }
             }
             composable(BottomNavigationScreens.Rooms.route) {
                 viewModel.fetchRooms()
