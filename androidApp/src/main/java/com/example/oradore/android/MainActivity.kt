@@ -132,7 +132,7 @@ fun navigateToDetailScreen(
     id: String
 ) {
 
-    navController.navigate("program/${programEntry.id}") {
+    navController.navigate("program/${id}") {
         popUpTo("main") { saveState = true }
         launchSingleTop = true
         restoreState = true
