@@ -37,15 +37,16 @@ struct SpeakerDetailView: View {
                         if !speaker.location.isEmpty {
                             HStack {
                                 Image(systemName: "mappin")
-                                Text(speaker.location).font(.footnote)
+                                Text(speaker.location).font(.caption)
                             }
                         }
                         if !speaker.website.isEmpty {
                             HStack {
                                 Image(systemName: "link")
-                                Text(speaker.website).font(.footnote)
+                                Text(speaker.website).font(.caption2)
                             }
                         }
+                        Divider()
                         Text(speaker.bio).font(.body)
                     }.padding(.top)
                 }
