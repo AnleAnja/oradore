@@ -44,6 +44,10 @@ struct SpeakerDetailView: View {
                             HStack {
                                 Image(systemName: "link")
                                 Text(speaker.website).font(.caption2)
+                            }.onTapGesture {
+                                if let url = URL(string: speaker.website) {
+                                    UIApplication.shared.open(url)
+                                }
                             }
                         }
                         Divider()
