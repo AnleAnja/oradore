@@ -10,7 +10,6 @@ import com.example.oradore.models.ProgramEntry
 import com.example.oradore.models.ProgramEntryPreview
 import com.example.oradore.models.Room
 import com.example.oradore.models.Speaker
-import com.example.oradore.models.SpeakerPreview
 
 class AppViewModel(
     private val savedState: SavedStateHandle

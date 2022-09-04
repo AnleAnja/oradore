@@ -11,10 +11,14 @@ import shared
 
 struct ProgramEntryDetailView: View {
     let id: String
+    @EnvironmentObject var viewModel: AppViewModel
+    
     var body: some View {
         let entry = getProgramEntryById()
+        let entryPreview = getProgramEntryPreviewById()
         let room = getRoomById(id: entry.roomId)
         let formatColor = Color(hexStringToUIColor(hex: entry.format.hexColor))
+        
         ScrollView {
             VStack (alignment: .leading) {
                 HStack {
@@ -22,8 +26,11 @@ struct ProgramEntryDetailView: View {
                         .foregroundColor(formatColor)
                         .font(.caption)
                     Spacer()
-                    Image(systemName: "star")
+                    Image(systemName: viewModel.getFavStateIcon(programEntry: entry))
                         .foregroundColor(.yellow)
+                        .onTapGesture {
+                            viewModel.toggleFav(programEntry: entry)
+                        }
                 }
                 Text(entry.name).font(.title)
                 HStack {
@@ -39,6 +46,9 @@ struct ProgramEntryDetailView: View {
                     .padding(.bottom)
                 }
                 Text(entry.description_).font(.callout)
+                Divider()
+                Text("Speaker").font(.title2)
+                SpeakerPreviewView(speakers: entryPreview.speakers)
             }
             .padding(.leading)
             .padding(.trailing)
@@ -48,6 +58,12 @@ struct ProgramEntryDetailView: View {
     
     func getProgramEntryById() -> ProgramEntry {
         return DummyData.shared.ProgramEntries()[DummyData.shared.ProgramEntries().firstIndex(where: {
+            $0.id == id
+        })!]
+    }
+    
+    func getProgramEntryPreviewById() -> ProgramEntryPreview {
+        return DummyData.shared.ProgramEntriesPreview()[DummyData.shared.ProgramEntriesPreview().firstIndex(where: {
             $0.id == id
         })!]
     }
