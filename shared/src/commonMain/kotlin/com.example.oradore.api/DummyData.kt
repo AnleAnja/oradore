@@ -16,7 +16,8 @@ object DummyData {
                 ),
                 Room(
                     "Jj7lxXz7Jw8CKS1vnSVf",
-                    "Raum 0401/0402 | FERCHAU-Hörsaal",
+                    "Raum 0401/0402",
+                    "FERCHAU-Hörsaal",
                     "http://www.gm.fh-koeln.de/~dobrynin/kmm/0401.png"
                 ),
                 listOf(
@@ -59,6 +60,7 @@ object DummyData {
                 Room(
                     "8HpEkr7FJ6aXMhyChcuo",
                     "Raum 3103",
+                    "",
                     "http://www.gm.fh-koeln.de/~dobrynin/kmm/3103.png"
                 ),
                 listOf(
@@ -93,6 +95,7 @@ object DummyData {
                 Room(
                     "sF1w3rpkux6tnJbLDxJd",
                     "Raum 3112",
+                    "",
                     "http://www.gm.fh-koeln.de/~dobrynin/kmm/3112.png"
                 ),
                 listOf(
@@ -291,27 +294,32 @@ object DummyData {
         return listOf(
             Room(
                 "ka2ITleGSa6l92ZjzjNR",
-                "Raum 3106 | Steinmüller-Babcock-Hörsaal",
+                "Raum 3106",
+                "Steinmüller-Babcock-Hörsaal",
                 "http://www.gm.fh-koeln.de/~dobrynin/kmm/3196.png"
             ),
             Room(
                 "8HpEkr7FJ6aXMhyChcuo",
                 "Raum 3103",
+                "",
                 "http://www.gm.fh-koeln.de/~dobrynin/kmm/3103.png"
             ),
             Room(
                 "q5ziDJLrl5LRgDTKqx0a",
-                "Raum 3102 | PFERD-Hörsaal",
+                "Raum 3102",
+                "PFERD-Hörsaal",
                 "http://www.gm.fh-koeln.de/~dobrynin/kmm/3102.png"
             ),
             Room(
                 "Jj7lxXz7Jw8CKS1vnSVf",
-                "Raum 0401/0402 | FERCHAU-Hörsaal",
+                "Raum 0401/0402",
+                "FERCHAU-Hörsaal",
                 "http://www.gm.fh-koeln.de/~dobrynin/kmm/0401.png"
             ),
             Room(
                 "Z47wC8xGHqBvyMa6DDtu",
-                "Serious Playground | Halle 51",
+                "Serious Playground",
+                "Halle 51",
                 null
             )
         )

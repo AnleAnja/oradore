@@ -2,6 +2,7 @@ package database
 
 import com.example.oradore.models.Room
 import database.DatabaseFactory.dbQuery
+import database.Rooms.description
 import database.Rooms.id
 import database.Rooms.name
 import database.Rooms.url
@@ -15,6 +16,7 @@ class RoomDao {
                 Rooms.insert {
                     it[id] = room.id
                     it[name] = room.name
+                    it[description] = room.description
                     it[url] = room.url
                 }
             }
@@ -27,6 +29,7 @@ class RoomDao {
                 Room(
                     it[id],
                     it[name],
+                    it[description],
                     it[url]
                 )
             }

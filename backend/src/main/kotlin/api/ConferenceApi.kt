@@ -123,7 +123,7 @@ class ConferenceApi(
             .flatMap { speakerRef -> speakerRef.speakers.map { it.id } }
             .distinct()
         val allSpeakers = fetchSpeakers(speakerIds)
-        val allRooms = fetchRooms(roomIds).also { it.forEach(::println) }
+        val allRooms = fetchRooms(roomIds)
         roomDao.insertRooms(allRooms)
         speakerDao.insertSpeakers(allSpeakers)
         programEntryDao.insertProgramEntries(programEntries)
@@ -207,7 +207,7 @@ class ConferenceApi(
         )
 
     private fun toRoom(json: RoomJson): Room {
-        val url = when (json.id) {
+        fun imageUrl(): String? = when (json.id) {
             "sF1w3rpkux6tnJbLDxJd" -> "3112"
             "AEH7Xya3DNS9kUE5yMyz" -> "3111"
             "Vyp1WaS98rfaTdvplF7V" -> "3107"
@@ -223,10 +223,22 @@ class ConferenceApi(
             else -> null
         }?.let { roomUrlPrefix + it }
 
+        fun nameAndDescription(): Pair<String, String> {
+            val split = json.name.split("|", limit = 2)
+            return when (split.size) {
+                0 -> Pair("", "")
+                1 -> Pair(split[0].trim(), "")
+                else -> Pair(split[0].trim(), split[1].trim())
+            }
+        }
+
+        val (name, description) = nameAndDescription()
+
         return Room(
             json.id,
-            json.name,
-            url
+            name,
+            description,
+            imageUrl()
         )
     }
 }

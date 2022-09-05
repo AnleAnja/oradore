@@ -58,6 +58,7 @@ class ProgramEntryDao {
                         Room(
                             it[Rooms.id],
                             it[Rooms.name],
+                            it[Rooms.description],
                             it[Rooms.url],
                         ),
                         listOf(
