@@ -1,13 +1,7 @@
 package database
 
-import com.example.oradore.models.Category
-import com.example.oradore.models.Format
-import com.example.oradore.models.ProgramEntry
-import com.example.oradore.models.TimeRange
+import com.example.oradore.models.*
 import database.DatabaseFactory.dbQuery
-import com.example.oradore.models.ProgramEntryPreview
-import com.example.oradore.models.Room
-import com.example.oradore.models.SpeakerPreview
 import org.jetbrains.exposed.sql.insert
 import org.jetbrains.exposed.sql.selectAll
 
@@ -58,7 +52,7 @@ class ProgramEntryDao {
                         Room(
                             it[Rooms.id],
                             it[Rooms.name],
-                            it[Rooms.description],
+                            it[Rooms.desc],
                             it[Rooms.url],
                         ),
                         listOf(
