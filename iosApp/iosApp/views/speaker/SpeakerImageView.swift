@@ -17,7 +17,7 @@ struct SpeakerImageView: View {
     } placeholder: {
       ProgressView()
     }
+    .clipShape(Circle())
     .frame(width: 64, height: 64)
-    .cornerRadius(64)
   }
 }
