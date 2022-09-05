@@ -1,0 +1,26 @@
+version: '3.3'
+
+services:
+  psql:
+    container_name: oradore-db
+
+    image: postgres:14.4-alpine
+    restart: always
+    expose:
+      - 5432
+    environment:
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "postgres"
+      POSTGRES_DB: "postgres"
+    volumes:
+      - psql_vol:/var/lib/postgresql/data
+
+  backend:
+    container_name: oradore-backend
+    image: oradore-backend
+    restart: always
+    ports:
+      - "9090:9090"
+
+volumes:
+  psql_vol:
