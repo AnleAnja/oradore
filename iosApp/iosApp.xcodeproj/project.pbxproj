@@ -17,6 +17,7 @@
 		FA068EDD28BFFC0B00FEA85B /* SpeakersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA068EDC28BFFC0B00FEA85B /* SpeakersView.swift */; };
 		FA068EDF28BFFC1F00FEA85B /* RoomsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA068EDE28BFFC1F00FEA85B /* RoomsView.swift */; };
 		FA068EE128BFFC3600FEA85B /* FavoritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA068EE028BFFC3600FEA85B /* FavoritesView.swift */; };
+		FA54AF1228C5F55C00243C34 /* RoomDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA54AF1128C5F55C00243C34 /* RoomDetailView.swift */; };
 		FAB1CD6828C4160400CCCB94 /* SpeakerImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB1CD6728C4160400CCCB94 /* SpeakerImageView.swift */; };
 		FAB1CD6A28C416D700CCCB94 /* SpeakerPreviewContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB1CD6928C416D700CCCB94 /* SpeakerPreviewContent.swift */; };
 /* End PBXBuildFile section */
@@ -47,6 +48,7 @@
 		FA068EDC28BFFC0B00FEA85B /* SpeakersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeakersView.swift; sourceTree = "<group>"; };
 		FA068EDE28BFFC1F00FEA85B /* RoomsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomsView.swift; sourceTree = "<group>"; };
 		FA068EE028BFFC3600FEA85B /* FavoritesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesView.swift; sourceTree = "<group>"; };
+		FA54AF1128C5F55C00243C34 /* RoomDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomDetailView.swift; sourceTree = "<group>"; };
 		FAB1CD6728C4160400CCCB94 /* SpeakerImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeakerImageView.swift; sourceTree = "<group>"; };
 		FAB1CD6928C416D700CCCB94 /* SpeakerPreviewContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeakerPreviewContent.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -123,6 +125,7 @@
 			isa = PBXGroup;
 			children = (
 				FA068EDE28BFFC1F00FEA85B /* RoomsView.swift */,
+				FA54AF1128C5F55C00243C34 /* RoomDetailView.swift */,
 			);
 			path = room;
 			sourceTree = "<group>";
@@ -234,6 +237,7 @@
 				2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */,
 				7555FF83242A565900829871 /* MainView.swift in Sources */,
 				FAB1CD6828C4160400CCCB94 /* SpeakerImageView.swift in Sources */,
+				FA54AF1228C5F55C00243C34 /* RoomDetailView.swift in Sources */,
 				8595C02828C424BB0089D9A4 /* SpeakerDetailView.swift in Sources */,
 				850C836C28C362DA00161640 /* AppViewModel.swift in Sources */,
 				FA068EE128BFFC3600FEA85B /* FavoritesView.swift in Sources */,

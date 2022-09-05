@@ -31,7 +31,7 @@ struct RoomsView: View {
     NavigationView {
       List {
         ForEach(searchResults) { room in
-          NavigationLink(destination: Text(room.id)) {
+          NavigationLink(destination: RoomDetailView(room: room)) {
             Text(room.name)
           }
         }
