@@ -14,34 +14,39 @@ struct RoomDetailView: View {
   let room: Room
   
   var body: some View {
-    GeometryReader { geo in
-      VStack(alignment: .center) {
-        HStack(alignment: .top) {
-          Spacer()
-          VStack {
-            Text(room.name)
-              .font(.title)
-            if !room.desc.isEmpty {
-              Text(room.desc)
-                .font(.subheadline)
-            }
-          }
-          Spacer()
+    if let location = room.roomLocation {
+      viewWithLocation(location)
+    } else {
+      roomInfo(buildingInfo: nil)
+    }
+  }
+  
+  private func roomInfo(buildingInfo: String?) -> some View {
+    HStack(alignment: .top) {
+      Spacer()
+      VStack {
+        Text(room.name)
+          .font(.title)
+        if !room.desc.isEmpty {
+          Text(room.desc)
+            .font(.subheadline)
         }
-        .frame(maxHeight: roomNameMaxHeight(geo))
-        if let url = room.url {
-          AsyncImage(url: URL(string: url)) { image in
-            image
-              .resizable()
-              .aspectRatio(contentMode: .fill)
-              .frame(maxHeight: roomImgMaxHeight(geo))
-              .clipped()
-          } placeholder: {
-            ProgressView()
-          }
+        if let buildingInfo = buildingInfo {
+          Text(buildingInfo)
+            .font(.subheadline)
         }
       }
-      .padding()
+      Spacer()
+    }
+  }
+  
+  private func viewWithLocation(_ location: RoomLocation) -> some View {
+    GeometryReader { geo in
+      VStack(alignment: .center) {
+        roomInfo(buildingInfo: location.buildingInfo)
+          .frame(maxHeight: roomNameMaxHeight(geo))
+        RoomLocationImageView(url: location.url, maxHeight: roomImgMaxHeight(geo))
+      }.padding()
     }
   }
   
