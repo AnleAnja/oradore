@@ -9,6 +9,8 @@
 import SwiftUI
 import shared
 
+extension Speaker: Identifiable {}
+
 struct SpeakersView: View {
     let speakers = DummyData.shared.Speakers()
     
@@ -31,7 +33,7 @@ struct SpeakersView: View {
     var body: some View {
         NavigationView {
             List {
-                ForEach(searchResults, id: \.id) { speaker in
+                ForEach(searchResults) { speaker in
                     NavigationLink(destination: SpeakerDetailView(speaker: speaker)) {
                         HStack {
                             if let imgUrl = speaker.imgPreview {

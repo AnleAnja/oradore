@@ -110,13 +110,21 @@
 		FA068ED928BFFB8D00FEA85B /* views */ = {
 			isa = PBXGroup;
 			children = (
+				FA54AF1028C5F47600243C34 /* room */,
 				7555FF82242A565900829871 /* MainView.swift */,
 				FA068EDA28BFFBC400FEA85B /* ProgramEntriesView.swift */,
-				FA068EDE28BFFC1F00FEA85B /* RoomsView.swift */,
 				FA068EE028BFFC3600FEA85B /* FavoritesView.swift */,
 				FAB1CD6B28C4180200CCCB94 /* speaker */,
 			);
 			path = views;
+			sourceTree = "<group>";
+		};
+		FA54AF1028C5F47600243C34 /* room */ = {
+			isa = PBXGroup;
+			children = (
+				FA068EDE28BFFC1F00FEA85B /* RoomsView.swift */,
+			);
+			path = room;
 			sourceTree = "<group>";
 		};
 		FAB1CD6B28C4180200CCCB94 /* speaker */ = {
