@@ -15,11 +15,15 @@ import io.ktor.server.routing.*
 
 fun main() {
     DatabaseFactory.init(true)
-    val programEntryDao = ProgramEntryDao()
     val roomDao = RoomDao()
+    val programEntryDao = ProgramEntryDao(roomDao)
     val speakerDao = SpeakerDao()
-    val api =
-        ConferenceApi("https://event.talque.com/view/v1", programEntryDao, roomDao, speakerDao)
+    val api = ConferenceApi(
+        "https://event.talque.com/view/v1",
+        programEntryDao,
+        roomDao,
+        speakerDao
+    )
 
     embeddedServer(Netty, 9090) {
         install(ContentNegotiation) {
