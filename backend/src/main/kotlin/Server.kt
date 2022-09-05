@@ -18,8 +18,13 @@ fun main() {
     val programEntryDao = ProgramEntryDao()
     val roomDao = RoomDao()
     val speakerDao = SpeakerDao()
-    val api =
-        ConferenceApi("https://event.talque.com/view/v1", programEntryDao, roomDao, speakerDao)
+    val api = ConferenceApi(
+        "https://event.talque.com/view/v1",
+        "http://www.gm.fh-koeln.de/~dobrynin/kmm/",
+        programEntryDao,
+        roomDao,
+        speakerDao
+    )
 
     embeddedServer(Netty, 9090) {
         install(ContentNegotiation) {

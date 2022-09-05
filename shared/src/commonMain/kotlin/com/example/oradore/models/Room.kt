@@ -7,5 +7,6 @@ import kotlinx.serialization.Serializable
 data class Room(
     @SerialName("roomId")
     val id: String,
-    val name: String
+    val name: String,
+    val url: String?
 )

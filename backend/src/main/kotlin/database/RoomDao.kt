@@ -1,9 +1,10 @@
 package database
 
+import com.example.oradore.models.Room
 import database.DatabaseFactory.dbQuery
 import database.Rooms.id
 import database.Rooms.name
-import com.example.oradore.models.Room
+import database.Rooms.url
 import org.jetbrains.exposed.sql.insert
 import org.jetbrains.exposed.sql.selectAll
 
@@ -14,6 +15,7 @@ class RoomDao {
                 Rooms.insert {
                     it[id] = room.id
                     it[name] = room.name
+                    it[url] = room.url
                 }
             }
         }
@@ -24,7 +26,8 @@ class RoomDao {
             Rooms.selectAll().map {
                 Room(
                     it[id],
-                    it[name]
+                    it[name],
+                    it[url]
                 )
             }
         }
