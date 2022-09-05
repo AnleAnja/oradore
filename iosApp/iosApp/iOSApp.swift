@@ -2,9 +2,12 @@ import SwiftUI
 
 @main
 struct iOSApp: App {
-	var body: some Scene {
-		WindowGroup {
-			MainView()
-		}
-	}
+  @StateObject private var viewModel = AppViewModel()
+  
+  var body: some Scene {
+    WindowGroup {
+      MainView()
+        .environmentObject(viewModel)
+    }
+  }
 }
