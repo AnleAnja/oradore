@@ -1,17 +1,11 @@
 package database
 
-import com.example.oradore.models.Category
-import com.example.oradore.models.Format
-import com.example.oradore.models.ProgramEntry
-import com.example.oradore.models.TimeRange
+import com.example.oradore.models.*
 import database.DatabaseFactory.dbQuery
-import com.example.oradore.models.ProgramEntryPreview
-import com.example.oradore.models.Room
-import com.example.oradore.models.SpeakerPreview
 import org.jetbrains.exposed.sql.insert
 import org.jetbrains.exposed.sql.selectAll
 
-class ProgramEntryDao {
+class ProgramEntryDao(private val roomDao: RoomDao) {
 
     suspend fun insertProgramEntries(programEntries: List<ProgramEntry>) {
         dbQuery {
@@ -58,6 +52,8 @@ class ProgramEntryDao {
                         Room(
                             it[Rooms.id],
                             it[Rooms.name],
+                            it[Rooms.desc],
+                            roomDao.roomLocation(it[Rooms.url], it[Rooms.buildingInfo])
                         ),
                         listOf(
                             SpeakerPreview(

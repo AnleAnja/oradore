@@ -40,7 +40,14 @@ private data class SpeakerResult(val model: Speaker)
 private data class SpeakerApiResult(val speakerById: Map<String, SpeakerResult>)
 
 @Serializable
-private data class RoomResult(val model: Room)
+data class RoomJson(
+    @SerialName("roomId")
+    val id: String,
+    val name: String
+)
+
+@Serializable
+private data class RoomResult(val model: RoomJson)
 
 @Serializable
 private data class RoomApiResult(val roomById: Map<String, RoomResult>)
@@ -116,7 +123,6 @@ class ConferenceApi(
             .distinct()
         val allSpeakers = fetchSpeakers(speakerIds)
         val allRooms = fetchRooms(roomIds)
-
         roomDao.insertRooms(allRooms)
         speakerDao.insertSpeakers(allSpeakers)
         programEntryDao.insertProgramEntries(programEntries)
@@ -170,7 +176,8 @@ class ConferenceApi(
                 )
             )
         }.body<RoomApiResult>()
-            .roomById.map { it.value.model }
+            .roomById
+            .map { toRoom(it.value.model) }
 
     private suspend fun fetchProgramEntries(): List<ProgramEntry> =
         http.post("$baseUrl/list/lectures") {
@@ -197,4 +204,24 @@ class ConferenceApi(
             entry.isCanceled,
             Format.fromAbbrev(entry.format)
         )
+
+    private fun toRoom(json: RoomJson): Room {
+        fun nameAndDescription(): Pair<String, String> {
+            val split = json.name.split("|", limit = 2)
+            return when (split.size) {
+                0 -> Pair("", "")
+                1 -> Pair(split[0].trim(), "")
+                else -> Pair(split[0].trim(), split[1].trim())
+            }
+        }
+
+        val (name, description) = nameAndDescription()
+
+        return Room(
+            json.id,
+            name,
+            description,
+            RoomLocation.fromRoomId(json.id)
+        )
+    }
 }
