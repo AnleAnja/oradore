@@ -26,7 +26,7 @@ struct ProgramEntryDetailView: View {
                         .foregroundColor(formatColor)
                         .font(.caption)
                     Spacer()
-                    Image(systemName: viewModel.getFavStateIcon(programEntry: entry))
+                    Image(systemName: viewModel.getFavStateIcon(entryId: entry.id))
                         .foregroundColor(.yellow)
                         .onTapGesture {
                             viewModel.toggleFav(programEntry: entry)

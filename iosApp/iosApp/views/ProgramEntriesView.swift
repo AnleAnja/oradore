@@ -12,7 +12,6 @@ import shared
 let programEntries = Dictionary(grouping: DummyData.shared.ProgramEntriesPreview(), by: { $0.timeRange.start })
 
 struct ProgramEntriesView: View {
-    
     @State private var searchText = ""
     
     private var searchResults: [Int64 : [ProgramEntryPreview]] {
@@ -72,6 +71,8 @@ struct ProgramEntriesView: View {
 struct ProgramEntryView : View {
     let programEntry: ProgramEntryPreview
     let formatColor: SwiftUI.Color
+    @EnvironmentObject var viewModel: AppViewModel
+
     var body: some View {
         VStack (alignment: .leading) {
             HStack {
@@ -79,8 +80,7 @@ struct ProgramEntryView : View {
                     .foregroundColor(formatColor)
                     .font(.caption)
                 Spacer()
-                Image(systemName: "star")
-                    .foregroundColor(.yellow)
+                Image(systemName: viewModel.getFavStateIcon(entryId: programEntry.id))                    .foregroundColor(.yellow)
             }
             VStack (alignment: .leading) {
                 Text(timeFormatter(time: programEntry.timeRange.start) + " - " + timeFormatter(time: programEntry.timeRange.end) + " Uhr")

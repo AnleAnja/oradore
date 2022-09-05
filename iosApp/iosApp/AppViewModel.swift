@@ -10,34 +10,35 @@ import Foundation
 import SwiftUI
 import shared
 
+
 class AppViewModel : ObservableObject{
-    var favorites : [ProgramEntry] = []
-    var iconName : String = "star"
+    @Published var favorites : [ProgramEntry] = []
     
-    func isFavorite(programEntry: ProgramEntry) -> Bool {
-        return favorites.contains(programEntry)
+    func isFavorite(entryId: String) -> Bool {
+        return favorites.contains(where: { entry in entry.id == entryId })
     }
     
-    func fav(programEntry: ProgramEntry) {
+    private func fav(programEntry: ProgramEntry) {
         favorites.append(programEntry)
     }
     
-    func unFav(programEntry: ProgramEntry) {
+    private func unFav(programEntry: ProgramEntry) {
         if let index = favorites.firstIndex(of: programEntry) {
             favorites.remove(at: index)
         }
     }
     
     func toggleFav(programEntry: ProgramEntry) {
-        if (isFavorite(programEntry: programEntry)) {
+        if (isFavorite(entryId: programEntry.id)) {
             unFav(programEntry: programEntry)
         } else {
             fav(programEntry: programEntry)
         }
     }
     
-    func getFavStateIcon(programEntry: ProgramEntry) -> String {
-        if (isFavorite(programEntry: programEntry)) {
+    func getFavStateIcon(entryId: String) -> String {
+        var iconName = ""
+        if (isFavorite(entryId: entryId)) {
             iconName = "star.fill"
         } else {
             iconName = "star"
