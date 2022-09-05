@@ -9,11 +9,11 @@
 import SwiftUI
 import shared
 
-let rooms = DummyData.shared.ProgramEntriesPreview().map { $0.room }
-
 extension Room: Identifiable { }
 
 struct RoomsView: View {
+  
+  let rooms = DummyData.shared.Rooms()
   
   @State private var searchText = ""
   
@@ -22,7 +22,8 @@ struct RoomsView: View {
       return rooms
     } else {
       return rooms.filter {
-        $0.name.contains(searchText)
+        $0.name.contains(searchText) ||
+        $0.desc.contains(searchText)
       }
     }
   }
@@ -32,7 +33,14 @@ struct RoomsView: View {
       List {
         ForEach(searchResults) { room in
           NavigationLink(destination: RoomDetailView(room: room)) {
-            Text(room.name)
+            VStack(alignment: .leading) {
+              Text(room.name)
+              if !room.desc.isEmpty {
+                Text(room.desc)
+                  .font(.caption)
+                  .foregroundColor(.secondary)
+              }
+            }
           }
         }
       }
