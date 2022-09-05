@@ -1,6 +1,7 @@
 package com.example.oradore.android
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.layout.Box
@@ -76,18 +77,33 @@ fun Navigation(viewModel: AppViewModel) {
             MainScreen(navController, viewModel)
         }
         composable(
-            "program/{id}",
+            "${DetailScreen.Program.label}/{id}",
             arguments = listOf(navArgument("id") { type = NavType.StringType })
         ) { backStackEntry ->
-            backStackEntry.arguments?.getString("id")
-                // TODO all of this can be removed as soon as we hit the actual http api in shared
-                ?.let { viewModel.programEntryById(it) }
-                ?.let { e ->
-                    val maybeRoom = viewModel.roomById(e.roomId) ?: return@let null
-                    val mayBeSpeakers = viewModel.speakerPreviewByProgramId(e.id) ?: return@let null
-                    Triple(e, maybeRoom, mayBeSpeakers)
-                }
-                ?.let { (e, r, s) -> ProgramDetailView(e, r, s, viewModel) }
+            // TODO all of this can be removed as soon as we hit the actual http api in shared
+            val programId = backStackEntry.arguments?.getString("id") ?: return@composable
+            val programEntry = viewModel.programEntryById(programId) ?: return@composable
+            val room = viewModel.roomById(programEntry.roomId) ?: return@composable
+            val speakers = viewModel.speakerPreviewByProgramId(programEntry.id) ?: return@composable
+            ProgramDetailView(programEntry, room, speakers, viewModel)
+        }
+        composable(
+            "${DetailScreen.Speaker.label}/{id}",
+            arguments = listOf(navArgument("id") { type = NavType.StringType })
+        ) { backStackEntry ->
+            val speakerId = backStackEntry.arguments?.getString("id")
+        }
+        composable(
+            "${DetailScreen.Room.label}/{id}",
+            arguments = listOf(navArgument("id") { type = NavType.StringType })
+        ) { backStackEntry ->
+            val roomId = backStackEntry.arguments?.getString("id")
+        }
+        composable(
+            "${DetailScreen.Favorite.label}/{id}",
+            arguments = listOf(navArgument("id") { type = NavType.StringType })
+        ) { backStackEntry ->
+            val favId = backStackEntry.arguments?.getString("id")
         }
     }
 }
@@ -103,21 +119,21 @@ fun MainScreen(navController: NavController, viewModel: AppViewModel) {
                 viewModel.fetchProgramEntries()
                 textState.value = TextFieldValue("") // reset search
                 ProgramListView(viewModel.programEntries, textState) { programEntry ->
-                    navigateToDetailScreen(navController, programEntry.id)
+                    navigateToDetailScreen(navController, DetailScreen.Program, programEntry.id)
                 }
             }
             composable(BottomNavigationScreens.Speakers.route) {
                 viewModel.fetchSpeakers()
                 textState.value = TextFieldValue("")
                 SpeakerListView(viewModel.speakers, textState) { speaker ->
-                    navigateToDetailScreen(navController, speaker.id)
+                    navigateToDetailScreen(navController, DetailScreen.Speaker, speaker.id)
                 }
             }
             composable(BottomNavigationScreens.Rooms.route) {
                 viewModel.fetchRooms()
                 textState.value = TextFieldValue("") // reset search
                 RoomListView(viewModel.rooms, textState) { room ->
-                    navigateToDetailScreen(navController, room.id)
+                    navigateToDetailScreen(navController, DetailScreen.Room, room.id)
                 }
             }
             composable(BottomNavigationScreens.Favorites.route) {
@@ -129,10 +145,10 @@ fun MainScreen(navController: NavController, viewModel: AppViewModel) {
 
 fun navigateToDetailScreen(
     navController: NavController,
+    detailScreen: DetailScreen,
     id: String
 ) {
-
-    navController.navigate("program/${id}") {
+    navController.navigate("${detailScreen.label}/${id}") {
         popUpTo("main") { saveState = true }
         launchSingleTop = true
         restoreState = true
