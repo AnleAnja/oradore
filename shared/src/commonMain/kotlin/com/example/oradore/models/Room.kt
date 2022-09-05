@@ -7,5 +7,5 @@ data class Room(
     val id: String,
     val name: String,
     val desc: String,
-    val url: String?
+    val roomLocation: RoomLocation?
 )

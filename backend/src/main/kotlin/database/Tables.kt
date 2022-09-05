@@ -21,6 +21,7 @@ object Rooms : Table() {
     val name = varchar("name", 100)
     val desc = varchar("desc", 100)
     val url = varchar("url", 500).nullable()
+    val buildingInfo = varchar("buildingInfo", 100).nullable()
 
     override val primaryKey = PrimaryKey(id)
 }

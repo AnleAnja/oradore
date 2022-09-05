@@ -87,7 +87,6 @@ private data class ProgramPostBody(
 
 class ConferenceApi(
     private val baseUrl: String,
-    private val roomUrlPrefix: String,
     private val programEntryDao: ProgramEntryDao,
     private val roomDao: RoomDao,
     private val speakerDao: SpeakerDao
@@ -207,22 +206,6 @@ class ConferenceApi(
         )
 
     private fun toRoom(json: RoomJson): Room {
-        fun imageUrl(): String? = when (json.id) {
-            "sF1w3rpkux6tnJbLDxJd" -> "3112"
-            "AEH7Xya3DNS9kUE5yMyz" -> "3111"
-            "Vyp1WaS98rfaTdvplF7V" -> "3107"
-            "ka2ITleGSa6l92ZjzjNR" -> "3106"
-            "sLbSh2c8DP9rPUXe0K2r" -> "3104"
-            "8HpEkr7FJ6aXMhyChcuo" -> "3103"
-            "q5ziDJLrl5LRgDTKqx0a" -> "3102"
-            "lMb3NrdzXGn1iPxE4rB4" -> "3101"
-            "db0VB7nhASaI0NJmE6hn" -> "3100"
-            "LMvxs4ZZyhfTSLAeUeqU" -> "1400"
-            "CeBYz8RIAw27ti3FOj5w" -> "0405"
-            "Jj7lxXz7Jw8CKS1vnSVf" -> "0401"
-            else -> null
-        }?.let { roomUrlPrefix + it }
-
         fun nameAndDescription(): Pair<String, String> {
             val split = json.name.split("|", limit = 2)
             return when (split.size) {
@@ -238,7 +221,7 @@ class ConferenceApi(
             json.id,
             name,
             description,
-            imageUrl()
+            RoomLocation.fromRoomId(json.id)
         )
     }
 }

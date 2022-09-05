@@ -5,7 +5,7 @@ import database.DatabaseFactory.dbQuery
 import org.jetbrains.exposed.sql.insert
 import org.jetbrains.exposed.sql.selectAll
 
-class ProgramEntryDao {
+class ProgramEntryDao(private val roomDao: RoomDao) {
 
     suspend fun insertProgramEntries(programEntries: List<ProgramEntry>) {
         dbQuery {
@@ -53,7 +53,7 @@ class ProgramEntryDao {
                             it[Rooms.id],
                             it[Rooms.name],
                             it[Rooms.desc],
-                            it[Rooms.url],
+                            roomDao.roomLocation(it[Rooms.url], it[Rooms.buildingInfo])
                         ),
                         listOf(
                             SpeakerPreview(

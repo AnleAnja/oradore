@@ -1,7 +1,9 @@
 package database
 
 import com.example.oradore.models.Room
+import com.example.oradore.models.RoomLocation
 import database.DatabaseFactory.dbQuery
+import database.Rooms.buildingInfo
 import database.Rooms.desc
 import database.Rooms.id
 import database.Rooms.name
@@ -17,7 +19,8 @@ class RoomDao {
                     it[id] = room.id
                     it[name] = room.name
                     it[desc] = room.desc
-                    it[url] = room.url
+                    it[url] = room.roomLocation?.url
+                    it[buildingInfo] = room.roomLocation?.buildingInfo
                 }
             }
         }
@@ -30,8 +33,12 @@ class RoomDao {
                     it[id],
                     it[name],
                     it[desc],
-                    it[url]
+                    roomLocation(it[url], it[buildingInfo])
                 )
             }
         }
+
+    fun roomLocation(url: String?, buildingInfo: String?): RoomLocation? =
+        if (url != null && buildingInfo != null) RoomLocation(buildingInfo, url)
+        else null
 }

@@ -15,12 +15,11 @@ import io.ktor.server.routing.*
 
 fun main() {
     DatabaseFactory.init(true)
-    val programEntryDao = ProgramEntryDao()
     val roomDao = RoomDao()
+    val programEntryDao = ProgramEntryDao(roomDao)
     val speakerDao = SpeakerDao()
     val api = ConferenceApi(
         "https://event.talque.com/view/v1",
-        "http://www.gm.fh-koeln.de/~dobrynin/kmm/",
         programEntryDao,
         roomDao,
         speakerDao

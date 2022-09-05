@@ -18,7 +18,10 @@ object DummyData {
                     "Jj7lxXz7Jw8CKS1vnSVf",
                     "Raum 0401/0402",
                     "FERCHAU-Hörsaal",
-                    "http://www.gm.fh-koeln.de/~dobrynin/kmm/0401.png"
+                    RoomLocation(
+                        RoomLocation.Mensabuilding0,
+                        "http://www.gm.fh-koeln.de/~dobrynin/kmm/0401.png"
+                    )
                 ),
                 listOf(
                     SpeakerPreview(
@@ -61,7 +64,10 @@ object DummyData {
                     "8HpEkr7FJ6aXMhyChcuo",
                     "Raum 3103",
                     "",
-                    "http://www.gm.fh-koeln.de/~dobrynin/kmm/3103.png"
+                    RoomLocation(
+                        RoomLocation.Mainbuilding3,
+                        "http://www.gm.fh-koeln.de/~dobrynin/kmm/3103.png"
+                    )
                 ),
                 listOf(
                     SpeakerPreview(
@@ -96,7 +102,10 @@ object DummyData {
                     "sF1w3rpkux6tnJbLDxJd",
                     "Raum 3112",
                     "",
-                    "http://www.gm.fh-koeln.de/~dobrynin/kmm/3112.png"
+                    RoomLocation(
+                        RoomLocation.Mainbuilding3,
+                        "http://www.gm.fh-koeln.de/~dobrynin/kmm/3112.png"
+                    )
                 ),
                 listOf(
                     SpeakerPreview(
@@ -296,25 +305,37 @@ object DummyData {
                 "ka2ITleGSa6l92ZjzjNR",
                 "Raum 3106",
                 "Steinmüller-Babcock-Hörsaal",
-                "http://www.gm.fh-koeln.de/~dobrynin/kmm/3196.png"
+                RoomLocation(
+                    RoomLocation.Mainbuilding3,
+                    "http://www.gm.fh-koeln.de/~dobrynin/kmm/3106.png"
+                )
             ),
             Room(
                 "8HpEkr7FJ6aXMhyChcuo",
                 "Raum 3103",
                 "",
-                "http://www.gm.fh-koeln.de/~dobrynin/kmm/3103.png"
+                RoomLocation(
+                    RoomLocation.Mainbuilding3,
+                    "http://www.gm.fh-koeln.de/~dobrynin/kmm/3103.png"
+                )
             ),
             Room(
                 "q5ziDJLrl5LRgDTKqx0a",
                 "Raum 3102",
                 "PFERD-Hörsaal",
-                "http://www.gm.fh-koeln.de/~dobrynin/kmm/3102.png"
+                RoomLocation(
+                    RoomLocation.Mainbuilding3,
+                    "http://www.gm.fh-koeln.de/~dobrynin/kmm/3102.png"
+                )
             ),
             Room(
                 "Jj7lxXz7Jw8CKS1vnSVf",
                 "Raum 0401/0402",
                 "FERCHAU-Hörsaal",
-                "http://www.gm.fh-koeln.de/~dobrynin/kmm/0401.png"
+                RoomLocation(
+                    RoomLocation.Mensabuilding0,
+                    "http://www.gm.fh-koeln.de/~dobrynin/kmm/0401.png"
+                )
             ),
             Room(
                 "Z47wC8xGHqBvyMa6DDtu",
