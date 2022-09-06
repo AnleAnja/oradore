@@ -14,7 +14,7 @@ import io.ktor.server.response.*
 import io.ktor.server.routing.*
 
 fun main() {
-    DatabaseFactory.init(true)
+    DatabaseFactory.init(Environment.PROD)
     val roomDao = RoomDao()
     val programEntryDao = ProgramEntryDao(roomDao)
     val speakerDao = SpeakerDao()
