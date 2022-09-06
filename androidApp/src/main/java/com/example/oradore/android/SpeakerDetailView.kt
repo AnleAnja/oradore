@@ -32,7 +32,7 @@ fun SpeakerDetailView(
             .fillMaxWidth()
     ) {
         SpeakerImageView(speaker)
-        SpeakerBusinessDateView(speaker)
+        SpeakerBusinessDataView(speaker)
         SpeakerInfoView(speaker)
         SpeakerBioView(speaker)
     }
@@ -130,7 +130,7 @@ private fun InfoRow(
 }
 
 @Composable
-private fun SpeakerBusinessDateView(
+private fun SpeakerBusinessDataView(
     speaker: Speaker
 ) {
     Text(
