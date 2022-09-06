@@ -9,10 +9,17 @@
 import SwiftUI
 import shared
 
-let programEntries = Dictionary(grouping: DummyData.shared.ProgramEntriesPreview(), by: { $0.timeRange.start })
 
 struct ProgramEntriesView: View {
     @State private var searchText = ""
+    
+    let title: String
+    let programEntries: [Int64: [ProgramEntryPreview]]
+
+    init(title: String, entries: [ProgramEntryPreview]) {
+        self.title = title
+        self.programEntries = Dictionary(grouping: entries, by: { $0.timeRange.start })
+    }
     
     private var searchResults: [Int64 : [ProgramEntryPreview]] {
         if searchText.isEmpty {
@@ -62,7 +69,7 @@ struct ProgramEntriesView: View {
                 }
                 
             }
-            .navigationTitle("Programm")
+            .navigationTitle(title)
             .searchable(text: $searchText)
         }
     }
