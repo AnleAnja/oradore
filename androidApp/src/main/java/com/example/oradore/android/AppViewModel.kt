@@ -37,7 +37,7 @@ class AppViewModel(
         DummyData.ProgramEntries().firstOrNull { it.id == id }
 
     fun roomById(id: String) =
-        DummyData.ProgramEntriesPreview().firstOrNull { it.room.id == id }?.room
+        rooms.find { it.id == id }
 
     fun speakerPreviewByProgramId(id: String) =
         DummyData.ProgramEntriesPreview().firstOrNull { it.id == id }?.speakers
