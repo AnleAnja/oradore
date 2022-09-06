@@ -116,7 +116,7 @@ fun MainScreen(navController: NavController, viewModel: AppViewModel) {
             composable(BottomNavigationScreens.Program.route) {
                 viewModel.fetchProgramEntries()
                 textState.value = TextFieldValue("") // reset search
-                ProgramListView(viewModel.programEntries, textState) { programEntry ->
+                ProgramListView(viewModel.programEntries, textState, viewModel) { programEntry ->
                     navigateToProgramDetailScreen(navController, programEntry.id)
                 }
             }
@@ -135,7 +135,10 @@ fun MainScreen(navController: NavController, viewModel: AppViewModel) {
                 }
             }
             composable(BottomNavigationScreens.Favorites.route) {
-                Text("D")
+                textState.value = TextFieldValue("")
+                ProgramListView(viewModel.favorites(), textState, viewModel) { programEntry ->
+                    navigateToProgramDetailScreen(navController, programEntry.id)
+                }
             }
         }
     }

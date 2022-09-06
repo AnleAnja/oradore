@@ -33,6 +33,7 @@ import com.example.oradore.models.SpeakerPreview
 fun ProgramListView(
     allProgramEntries: List<ProgramEntryPreview>,
     state: MutableState<TextFieldValue>,
+    viewModel: AppViewModel,
     onClick: (ProgramEntryPreview) -> Unit
 ) {
     val searchedText = state.value.text.lowercase()
@@ -97,7 +98,7 @@ fun ProgramListView(
                 }
                 if (!collapsed.value.contains(start)) {
                     items(entries) { entry -> // ForEach
-                        ProgramEntryPreviewView(entry, onClick)
+                        ProgramEntryPreviewView(entry, viewModel, onClick)
                     }
                 }
             }
@@ -107,6 +108,7 @@ fun ProgramListView(
 @Composable
 private fun ProgramEntryPreviewView(
     programEntry: ProgramEntryPreview,
+    viewModel: AppViewModel,
     onClick: (ProgramEntryPreview) -> Unit
 ) {
     val typo = MaterialTheme.typography
@@ -126,13 +128,20 @@ private fun ProgramEntryPreviewView(
                 .width(2.dp)
         )
         Column(Modifier.padding(start = 8.dp)) { // VStack
-            Text(
-                text = programEntry.format.label,
-                style = typo.body2,
-                modifier = Modifier.padding(bottom = 4.dp),
-                color = programEntry.format.hexColor.color,
-                fontWeight = FontWeight.Bold
-            )
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                Text(
+                    text = programEntry.format.label,
+                    style = typo.body2,
+                    modifier = Modifier.padding(bottom = 4.dp),
+                    color = programEntry.format.hexColor.color,
+                    fontWeight = FontWeight.Bold
+                )
+                FavoriteIconVIew(programEntry.id, viewModel)
+            }
+
             Text(
                 text = "${programEntry.timeRange.formated} in ${programEntry.room.name}",
                 style = typo.body2,

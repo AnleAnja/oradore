@@ -6,11 +6,8 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Favorite
-import androidx.compose.material.icons.outlined.Favorite
 import androidx.compose.material.icons.outlined.Room
 import androidx.compose.material.icons.outlined.Schedule
-import androidx.compose.material.icons.outlined.Star
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -51,21 +48,7 @@ fun ProgramDetailView(
                 color = entry.format.hexColor.color,
                 fontWeight = FontWeight.Bold
             )
-            IconButton(
-                modifier = Modifier.size(30.dp),
-                onClick = { viewModel.toggleFav(entry) }
-            ) {
-                // TODO There is no difference in the filled favorite and outlined favorite icon.
-                //  Thus, i just use different icons for now.
-                val icon =
-                    if (viewModel.isFavorite(entry)) Icons.Default.Favorite
-                    else Icons.Outlined.Star
-                Icon(
-                    icon,
-                    contentDescription = "Save as favorite",
-                    tint = MaterialTheme.colors.primary,
-                )
-            }
+            FavoriteIconButtonView(entry.id, viewModel)
         }
         Text(
             text = entry.name,

@@ -40,6 +40,9 @@ fun MaterialTheme.paddingDefault() = 8.dp
 fun MaterialTheme.iconSize() = 26.dp
 
 @Composable
+fun MaterialTheme.iconButtonSize() = 34.dp
+
+@Composable
 fun MaterialTheme.foregroundColorSecondary() = Color.Gray
 
 @Composable
