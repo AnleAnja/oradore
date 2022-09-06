@@ -80,7 +80,8 @@ struct ProgramEntryView : View {
                     .foregroundColor(formatColor)
                     .font(.caption)
                 Spacer()
-                Image(systemName: viewModel.getFavStateIcon(entryId: programEntry.id))                    .foregroundColor(.yellow)
+                Image(systemName: viewModel.getFavStateIcon(entryId: programEntry.id))
+                  .foregroundColor(.yellow)
             }
             VStack (alignment: .leading) {
                 Text(timeFormatter(time: programEntry.timeRange.start) + " - " + timeFormatter(time: programEntry.timeRange.end) + " Uhr")

@@ -1,5 +1,6 @@
 package database
 
+import Environment
 import kotlinx.coroutines.Dispatchers
 import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.Schema
@@ -8,14 +9,14 @@ import org.jetbrains.exposed.sql.transactions.experimental.newSuspendedTransacti
 import org.jetbrains.exposed.sql.transactions.transaction
 
 object DatabaseFactory {
-    fun init(create: Boolean) {
+    fun init(environment: Environment) {
         val database = Database.connect(
-            "jdbc:postgresql://localhost:5432/oradoredb",
+            "jdbc:postgresql://${environment.serverName()}:5432/${environment.dbName()}",
             driver = "org.postgresql.Driver",
             user = "postgres",
-            password = ""
+            password = environment.password()
         )
-        if (create) {
+        if (environment.createDb()) {
             transaction(database) {
                 SchemaUtils.dropSchema(Schema("public"), cascade = true)
                 SchemaUtils.createSchema(Schema("public"))

@@ -2,7 +2,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 val serializationVersion = "1.3.3"
 val ktorVersion = "2.0.3"
-val coroutineVersion = "1.6.4"
+val coroutineVersion = "1.6.1"
 val exposedVersion = "0.39.2"
 val postgresVersion = "42.5.0"
 
@@ -19,7 +19,7 @@ dependencies {
     implementation("org.postgresql:postgresql:$postgresVersion")
 
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:$serializationVersion")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutineVersion")
+    //implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutineVersion")
 
     implementation("io.ktor:ktor-server-core:${ktorVersion}")
     implementation("io.ktor:ktor-server-netty:${ktorVersion}")
