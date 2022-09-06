@@ -86,6 +86,15 @@ fun Navigation(viewModel: AppViewModel) {
             val speakers = viewModel.speakerPreviewByProgramId(programEntry.id) ?: return@composable
             ProgramDetailView(programEntry, room, speakers, viewModel)
         }
+        composable(
+            "room/{id}",
+            arguments = listOf(navArgument("id") { type = NavType.StringType })
+        ) { backStackEntry ->
+            // TODO all of this can be removed as soon as we hit the actual http api in shared
+            val roomId = backStackEntry.arguments?.getString("id") ?: return@composable
+            val room = viewModel.roomById(roomId) ?: return@composable
+            RoomDetailView(room = room)
+        }
     }
 }
 
@@ -114,7 +123,7 @@ fun MainScreen(navController: NavController, viewModel: AppViewModel) {
                 viewModel.fetchRooms()
                 textState.value = TextFieldValue("") // reset search
                 RoomListView(viewModel.rooms, textState) { room ->
-
+                    navigateToRoomDetailScreen(navController, room.id)
                 }
             }
             composable(BottomNavigationScreens.Favorites.route) {
@@ -129,6 +138,17 @@ fun navigateToProgramDetailScreen(
     id: String
 ) {
     navController.navigate("program/${id}") {
+        popUpTo("main") { saveState = true }
+        launchSingleTop = true
+        restoreState = true
+    }
+}
+
+fun navigateToRoomDetailScreen(
+    navController: NavController,
+    id: String
+) {
+    navController.navigate("room/${id}") {
         popUpTo("main") { saveState = true }
         launchSingleTop = true
         restoreState = true

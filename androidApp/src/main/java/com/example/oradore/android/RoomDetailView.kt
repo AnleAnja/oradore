@@ -21,7 +21,7 @@ fun RoomDetailView(room: Room) {
 @Composable
 private fun roomInfo(room: Room, buildingInfo: String?) {
     Text(text = room.name)
-    if (room.desc != null)
+    if (room.desc.isNotEmpty())
         Text(text = room.desc)
     if (buildingInfo != null)
         Text(buildingInfo)
