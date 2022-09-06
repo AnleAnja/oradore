@@ -79,15 +79,12 @@ fun Navigation(viewModel: AppViewModel) {
             "program/{id}",
             arguments = listOf(navArgument("id") { type = NavType.StringType })
         ) { backStackEntry ->
-            backStackEntry.arguments?.getString("id")
-                // TODO all of this can be removed as soon as we hit the actual http api in shared
-                ?.let { viewModel.programEntryById(it) }
-                ?.let { e ->
-                    val maybeRoom = viewModel.roomById(e.roomId) ?: return@let null
-                    val mayBeSpeakers = viewModel.speakerPreviewByProgramId(e.id) ?: return@let null
-                    Triple(e, maybeRoom, mayBeSpeakers)
-                }
-                ?.let { (e, r, s) -> ProgramDetailView(e, r, s, viewModel) }
+            // TODO all of this can be removed as soon as we hit the actual http api in shared
+            val programEntryId = backStackEntry.arguments?.getString("id") ?: return@composable
+            val programEntry = viewModel.programEntryById(programEntryId) ?: return@composable
+            val room = viewModel.roomById(programEntry.roomId) ?: return@composable
+            val speakers = viewModel.speakerPreviewByProgramId(programEntry.id) ?: return@composable
+            ProgramDetailView(programEntry, room, speakers, viewModel)
         }
     }
 }
@@ -103,21 +100,21 @@ fun MainScreen(navController: NavController, viewModel: AppViewModel) {
                 viewModel.fetchProgramEntries()
                 textState.value = TextFieldValue("") // reset search
                 ProgramListView(viewModel.programEntries, textState) { programEntry ->
-                    navigateToDetailScreen(navController, programEntry.id)
+                    navigateToProgramDetailScreen(navController, programEntry.id)
                 }
             }
             composable(BottomNavigationScreens.Speakers.route) {
                 viewModel.fetchSpeakers()
                 textState.value = TextFieldValue("")
                 SpeakerListView(viewModel.speakers, textState) { speaker ->
-                    navigateToDetailScreen(navController, speaker.id)
+
                 }
             }
             composable(BottomNavigationScreens.Rooms.route) {
                 viewModel.fetchRooms()
                 textState.value = TextFieldValue("") // reset search
                 RoomListView(viewModel.rooms, textState) { room ->
-                    navigateToDetailScreen(navController, room.id)
+
                 }
             }
             composable(BottomNavigationScreens.Favorites.route) {
@@ -127,11 +124,10 @@ fun MainScreen(navController: NavController, viewModel: AppViewModel) {
     }
 }
 
-fun navigateToDetailScreen(
+fun navigateToProgramDetailScreen(
     navController: NavController,
     id: String
 ) {
-
     navController.navigate("program/${id}") {
         popUpTo("main") { saveState = true }
         launchSingleTop = true
