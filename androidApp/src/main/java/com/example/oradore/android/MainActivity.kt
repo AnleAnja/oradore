@@ -79,15 +79,21 @@ fun Navigation(viewModel: AppViewModel) {
             "program/{id}",
             arguments = listOf(navArgument("id") { type = NavType.StringType })
         ) { backStackEntry ->
-            backStackEntry.arguments?.getString("id")
-                // TODO all of this can be removed as soon as we hit the actual http api in shared
-                ?.let { viewModel.programEntryById(it) }
-                ?.let { e ->
-                    val maybeRoom = viewModel.roomById(e.roomId) ?: return@let null
-                    val mayBeSpeakers = viewModel.speakerPreviewByProgramId(e.id) ?: return@let null
-                    Triple(e, maybeRoom, mayBeSpeakers)
-                }
-                ?.let { (e, r, s) -> ProgramDetailView(e, r, s, viewModel) }
+            // TODO all of this can be removed as soon as we hit the actual http api in shared
+            val programEntryId = backStackEntry.arguments?.getString("id") ?: return@composable
+            val programEntry = viewModel.programEntryById(programEntryId) ?: return@composable
+            val room = viewModel.roomById(programEntry.roomId) ?: return@composable
+            val speakers = viewModel.speakerPreviewByProgramId(programEntry.id) ?: return@composable
+            ProgramDetailView(programEntry, room, speakers, viewModel)
+        }
+        composable(
+            "room/{id}",
+            arguments = listOf(navArgument("id") { type = NavType.StringType })
+        ) { backStackEntry ->
+            // TODO all of this can be removed as soon as we hit the actual http api in shared
+            val roomId = backStackEntry.arguments?.getString("id") ?: return@composable
+            val room = viewModel.roomById(roomId) ?: return@composable
+            RoomDetailView(room = room)
         }
         composable(
             "speaker/{id}",
@@ -111,7 +117,7 @@ fun MainScreen(navController: NavController, viewModel: AppViewModel) {
                 viewModel.fetchProgramEntries()
                 textState.value = TextFieldValue("") // reset search
                 ProgramListView(viewModel.programEntries, textState) { programEntry ->
-                    navigateToDetailScreen(navController, programEntry.id)
+                    navigateToProgramDetailScreen(navController, programEntry.id)
                 }
             }
             composable(BottomNavigationScreens.Speakers.route) {
@@ -125,7 +131,7 @@ fun MainScreen(navController: NavController, viewModel: AppViewModel) {
                 viewModel.fetchRooms()
                 textState.value = TextFieldValue("") // reset search
                 RoomListView(viewModel.rooms, textState) { room ->
-                    navigateToDetailScreen(navController, room.id)
+                    navigateToRoomDetailScreen(navController, room.id)
                 }
             }
             composable(BottomNavigationScreens.Favorites.route) {
@@ -135,11 +141,22 @@ fun MainScreen(navController: NavController, viewModel: AppViewModel) {
     }
 }
 
-fun navigateToDetailScreen(
+fun navigateToProgramDetailScreen(
     navController: NavController,
     id: String
 ) {
     navController.navigate("program/${id}") {
+        popUpTo("main") { saveState = true }
+        launchSingleTop = true
+        restoreState = true
+    }
+}
+
+fun navigateToRoomDetailScreen(
+    navController: NavController,
+    id: String
+) {
+    navController.navigate("room/${id}") {
         popUpTo("main") { saveState = true }
         launchSingleTop = true
         restoreState = true
