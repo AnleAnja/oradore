@@ -12,9 +12,9 @@
 		2152FB042600AC8F00CF470E /* iOSApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2152FB032600AC8F00CF470E /* iOSApp.swift */; };
 		7555FF83242A565900829871 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7555FF82242A565900829871 /* MainView.swift */; };
 		850C836C28C362DA00161640 /* AppViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 850C836B28C362DA00161640 /* AppViewModel.swift */; };
+		8595C02828C424BB0089D9A4 /* SpeakerDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8595C02728C424BB0089D9A4 /* SpeakerDetailView.swift */; };
 		8595C02A28C4522A0089D9A4 /* ProgramEntryDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8595C02928C4522A0089D9A4 /* ProgramEntryDetailView.swift */; };
 		8595C02C28C45CCC0089D9A4 /* HelperFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8595C02B28C45CCC0089D9A4 /* HelperFunctions.swift */; };
-		8595C02828C424BB0089D9A4 /* SpeakerDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8595C02728C424BB0089D9A4 /* SpeakerDetailView.swift */; };
 		FA068EDB28BFFBC400FEA85B /* ProgramEntriesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA068EDA28BFFBC400FEA85B /* ProgramEntriesView.swift */; };
 		FA068EDD28BFFC0B00FEA85B /* SpeakersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA068EDC28BFFC0B00FEA85B /* SpeakersView.swift */; };
 		FA068EDF28BFFC1F00FEA85B /* RoomsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA068EDE28BFFC1F00FEA85B /* RoomsView.swift */; };
@@ -46,9 +46,9 @@
 		7555FF82242A565900829871 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		7555FF8C242A565B00829871 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		850C836B28C362DA00161640 /* AppViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppViewModel.swift; sourceTree = "<group>"; };
+		8595C02728C424BB0089D9A4 /* SpeakerDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeakerDetailView.swift; sourceTree = "<group>"; };
 		8595C02928C4522A0089D9A4 /* ProgramEntryDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramEntryDetailView.swift; sourceTree = "<group>"; };
 		8595C02B28C45CCC0089D9A4 /* HelperFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelperFunctions.swift; sourceTree = "<group>"; };
-		8595C02728C424BB0089D9A4 /* SpeakerDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeakerDetailView.swift; sourceTree = "<group>"; };
 		FA068EDA28BFFBC400FEA85B /* ProgramEntriesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramEntriesView.swift; sourceTree = "<group>"; };
 		FA068EDC28BFFC0B00FEA85B /* SpeakersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeakersView.swift; sourceTree = "<group>"; };
 		FA068EDE28BFFC1F00FEA85B /* RoomsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomsView.swift; sourceTree = "<group>"; };
@@ -119,10 +119,9 @@
 		FA068ED928BFFB8D00FEA85B /* views */ = {
 			isa = PBXGroup;
 			children = (
+				FA6931C528C782FD00A6E4C9 /* program */,
 				FA54AF1028C5F47600243C34 /* room */,
 				7555FF82242A565900829871 /* MainView.swift */,
-				8595C02928C4522A0089D9A4 /* ProgramEntryDetailView.swift */,
-				FA068EDA28BFFBC400FEA85B /* ProgramEntriesView.swift */,
 				FA068EE028BFFC3600FEA85B /* FavoritesView.swift */,
 				FAB1CD6B28C4180200CCCB94 /* speaker */,
 			);
@@ -137,6 +136,15 @@
 				FA54AF1328C611E800243C34 /* RoomDetailImageView.swift */,
 			);
 			path = room;
+			sourceTree = "<group>";
+		};
+		FA6931C528C782FD00A6E4C9 /* program */ = {
+			isa = PBXGroup;
+			children = (
+				8595C02928C4522A0089D9A4 /* ProgramEntryDetailView.swift */,
+				FA068EDA28BFFBC400FEA85B /* ProgramEntriesView.swift */,
+			);
+			path = program;
 			sourceTree = "<group>";
 		};
 		FAB1CD6B28C4180200CCCB94 /* speaker */ = {

@@ -4,7 +4,7 @@ import shared
 struct MainView: View {
   var body: some View {
     TabView {
-      ProgramEntriesView()
+        ProgramEntriesView(entries: DummyData.shared.ProgramEntriesPreview())
         .tabItem {
           Label("Programm", systemImage: "list.bullet")
         }

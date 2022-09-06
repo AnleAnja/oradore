@@ -9,10 +9,15 @@
 import SwiftUI
 import shared
 
-let programEntries = Dictionary(grouping: DummyData.shared.ProgramEntriesPreview(), by: { $0.timeRange.start })
 
 struct ProgramEntriesView: View {
     @State private var searchText = ""
+  
+    let programEntries: [Int64: [ProgramEntryPreview]]
+
+    init(entries: [ProgramEntryPreview]) {
+        self.programEntries = Dictionary(grouping: entries, by: { $0.timeRange.start })
+    }
     
     private var searchResults: [Int64 : [ProgramEntryPreview]] {
         if searchText.isEmpty {
