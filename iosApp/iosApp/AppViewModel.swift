@@ -12,19 +12,19 @@ import shared
 
 
 class AppViewModel : ObservableObject{
-    @Published var favorites : [ProgramEntry] = []
+    @Published var favoriteProgramEntryIds : [String] = []
     
     func isFavorite(entryId: String) -> Bool {
-        return favorites.contains(where: { entry in entry.id == entryId })
+        return favoriteProgramEntryIds.contains(entryId)
     }
     
     private func fav(programEntry: ProgramEntry) {
-        favorites.append(programEntry)
+        favoriteProgramEntryIds.append(programEntry.id)
     }
     
     private func unFav(programEntry: ProgramEntry) {
-        if let index = favorites.firstIndex(of: programEntry) {
-            favorites.remove(at: index)
+        if let index = favoriteProgramEntryIds.firstIndex(of: programEntry.id) {
+            favoriteProgramEntryIds.remove(at: index)
         }
     }
     
@@ -44,5 +44,9 @@ class AppViewModel : ObservableObject{
             iconName = "star"
         }
         return iconName
+    }
+    
+    func favorites() -> [ProgramEntryPreview] {
+        DummyData.shared.ProgramEntriesPreview().filter { isFavorite(entryId: $0.id) }
     }
 }

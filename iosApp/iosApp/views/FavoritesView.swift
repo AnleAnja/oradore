@@ -9,29 +9,10 @@
 import SwiftUI
 
 struct FavoritesView: View {
-  let favorites = ["fav 1", "fav 2", "fav 3", "fav 4"]
-  
-  @State private var searchText = ""
-  
-  private var searchResults: [String] {
-    if searchText.isEmpty {
-      return favorites
-    } else {
-      return favorites.filter { $0.contains(searchText) }
-    }
-  }
+  @EnvironmentObject var viewModel: AppViewModel
   
   var body: some View {
-    NavigationView {
-      List {
-        ForEach(searchResults, id: \.self) { fav in
-          NavigationLink(destination: Text(fav)) {
-            Text(fav)
-          }
-        }
-      }
-      .navigationTitle("Favoriten")
-      .searchable(text: $searchText)
-    }
+    let favorites = viewModel.favorites()
+    ProgramEntriesView(title: "Favoriten", entries: favorites)
   }
 }
