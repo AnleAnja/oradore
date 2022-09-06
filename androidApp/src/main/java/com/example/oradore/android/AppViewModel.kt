@@ -68,4 +68,6 @@ class AppViewModel(
         speakers = DummyData.Speakers()
     }
 
+    fun speakerById(id: String) =
+        speakers.find { it.id == id }
 }

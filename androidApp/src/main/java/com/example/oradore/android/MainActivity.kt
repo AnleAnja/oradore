@@ -95,6 +95,14 @@ fun Navigation(viewModel: AppViewModel) {
             val room = viewModel.roomById(roomId) ?: return@composable
             RoomDetailView(room = room)
         }
+        composable(
+            "speaker/{id}",
+            arguments = listOf(navArgument("id") { type = NavType.StringType })
+        ) { backStackEntry ->
+            val speakerId = backStackEntry.arguments?.getString("id") ?: return@composable
+            val speaker = viewModel.speakerById(speakerId) ?: return@composable
+            SpeakerDetailView(speaker)
+        }
     }
 }
 
@@ -116,7 +124,7 @@ fun MainScreen(navController: NavController, viewModel: AppViewModel) {
                 viewModel.fetchSpeakers()
                 textState.value = TextFieldValue("")
                 SpeakerListView(viewModel.speakers, textState) { speaker ->
-
+                    navigateToSpeakerDetailScreen(navController, speaker.id)
                 }
             }
             composable(BottomNavigationScreens.Rooms.route) {
@@ -149,6 +157,17 @@ fun navigateToRoomDetailScreen(
     id: String
 ) {
     navController.navigate("room/${id}") {
+        popUpTo("main") { saveState = true }
+        launchSingleTop = true
+        restoreState = true
+    }
+}
+
+fun navigateToSpeakerDetailScreen(
+    navController: NavController,
+    id: String
+) {
+    navController.navigate("speaker/${id}") {
         popUpTo("main") { saveState = true }
         launchSingleTop = true
         restoreState = true
