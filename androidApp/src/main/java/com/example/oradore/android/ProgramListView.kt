@@ -25,16 +25,17 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import coil.compose.SubcomposeAsyncImage
-import com.example.oradore.models.ProgramEntryPreview
-import com.example.oradore.models.SpeakerPreview
+import com.example.oradore.models.ProgramEntry
+import com.example.oradore.models.Role
+import com.example.oradore.models.Speaker
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun ProgramListView(
-    allProgramEntries: List<ProgramEntryPreview>,
+    allProgramEntries: List<ProgramEntry>,
     state: MutableState<TextFieldValue>,
     viewModel: AppViewModel,
-    onClick: (ProgramEntryPreview) -> Unit
+    onClick: (ProgramEntry) -> Unit
 ) {
     val searchedText = state.value.text.lowercase()
 
@@ -107,9 +108,9 @@ fun ProgramListView(
 
 @Composable
 private fun ProgramEntryPreviewView(
-    programEntry: ProgramEntryPreview,
+    programEntry: ProgramEntry,
     viewModel: AppViewModel,
-    onClick: (ProgramEntryPreview) -> Unit
+    onClick: (ProgramEntry) -> Unit
 ) {
     val typo = MaterialTheme.typography
 
@@ -161,8 +162,9 @@ private fun ProgramEntryPreviewView(
 }
 
 @Composable
-private fun SpeakerPreviewView(speaker: SpeakerPreview, isLast: Boolean) {
+private fun SpeakerPreviewView(speakers: Pair<Speaker, Role>, isLast: Boolean) {
     val typo = MaterialTheme.typography
+    val speaker = speakers.first
 
     Row(
         modifier = Modifier
@@ -205,13 +207,13 @@ private fun SpeakerPreviewView(speaker: SpeakerPreview, isLast: Boolean) {
     }
 }
 
-private fun containsSearchText(entry: ProgramEntryPreview, searchText: String): Boolean =
+private fun containsSearchText(entry: ProgramEntry, searchText: String): Boolean =
     entry.name.lowercase().contains(searchText) ||
             entry.room.name.lowercase().contains(searchText) ||
             entry.speakers.any { speaker ->
-                speaker.firstName.lowercase().contains(searchText) ||
-                        speaker.lastName.lowercase().contains(searchText) ||
-                        speaker.company.lowercase().contains(searchText) ||
-                        speaker.jobTitle.lowercase().contains(searchText)
+                speaker.first.firstName.lowercase().contains(searchText) ||
+                        speaker.first.lastName.lowercase().contains(searchText) ||
+                        speaker.first.company.lowercase().contains(searchText) ||
+                        speaker.first.jobTitle.lowercase().contains(searchText)
             } ||
             entry.format.label.lowercase().contains(searchText)
