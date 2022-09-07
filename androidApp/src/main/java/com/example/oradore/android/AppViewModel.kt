@@ -6,7 +6,6 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import com.example.oradore.api.DummyData
-import com.example.oradore.models.ProgramEntry
 import com.example.oradore.models.ProgramEntryPreview
 import com.example.oradore.models.Room
 import com.example.oradore.models.Speaker
@@ -20,8 +19,7 @@ class AppViewModel(
     var programEntries by mutableStateOf(emptyList<ProgramEntryPreview>())
         private set
 
-
-    private var favoriteProgramEntries by mutableStateOf(setOf<ProgramEntry>())
+    private var favoriteProgramEntries by mutableStateOf(setOf<String>())
 
     var rooms by mutableStateOf(emptyList<Room>())
         private set
@@ -42,22 +40,22 @@ class AppViewModel(
     fun speakerPreviewByProgramId(id: String) =
         DummyData.ProgramEntriesPreview().firstOrNull { it.id == id }?.speakers
 
-    fun isFavorite(programEntry: ProgramEntry) =
-        favoriteProgramEntries.contains(programEntry)
+    fun isFavorite(programEntryId: String) =
+        favoriteProgramEntries.contains(programEntryId)
 
-    private fun fav(programEntry: ProgramEntry) {
-        favoriteProgramEntries = favoriteProgramEntries + programEntry
+    private fun fav(programEntryId: String) {
+        favoriteProgramEntries = favoriteProgramEntries + programEntryId
     }
 
-    private fun unFav(programEntry: ProgramEntry) {
-        favoriteProgramEntries = favoriteProgramEntries - programEntry
+    private fun unFav(programEntryId: String) {
+        favoriteProgramEntries = favoriteProgramEntries - programEntryId
     }
 
-    fun toggleFav(programEntry: ProgramEntry) {
-        if (isFavorite(programEntry))
-            unFav(programEntry)
+    fun toggleFav(programEntryId: String) {
+        if (isFavorite(programEntryId))
+            unFav(programEntryId)
         else
-            fav(programEntry)
+            fav(programEntryId)
     }
 
     fun fetchRooms() {
@@ -70,4 +68,7 @@ class AppViewModel(
 
     fun speakerById(id: String) =
         speakers.find { it.id == id }
+
+    fun favorites(): List<ProgramEntryPreview> =
+        programEntries.filter { isFavorite(it.id) }
 }
