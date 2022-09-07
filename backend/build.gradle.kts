@@ -10,6 +10,7 @@ plugins {
     id("kotlin-platform-jvm")
     kotlin("plugin.serialization") version "1.6.10"
     application
+    id("io.ktor.plugin") version "2.1.1"
 }
 
 dependencies {
