@@ -11,9 +11,12 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
+import com.example.oradore.android.styling.fontBody
+import com.example.oradore.android.styling.fontCaption
+import com.example.oradore.android.styling.fontHeadline
+import com.example.oradore.android.styling.fontSubheadline
 import com.example.oradore.models.Room
 
 @Composable
@@ -42,11 +45,20 @@ fun RoomView(
     room: Room,
     onClick: (Room) -> Unit
 ) {
-    Text(
-        text = room.name,
-        style = MaterialTheme.typography.h6,
+    Column(
         modifier = Modifier
             .clickable(onClick = { onClick(room) })
             .padding(8.dp)
-    )
+    ) {
+        Text(
+            text = room.name,
+            style = MaterialTheme.fontHeadline(),
+        )
+        if (room.desc.isNotEmpty()) {
+            Text(
+                text = room.desc,
+                style = MaterialTheme.fontBody()
+            )
+        }
+    }
 }
