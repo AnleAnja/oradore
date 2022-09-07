@@ -17,15 +17,11 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import coil.compose.SubcomposeAsyncImage
-import com.example.oradore.models.ProgramEntry
-import com.example.oradore.models.Room
-import com.example.oradore.models.SpeakerPreview
+import com.example.oradore.models.*
 
 @Composable
 fun ProgramDetailView(
     entry: ProgramEntry,
-    room: Room,
-    speakers: List<SpeakerPreview>,
     viewModel: AppViewModel
 ) {
     val typo = MaterialTheme.typography
@@ -82,7 +78,7 @@ fun ProgramDetailView(
                 modifier = Modifier.size(24.dp)
             )
             Text(
-                text = room.name,
+                text = entry.room.name,
                 style = typo.body2,
                 modifier = Modifier.padding(bottom = 4.dp)
             )
@@ -96,15 +92,16 @@ fun ProgramDetailView(
             style = typo.h5,
             modifier = Modifier.padding(bottom = 4.dp, top = 8.dp)
         )
-        speakers.forEachIndexed { index, speaker ->
-            SpeakerPreviewView(speaker, index == speakers.size - 1)
+        entry.speakers.forEachIndexed { index, speaker ->
+            SpeakerPreviewView(speaker, index == entry.speakers.size - 1)
         }
     }
 }
 
 @Composable
-private fun SpeakerPreviewView(speaker: SpeakerPreview, isLast: Boolean) {
+private fun SpeakerPreviewView(speaker: Pair<Speaker, Role>, isLast: Boolean) {
     val typo = MaterialTheme.typography
+    val speakerProperties = speaker.first
 
     Row(
         modifier = Modifier
@@ -114,7 +111,7 @@ private fun SpeakerPreviewView(speaker: SpeakerPreview, isLast: Boolean) {
         verticalAlignment = Alignment.Top
     ) {
         SubcomposeAsyncImage(
-            model = speaker.imgPreview,
+            model = speakerProperties.imgPreview,
             loading = { CircularProgressIndicator() },
             contentDescription = null,
             contentScale = ContentScale.Crop,
@@ -124,21 +121,21 @@ private fun SpeakerPreviewView(speaker: SpeakerPreview, isLast: Boolean) {
         )
         Column(modifier = Modifier.padding(start = 12.dp)) {
             Text(
-                text = "${speaker.firstName} ${speaker.lastName}",
+                text = "${speakerProperties.firstName} ${speakerProperties.lastName}",
                 style = typo.body1,
                 modifier = Modifier.padding(bottom = 4.dp),
             )
-            if (speaker.company.isNotEmpty()) {
+            if (speakerProperties.company.isNotEmpty()) {
                 Text(
-                    text = speaker.company,
+                    text = speakerProperties.company,
                     style = typo.caption,
                     modifier = Modifier.padding(bottom = 4.dp),
                     color = Color.Gray
                 )
             }
-            if (speaker.jobTitle.isNotEmpty()) {
+            if (speakerProperties.jobTitle.isNotEmpty()) {
                 Text(
-                    text = speaker.jobTitle,
+                    text = speakerProperties.jobTitle,
                     style = typo.caption,
                     modifier = Modifier.padding(bottom = if (isLast) 0.dp else 4.dp),
                     color = Color.Gray

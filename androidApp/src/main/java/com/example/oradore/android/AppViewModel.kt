@@ -5,18 +5,22 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
-import com.example.oradore.api.DummyData
-import com.example.oradore.models.ProgramEntryPreview
+import androidx.lifecycle.viewModelScope
+import com.example.oradore.api.NetworkApi
+import com.example.oradore.models.ProgramEntry
 import com.example.oradore.models.Room
 import com.example.oradore.models.Speaker
+import kotlinx.coroutines.launch
 
 class AppViewModel(
-    private val savedState: SavedStateHandle
+    private val savedState: SavedStateHandle,
 ) : ViewModel() {
+
+    lateinit var api: NetworkApi
 
     var screen by mutableStateOf(0)
 
-    var programEntries by mutableStateOf(emptyList<ProgramEntryPreview>())
+    var programEntries by mutableStateOf(emptyList<ProgramEntry>())
         private set
 
     private var favoriteProgramEntries by mutableStateOf(setOf<String>())
@@ -28,17 +32,16 @@ class AppViewModel(
         private set
 
     fun fetchProgramEntries() {
-        programEntries = DummyData.ProgramEntriesPreview()
+        viewModelScope.launch {
+            programEntries = api.fetchProgramEntries()
+        }
     }
 
     fun programEntryById(id: String) =
-        DummyData.ProgramEntries().firstOrNull { it.id == id }
+        programEntries.firstOrNull { it.id == id }
 
     fun roomById(id: String) =
         rooms.find { it.id == id }
-
-    fun speakerPreviewByProgramId(id: String) =
-        DummyData.ProgramEntriesPreview().firstOrNull { it.id == id }?.speakers
 
     fun isFavorite(programEntryId: String) =
         favoriteProgramEntries.contains(programEntryId)
@@ -59,16 +62,20 @@ class AppViewModel(
     }
 
     fun fetchRooms() {
-        rooms = DummyData.Rooms()
+        viewModelScope.launch {
+            rooms = api.fetchRooms()
+        }
     }
 
     fun fetchSpeakers() {
-        speakers = DummyData.Speakers()
+        viewModelScope.launch {
+            speakers = api.fetchSpeakers()
+        }
     }
 
     fun speakerById(id: String) =
         speakers.find { it.id == id }
 
-    fun favorites(): List<ProgramEntryPreview> =
+    fun favorites(): List<ProgramEntry> =
         programEntries.filter { isFavorite(it.id) }
 }
