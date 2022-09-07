@@ -29,6 +29,6 @@ data class RoomLocation(
                 "CeBYz8RIAw27ti3FOj5w" -> RoomLocation(Mensabuilding0, "0405")
                 "Jj7lxXz7Jw8CKS1vnSVf" -> RoomLocation(Mensabuilding0, "0401")
                 else -> null
-            }?.let { it.copy(url = roomUrlPrefix + it) }
+            }?.let { it.copy(url = roomUrlPrefix + it.url) }
     }
 }

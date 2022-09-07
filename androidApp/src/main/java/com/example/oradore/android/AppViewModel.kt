@@ -5,10 +5,12 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.oradore.api.DummyData
 import com.example.oradore.models.ProgramEntryPreview
 import com.example.oradore.models.Room
 import com.example.oradore.models.Speaker
+import kotlinx.coroutines.launch
 
 class AppViewModel(
     private val savedState: SavedStateHandle

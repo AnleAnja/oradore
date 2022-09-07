@@ -12,7 +12,7 @@ import shared
 extension Speaker: Identifiable {}
 
 struct SpeakersView: View {
-    let speakers = DummyData.shared.Speakers()
+    let speakers: [Speaker]
     
     @State private var searchText = ""
     

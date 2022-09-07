@@ -20,14 +20,19 @@ class NetworkApi(private val baseUrl: String) {
     }
 
     @Throws(Exception::class)
-    suspend fun fetchProgramEntries(): List<ProgramEntry> =
-        http.get("$baseUrl/program").body()
+    suspend fun fetchProgramEntries(): List<GroupProgramEntries> =
+        http.get("$baseUrl/program").body<List<ProgramEntry>>()
+            .groupBy { it.timeRange.start }
+            .map { (key, value) -> GroupProgramEntries(key, value.sortedBy { it.timeRange.start }) }
+            .sortedBy { it.start }
 
     @Throws(Exception::class)
     suspend fun fetchSpeakers(): List<Speaker> =
-        http.get("$baseUrl/speakers").body()
+        http.get("$baseUrl/speakers").body<List<Speaker>>()
+            .sortedBy { it.lastName }
 
     @Throws(Exception::class)
     suspend fun fetchRooms(): List<Room> =
-        http.get("$baseUrl/rooms").body()
+        http.get("$baseUrl/rooms").body<List<Room>>()
+            .sortedBy { it.name }
 }
