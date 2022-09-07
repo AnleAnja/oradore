@@ -25,6 +25,7 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import coil.compose.SubcomposeAsyncImage
+import com.example.oradore.api.GroupProgramEntries
 import com.example.oradore.models.ProgramEntry
 import com.example.oradore.models.Role
 import com.example.oradore.models.Speaker
@@ -32,7 +33,7 @@ import com.example.oradore.models.Speaker
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun ProgramListView(
-    allProgramEntries: List<ProgramEntry>,
+    allProgramEntries: List<GroupProgramEntries>,
     state: MutableState<TextFieldValue>,
     viewModel: AppViewModel,
     onClick: (ProgramEntry) -> Unit
@@ -42,20 +43,17 @@ fun ProgramListView(
     val visibleProgramEntries = if (searchedText.isEmpty()) {
         allProgramEntries
     } else {
-        allProgramEntries.filter { entry ->
+        viewModel.filterProgramEntries { entry ->
             containsSearchText(entry, searchedText)
         }
     }
-
-    val entries = visibleProgramEntries
-        .groupBy { it.timeRange.start }
 
     val collapsed = remember { mutableStateOf(emptySet<Long>()) }
 
     LazyColumn( // LazyVStack / List
         modifier = Modifier.fillMaxWidth()
     ) {
-        entries
+        visibleProgramEntries
             .forEach { (start, entries) ->
                 stickyHeader {
                     Row(

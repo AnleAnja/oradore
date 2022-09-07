@@ -6,6 +6,7 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.oradore.api.GroupProgramEntries
 import com.example.oradore.api.NetworkApi
 import com.example.oradore.models.ProgramEntry
 import com.example.oradore.models.Room
@@ -20,7 +21,7 @@ class AppViewModel(
 
     var screen by mutableStateOf(0)
 
-    var programEntries by mutableStateOf(emptyList<ProgramEntry>())
+    var programEntries by mutableStateOf(emptyList<GroupProgramEntries>())
         private set
 
     private var favoriteProgramEntries by mutableStateOf(setOf<String>())
@@ -37,8 +38,15 @@ class AppViewModel(
         }
     }
 
-    fun programEntryById(id: String) =
-        programEntries.firstOrNull { it.id == id }
+    fun programEntryById(id: String): ProgramEntry? {
+        programEntries.forEach { group ->
+            group.entries.forEach { entry ->
+                if (entry.id == id)
+                    return entry
+            }
+        }
+        return null
+    }
 
     fun roomById(id: String) =
         rooms.find { it.id == id }
@@ -76,6 +84,17 @@ class AppViewModel(
     fun speakerById(id: String) =
         speakers.find { it.id == id }
 
-    fun favorites(): List<ProgramEntry> =
-        programEntries.filter { isFavorite(it.id) }
+    fun filterProgramEntries(where: (ProgramEntry) -> Boolean): List<GroupProgramEntries> {
+        val filtered = mutableListOf<GroupProgramEntries>()
+        programEntries.forEach { group ->
+            val newEntries = group.entries.filter(where)
+            if (newEntries.isNotEmpty()) {
+                filtered += group.copy(entries = newEntries)
+            }
+        }
+        return filtered
+    }
+
+    fun favorites(): List<GroupProgramEntries> =
+        filterProgramEntries { isFavorite(it.id) }
 }
