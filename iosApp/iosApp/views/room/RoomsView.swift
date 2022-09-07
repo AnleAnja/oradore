@@ -34,10 +34,10 @@ struct RoomsView: View {
         ForEach(searchResults) { room in
           NavigationLink(destination: RoomDetailView(room: room)) {
             VStack(alignment: .leading) {
-              Text(room.name)
+                Text(room.name).font(.headline)
               if !room.desc.isEmpty {
                 Text(room.desc)
-                  .font(.caption)
+                  .font(.body)
                   .foregroundColor(.secondary)
               }
             }
