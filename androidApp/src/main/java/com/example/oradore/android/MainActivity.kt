@@ -22,6 +22,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.example.oradore.api.NetworkApi
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,6 +38,7 @@ class MainActivity : AppCompatActivity() {
 @Composable
 fun Content() {
     val viewModel: AppViewModel = viewModel()
+    viewModel.api = NetworkApi("http://advp44.gm.fh-koeln.de:9090/")
     Scaffold(
         topBar = { TopBar(viewModel) }
     ) { padding -> // We need to pass scaffold's inner padding to content. That's why we use Box.
@@ -82,9 +84,7 @@ fun Navigation(viewModel: AppViewModel) {
             // TODO all of this can be removed as soon as we hit the actual http api in shared
             val programEntryId = backStackEntry.arguments?.getString("id") ?: return@composable
             val programEntry = viewModel.programEntryById(programEntryId) ?: return@composable
-            val room = viewModel.roomById(programEntry.roomId) ?: return@composable
-            val speakers = viewModel.speakerPreviewByProgramId(programEntry.id) ?: return@composable
-            ProgramDetailView(programEntry, room, speakers, viewModel)
+            ProgramDetailView(programEntry, viewModel)
         }
         composable(
             "room/{id}",
