@@ -6,7 +6,6 @@ import androidx.compose.runtime.setValue
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.oradore.api.DummyData
 import com.example.oradore.api.NetworkApi
 import com.example.oradore.models.ProgramEntry
 import com.example.oradore.models.Room
@@ -43,9 +42,6 @@ class AppViewModel(
 
     fun roomById(id: String) =
         rooms.find { it.id == id }
-
-    fun speakerPreviewByProgramId(id: String) =
-        DummyData.ProgramEntries().firstOrNull { it.id == id }?.speakers
 
     fun isFavorite(programEntryId: String) =
         favoriteProgramEntries.contains(programEntryId)
