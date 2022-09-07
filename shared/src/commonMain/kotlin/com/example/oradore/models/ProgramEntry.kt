@@ -1,8 +1,5 @@
 package com.example.oradore.models
 
-import com.example.oradore.models.Category
-import com.example.oradore.models.Format
-import com.example.oradore.models.TimeRange
 import kotlinx.serialization.Serializable
 
 @Serializable
@@ -10,10 +7,10 @@ data class ProgramEntry(
     val name: String,
     val id: String,
     val description: String,
-    val tags: List<Category>,
+    val category: Category,
     val timeRange: TimeRange,
-    val roomId: String,
-    val speakers: List<SpeakerRef>,
+    val room: Room,
+    val speakers: List<Pair<Speaker, Role>>,
     val isCanceled: Boolean,
     val format: Format,
 )
