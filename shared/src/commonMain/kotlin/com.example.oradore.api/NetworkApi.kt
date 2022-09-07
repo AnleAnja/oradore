@@ -29,7 +29,7 @@ class NetworkApi(private val baseUrl: String) {
     @Throws(Exception::class)
     suspend fun fetchSpeakers(): List<Speaker> =
         http.get("$baseUrl/speakers").body<List<Speaker>>()
-            .sortedBy { it.lastName }
+            .sortedBy { it.firstName }
 
     @Throws(Exception::class)
     suspend fun fetchRooms(): List<Room> =
