@@ -1,6 +1,5 @@
 package database
 
-import api.ProgramEntryDb
 import com.example.oradore.models.*
 import database.DatabaseFactory.dbQuery
 import org.jetbrains.exposed.sql.insert

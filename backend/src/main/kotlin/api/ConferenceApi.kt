@@ -4,6 +4,7 @@ import com.example.oradore.models.*
 import database.ProgramEntryDao
 import database.RoomDao
 import database.SpeakerDao
+import database.ProgramEntryDb
 import io.ktor.client.*
 import io.ktor.client.call.*
 import io.ktor.client.plugins.contentnegotiation.*
@@ -28,19 +29,6 @@ private data class ProgramEntryJson(
     val speakerRole: Map<String, String>,
     val isCanceled: Boolean,
     val format: String,
-)
-
-@Serializable
-data class ProgramEntryDb(
-    val name: String,
-    val id: String,
-    val description: String,
-    val tags: Category,
-    val timeRange: TimeRange,
-    val roomId: String,
-    val speakers: List<SpeakerRef>,
-    val isCanceled: Boolean,
-    val format: Format
 )
 
 @Serializable
