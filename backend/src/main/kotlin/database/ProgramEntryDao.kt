@@ -1,5 +1,6 @@
 package database
 
+import api.ProgramEntryDb
 import com.example.oradore.models.*
 import database.DatabaseFactory.dbQuery
 import org.jetbrains.exposed.sql.insert
@@ -7,14 +8,14 @@ import org.jetbrains.exposed.sql.selectAll
 
 class ProgramEntryDao(private val roomDao: RoomDao) {
 
-    suspend fun insertProgramEntries(programEntries: List<ProgramEntry>) {
+    suspend fun insertProgramEntries(programEntries: List<ProgramEntryDb>) {
         dbQuery {
             programEntries.forEach { programEntry ->
                 ProgramEntries.insert {
                     it[id] = programEntry.id
                     it[name] = programEntry.name
                     it[description] = programEntry.description
-                    it[tag] = (programEntry.tags.firstOrNull() ?: Category.OTHER).abbrev
+                    it[tag] = (programEntry.tags).abbrev
                     it[startTime] = programEntry.timeRange.start
                     it[endTime] = programEntry.timeRange.end
                     it[roomId] = programEntry.roomId
@@ -33,7 +34,7 @@ class ProgramEntryDao(private val roomDao: RoomDao) {
         }
     }
 
-    suspend fun getAllProgramEntries(): List<ProgramEntryPreview> =
+    suspend fun getAllProgramEntries(): List<ProgramEntry> =
         dbQuery {
             ProgramEntries
                 .innerJoin(Rooms)
@@ -41,9 +42,10 @@ class ProgramEntryDao(private val roomDao: RoomDao) {
                 .innerJoin(Speakers)
                 .selectAll()
                 .map {
-                    ProgramEntryPreview(
+                    ProgramEntry(
                         it[ProgramEntries.name],
                         it[ProgramEntries.id],
+                        it[ProgramEntries.description],
                         Category.fromAbbrev(it[ProgramEntries.tag]),
                         TimeRange(
                             it[ProgramEntries.startTime],
@@ -56,13 +58,25 @@ class ProgramEntryDao(private val roomDao: RoomDao) {
                             roomDao.roomLocation(it[Rooms.url], it[Rooms.buildingInfo])
                         ),
                         listOf(
-                            SpeakerPreview(
-                                it[Speakers.id],
-                                it[Speakers.firstName],
-                                it[Speakers.lastName],
-                                it[Speakers.imgPreview],
-                                it[Speakers.company],
-                                it[Speakers.jobTitle]
+                            Pair(
+                                first = Speaker(
+                                    it[Speakers.id],
+                                    it[Speakers.firstName],
+                                    it[Speakers.lastName],
+                                    it[Speakers.imgLarge],
+                                    it[Speakers.imgPreview],
+                                    it[Speakers.bio],
+                                    it[Speakers.company],
+                                    it[Speakers.jobTitle],
+                                    it[Speakers.location],
+                                    it[Speakers.website],
+                                    it[Speakers.linkedin],
+                                    it[Speakers.xing],
+                                    it[Speakers.twitter],
+                                    it[Speakers.instagram],
+                                    it[Speakers.facebook]
+                                ),
+                                second = Role.fromAbbrev(it[ProgramSpeakers.role])
                             )
                         ),
                         it[ProgramEntries.isCanceled],

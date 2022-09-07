@@ -31,6 +31,19 @@ private data class ProgramEntryJson(
 )
 
 @Serializable
+data class ProgramEntryDb(
+    val name: String,
+    val id: String,
+    val description: String,
+    val tags: Category,
+    val timeRange: TimeRange,
+    val roomId: String,
+    val speakers: List<SpeakerRef>,
+    val isCanceled: Boolean,
+    val format: Format
+)
+
+@Serializable
 private data class ProgramResult(val lectures: List<ProgramEntryJson>)
 
 @Serializable
@@ -179,20 +192,22 @@ class ConferenceApi(
             .roomById
             .map { toRoom(it.value.model) }
 
-    private suspend fun fetchProgramEntries(): List<ProgramEntry> =
+    private suspend fun fetchProgramEntries(): List<ProgramEntryDb> =
         http.post("$baseUrl/list/lectures") {
             contentType(ContentType.Application.Json)
             setBody(programPostBody)
         }.body<ProgramResult>()
             .lectures
-            .map(::toProgramEntry)
+            .map(::toProgramEntryDb)
 
-    private fun toProgramEntry(entry: ProgramEntryJson) =
-        ProgramEntry(
+    private fun toProgramEntryDb (entry: ProgramEntryJson) =
+        ProgramEntryDb(
             entry.name,
             entry.id,
             entry.description,
-            entry.tags.map { Category.fromAbbrev(it) },
+            entry.tags.firstOrNull()
+                ?.let { Category.fromAbbrev(it) }
+                ?: Category.OTHER,
             entry.timeRange,
             entry.roomId,
             entry.speakers.map {

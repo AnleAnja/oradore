@@ -1,6 +1,6 @@
 package com.example.oradore.api
 
-import com.example.oradore.models.ProgramEntryPreview
+import com.example.oradore.models.ProgramEntry
 import com.example.oradore.models.Room
 import com.example.oradore.models.Speaker
 import io.ktor.client.*
@@ -20,7 +20,7 @@ class NetworkApi(private val baseUrl: String) {
     }
 
     @Throws(Exception::class)
-    suspend fun fetchProgramEntries(): List<ProgramEntryPreview> =
+    suspend fun fetchProgramEntries(): List<ProgramEntry> =
         http.get("$baseUrl/program").body()
 
     @Throws(Exception::class)

@@ -9,5 +9,15 @@ enum class Role(val label: String) {
     SPEAKER("Speaker"),
 
     @SerialName("moderation")
-    MODERATOR("Moderation")
+    MODERATOR("Moderation"),
+
+    OTHER("Sonstige");
+
+    companion object {
+        fun fromAbbrev(abbrev: String) = when (abbrev) {
+            "Speaker" -> Role.SPEAKER
+            "Moderation" -> Role.MODERATOR
+            else -> Role.OTHER
+        }
+    }
 }
