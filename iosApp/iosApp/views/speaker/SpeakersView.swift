@@ -39,12 +39,7 @@ struct SpeakersView: View {
                             if let imgUrl = speaker.imgPreview {
                                 SpeakerImageView(url: imgUrl)
                             }
-                            SpeakerPreviewContent(
-                                firstName: speaker.firstName,
-                                lastName: speaker.lastName,
-                                company: speaker.company,
-                                jobTitle: speaker.jobTitle
-                            )
+                            SpeakerPreviewContent(speaker: speaker)
                         }
                     }
                 }

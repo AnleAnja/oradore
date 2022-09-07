@@ -15,8 +15,7 @@ struct ProgramEntryDetailView: View {
     
     var body: some View {
         let entry = getProgramEntryById()
-        let entryPreview = getProgramEntryPreviewById()
-        let room = getRoomById(id: entry.roomId)
+        let room = entry.room
         let formatColor = Color(hexStringToUIColor(hex: entry.format.hexColor))
         
         ScrollView {
@@ -48,7 +47,7 @@ struct ProgramEntryDetailView: View {
                 Text(entry.description_).font(.callout)
                 Divider()
                 Text("Speaker").font(.title2)
-                SpeakerPreviewView(speakers: entryPreview.speakers)
+                SpeakerPreviewView(speakers: entry.speakerWithRoles)
             }
             .padding(.leading)
             .padding(.trailing)
@@ -58,12 +57,6 @@ struct ProgramEntryDetailView: View {
     
     func getProgramEntryById() -> ProgramEntry {
         return DummyData.shared.ProgramEntries()[DummyData.shared.ProgramEntries().firstIndex(where: {
-            $0.id == id
-        })!]
-    }
-    
-    func getProgramEntryPreviewById() -> ProgramEntryPreview {
-        return DummyData.shared.ProgramEntriesPreview()[DummyData.shared.ProgramEntriesPreview().firstIndex(where: {
             $0.id == id
         })!]
     }

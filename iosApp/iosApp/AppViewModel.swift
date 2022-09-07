@@ -46,7 +46,7 @@ class AppViewModel : ObservableObject{
         return iconName
     }
     
-    func favorites() -> [ProgramEntryPreview] {
-        DummyData.shared.ProgramEntriesPreview().filter { isFavorite(entryId: $0.id) }
+    func favorites() -> [ProgramEntry] {
+        DummyData.shared.ProgramEntries().filter { isFavorite(entryId: $0.id) }
     }
 }

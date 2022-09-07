@@ -14,14 +14,14 @@ struct ProgramEntriesView: View {
     @State private var searchText = ""
     
     let title: String
-    let programEntries: [Int64: [ProgramEntryPreview]]
-
-    init(title: String, entries: [ProgramEntryPreview]) {
+    let programEntries: [Int64: [ProgramEntry]]
+    
+    init(title: String, entries: [ProgramEntry]) {
         self.title = title
         self.programEntries = Dictionary(grouping: entries, by: { $0.timeRange.start })
     }
     
-    private var searchResults: [Int64 : [ProgramEntryPreview]] {
+    private var searchResults: [Int64 : [ProgramEntry]] {
         if searchText.isEmpty {
             return programEntries
         } else {
@@ -29,8 +29,9 @@ struct ProgramEntriesView: View {
                 value.contains { entry in
                     entry.name.lowercased().contains(searchText.lowercased()) ||
                     entry.room.name.lowercased().contains(searchText.lowercased()) ||
-                    entry.speakers.contains { speaker in
-                        speaker.firstName.lowercased().contains(searchText.lowercased()) ||
+                    entry.speakerWithRoles.contains { speakerWithRole in
+                        let speaker = speakerWithRole.speaker
+                        return speaker.firstName.lowercased().contains(searchText.lowercased()) ||
                         speaker.lastName.lowercased().contains(searchText.lowercased()) ||
                         speaker.company.lowercased().contains(searchText.lowercased()) ||
                         speaker.jobTitle.lowercased().contains(searchText.lowercased())
@@ -76,10 +77,10 @@ struct ProgramEntriesView: View {
 }
 
 struct ProgramEntryView : View {
-    let programEntry: ProgramEntryPreview
+    let programEntry: ProgramEntry
     let formatColor: SwiftUI.Color
     @EnvironmentObject var viewModel: AppViewModel
-
+    
     var body: some View {
         VStack (alignment: .leading) {
             HStack {
@@ -88,7 +89,7 @@ struct ProgramEntryView : View {
                     .font(.caption)
                 Spacer()
                 Image(systemName: viewModel.getFavStateIcon(entryId: programEntry.id))
-                  .foregroundColor(.yellow)
+                    .foregroundColor(.yellow)
             }
             VStack (alignment: .leading) {
                 Text(timeFormatter(time: programEntry.timeRange.start) + " - " + timeFormatter(time: programEntry.timeRange.end) + " Uhr")
@@ -97,23 +98,23 @@ struct ProgramEntryView : View {
             Text(programEntry.name).font(.title)
         }
         Spacer()
-        SpeakerPreviewView(speakers: programEntry.speakers)
+        SpeakerPreviewView(speakers: programEntry.speakerWithRoles)
     }
 }
 
+extension SpeakerWithRole: Identifiable {
+    var id: String { speaker.id }
+}
+
 struct SpeakerPreviewView : View {
-    let speakers: [SpeakerPreview]
+    let speakers: [SpeakerWithRole]
+    
     var body: some View {
-        ForEach(speakers, id: \.self) { speaker in
+        ForEach(speakers) { speakerWithRole in
             HStack {
-                SpeakerPreviewContent(
-                    firstName: speaker.firstName,
-                    lastName: speaker.lastName,
-                    company: speaker.company,
-                    jobTitle: speaker.jobTitle
-                )
+                SpeakerPreviewContent(speaker: speakerWithRole.speaker)
                 Spacer()
-                if let imgUrl = speaker.imgPreview {
+                if let imgUrl = speakerWithRole.speaker.imgPreview {
                     SpeakerImageView(url: imgUrl)
                 } else {
                     EmptyView()
