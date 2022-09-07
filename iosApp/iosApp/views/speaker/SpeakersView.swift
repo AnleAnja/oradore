@@ -12,7 +12,7 @@ import shared
 extension Speaker: Identifiable {}
 
 struct SpeakersView: View {
-    let speakers = DummyData.shared.Speakers()
+    let speakers: [Speaker]
     
     @State private var searchText = ""
     
@@ -39,12 +39,7 @@ struct SpeakersView: View {
                             if let imgUrl = speaker.imgPreview {
                                 SpeakerImageView(url: imgUrl)
                             }
-                            SpeakerPreviewContent(
-                                firstName: speaker.firstName,
-                                lastName: speaker.lastName,
-                                company: speaker.company,
-                                jobTitle: speaker.jobTitle
-                            )
+                            SpeakerPreviewContent(speaker: speaker)
                         }
                     }
                 }

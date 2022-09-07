@@ -13,7 +13,7 @@ extension Room: Identifiable { }
 
 struct RoomsView: View {
   
-  let rooms = DummyData.shared.Rooms()
+  let rooms: [Room]
   
   @State private var searchText = ""
   

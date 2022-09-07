@@ -11,8 +11,49 @@ import SwiftUI
 import shared
 
 
-class AppViewModel : ObservableObject{
-    @Published var favoriteProgramEntryIds : [String] = []
+class AppViewModel: ObservableObject {
+  
+    @Published
+    private(set) var favoriteProgramEntryIds : [String] = []
+    
+    @Published
+    private(set) var programEntries: [GroupProgramEntries] = []
+    
+    @Published
+    private(set) var speakers: [Speaker] = []
+    
+    @Published
+    private(set) var rooms: [Room] = []
+    
+    let api: NetworkApi
+    
+    init(api: NetworkApi) {
+        self.api = api
+    }
+    
+    func fetchProgramEntries() {
+        api.fetchProgramEntries { entries, _ in
+            if let entries = entries {
+                self.programEntries = entries
+            }
+        }
+    }
+    
+    func fetchSpeakers() {
+        api.fetchSpeakers { speakers, _ in
+            if let speakers = speakers {
+                self.speakers = speakers
+            }
+        }
+    }
+    
+    func fetchRooms() {
+        api.fetchRooms { rooms, _ in
+            if let rooms = rooms {
+                self.rooms = rooms
+            }
+        }
+    }
     
     func isFavorite(entryId: String) -> Bool {
         return favoriteProgramEntryIds.contains(entryId)
@@ -45,8 +86,19 @@ class AppViewModel : ObservableObject{
         }
         return iconName
     }
+  
+    func filterProgramEntries(`where` predicate: (ProgramEntry) -> Bool) -> [GroupProgramEntries] {
+        programEntries.reduce(into: []) { acc, group in
+            let start = group.start
+            let entries = group.entries
+            let newEntries = entries.filter(predicate)
+            if !newEntries.isEmpty {
+                acc.append(GroupProgramEntries(start: start, entries: newEntries))
+            }
+        }
+    }
     
-    func favorites() -> [ProgramEntryPreview] {
-        DummyData.shared.ProgramEntriesPreview().filter { isFavorite(entryId: $0.id) }
+    func favorites() -> [GroupProgramEntries] {
+        filterProgramEntries(where: { isFavorite(entryId: $0.id) })
     }
 }

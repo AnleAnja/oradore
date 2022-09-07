@@ -7,12 +7,13 @@
 //
 
 import SwiftUI
+import shared
 
 struct FavoritesView: View {
-  @EnvironmentObject var viewModel: AppViewModel
+  
+  let favorites: [GroupProgramEntries]
   
   var body: some View {
-    let favorites = viewModel.favorites()
-    ProgramEntriesView(title: "Favoriten", entries: favorites)
+    ProgramEntriesView(title: "Favoriten", programEntries: favorites)
   }
 }

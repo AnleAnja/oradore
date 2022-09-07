@@ -10,19 +10,16 @@ import SwiftUI
 import shared
 
 struct SpeakerPreviewContent: View {
-  let firstName: String
-  let lastName: String
-  let company: String
-  let jobTitle: String
+  let speaker: Speaker
   
   var body: some View {
     VStack(alignment: .leading) {
-      Text("\(firstName) \(lastName)")
+      Text("\(speaker.firstName) \(speaker.lastName)")
         .font(.headline)
-      Text(company)
+      Text(speaker.company)
         .font(.caption)
         .foregroundColor(.secondary)
-      Text(jobTitle)
+      Text(speaker.jobTitle)
         .font(.caption)
         .foregroundColor(.secondary)
     }

@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import shared
 
 func hexStringToUIColor (hex:String) -> UIColor {
     var cString:String = hex.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
@@ -36,4 +37,15 @@ func timeFormatter(time: Int64) -> String {
     let timeAsDate = Date(timeIntervalSince1970: Double(time)/1000.0)
     formatter.dateFormat = "HH:mm"
     return formatter.string(from: timeAsDate)
+}
+
+struct SpeakerWithRole {
+    let speaker: Speaker
+    let role: Role
+}
+
+extension ProgramEntry {
+    var speakerWithRoles: [SpeakerWithRole] {
+        speakers.map { SpeakerWithRole(speaker: $0.first!, role: $0.second!) }
+    }
 }

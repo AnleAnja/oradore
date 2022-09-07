@@ -9,34 +9,34 @@
 import SwiftUI
 import shared
 
+extension GroupProgramEntries: Identifiable {
+  public var id: Int64 { start }
+}
+
+extension ProgramEntry: Identifiable { }
 
 struct ProgramEntriesView: View {
+    @EnvironmentObject var viewModel: AppViewModel
     @State private var searchText = ""
     
     let title: String
-    let programEntries: [Int64: [ProgramEntryPreview]]
-
-    init(title: String, entries: [ProgramEntryPreview]) {
-        self.title = title
-        self.programEntries = Dictionary(grouping: entries, by: { $0.timeRange.start })
-    }
+    let programEntries: [GroupProgramEntries]
     
-    private var searchResults: [Int64 : [ProgramEntryPreview]] {
+    private var searchResults: [GroupProgramEntries] {
         if searchText.isEmpty {
             return programEntries
         } else {
-            return programEntries.filter { key, value in
-                value.contains { entry in
-                    entry.name.lowercased().contains(searchText.lowercased()) ||
-                    entry.room.name.lowercased().contains(searchText.lowercased()) ||
-                    entry.speakers.contains { speaker in
-                        speaker.firstName.lowercased().contains(searchText.lowercased()) ||
-                        speaker.lastName.lowercased().contains(searchText.lowercased()) ||
-                        speaker.company.lowercased().contains(searchText.lowercased()) ||
-                        speaker.jobTitle.lowercased().contains(searchText.lowercased())
-                    } ||
-                    entry.format.label.lowercased().contains(searchText.lowercased())
-                }
+            return viewModel.filterProgramEntries { entry in
+                entry.name.lowercased().contains(searchText.lowercased()) ||
+                entry.room.name.lowercased().contains(searchText.lowercased()) ||
+                entry.speakerWithRoles.contains { speakerWithRole in
+                    let speaker = speakerWithRole.speaker
+                    return speaker.firstName.lowercased().contains(searchText.lowercased()) ||
+                    speaker.lastName.lowercased().contains(searchText.lowercased()) ||
+                    speaker.company.lowercased().contains(searchText.lowercased()) ||
+                    speaker.jobTitle.lowercased().contains(searchText.lowercased())
+                } ||
+                entry.format.label.lowercased().contains(searchText.lowercased())
             }
         }
     }
@@ -44,17 +44,18 @@ struct ProgramEntriesView: View {
     var body: some View {
         NavigationView {
             List {
-                ForEach(Array(searchResults.keys), id: \.self) { start in
+                ForEach(searchResults) { group in
+                    let start = group.start
+                    let entries = group.entries
                     Section(header: HStack {
                         VStack { Divider() }
                         Text(timeFormatter(time: start))
                             .font(.headline)
                         VStack { Divider() }
-                    }                        )
-                    {
-                        ForEach(searchResults[start]!, id: \.self) { entry in
+                    }){
+                        ForEach(entries) { entry in
                             let formatColor = Color(hexStringToUIColor(hex: entry.format.hexColor))
-                            NavigationLink(destination: ProgramEntryDetailView(id: entry.id)) {
+                            NavigationLink(destination: ProgramEntryDetailView(entry: entry)) {
                                 HStack {
                                     Divider()
                                         .frame(maxWidth:2)
@@ -76,10 +77,10 @@ struct ProgramEntriesView: View {
 }
 
 struct ProgramEntryView : View {
-    let programEntry: ProgramEntryPreview
+    let programEntry: ProgramEntry
     let formatColor: SwiftUI.Color
     @EnvironmentObject var viewModel: AppViewModel
-
+    
     var body: some View {
         VStack (alignment: .leading) {
             HStack {
@@ -88,7 +89,7 @@ struct ProgramEntryView : View {
                     .font(.caption)
                 Spacer()
                 Image(systemName: viewModel.getFavStateIcon(entryId: programEntry.id))
-                  .foregroundColor(.yellow)
+                    .foregroundColor(.yellow)
             }
             VStack (alignment: .leading) {
                 Text(timeFormatter(time: programEntry.timeRange.start) + " - " + timeFormatter(time: programEntry.timeRange.end) + " Uhr")
@@ -97,23 +98,23 @@ struct ProgramEntryView : View {
             Text(programEntry.name).font(.title)
         }
         Spacer()
-        SpeakerPreviewView(speakers: programEntry.speakers)
+        SpeakerPreviewView(speakers: programEntry.speakerWithRoles)
     }
 }
 
+extension SpeakerWithRole: Identifiable {
+    var id: String { speaker.id }
+}
+
 struct SpeakerPreviewView : View {
-    let speakers: [SpeakerPreview]
+    let speakers: [SpeakerWithRole]
+    
     var body: some View {
-        ForEach(speakers, id: \.self) { speaker in
+        ForEach(speakers) { speakerWithRole in
             HStack {
-                SpeakerPreviewContent(
-                    firstName: speaker.firstName,
-                    lastName: speaker.lastName,
-                    company: speaker.company,
-                    jobTitle: speaker.jobTitle
-                )
+                SpeakerPreviewContent(speaker: speakerWithRole.speaker)
                 Spacer()
-                if let imgUrl = speaker.imgPreview {
+                if let imgUrl = speakerWithRole.speaker.imgPreview {
                     SpeakerImageView(url: imgUrl)
                 } else {
                     EmptyView()
