@@ -82,7 +82,7 @@ private data class ProgramPostBody(
     val tags: List<String>,
     val title: String,
     val dateTimeRange: String?,
-    val cursor: String,
+    val cursor: String?,
     val limit: Int,
 )
 
@@ -110,7 +110,7 @@ class ConferenceApi(
         emptyList(),
         "",
         null,
-        "Ck8KGQoMcGVyaW9kX3N0YXJ0EgkIgJDhtuyb-gISLmoLZX50YWxxdWUtNDJyHwsSBUV2ZW50IhRFczVYdFNpRTJsdVkxSkM2M2UwRwwYACAB",
+        null,
         100
     )
 
@@ -188,8 +188,13 @@ class ConferenceApi(
             .lectures
             .map(::toProgramEntryDb)
 
-    private fun toProgramEntryDb (entry: ProgramEntryJson) =
-        ProgramEntryDb(
+    private fun toProgramEntryDb(entry: ProgramEntryJson): ProgramEntryDb {
+        val mods = entry.speakerRole.map { SpeakerRef(it.key, Role.MODERATOR) }
+        val speakers = entry.speakers
+            .map { SpeakerRef(it, Role.SPEAKER) }
+            .filterNot { s -> mods.any { it.id == s.id } }
+
+        return ProgramEntryDb(
             entry.name,
             entry.id,
             entry.description,
@@ -198,15 +203,11 @@ class ConferenceApi(
                 ?: Category.OTHER,
             entry.timeRange,
             entry.roomId,
-            entry.speakers.map {
-                SpeakerRef(
-                    it,
-                    Role.SPEAKER
-                )
-            } + entry.speakerRole.map { SpeakerRef(it.key, Role.MODERATOR) },
+            speakers + mods,
             entry.isCanceled,
             Format.fromAbbrev(entry.format)
         )
+    }
 
     private fun toRoom(json: RoomJson): Room {
         fun nameAndDescription(): Pair<String, String> {
