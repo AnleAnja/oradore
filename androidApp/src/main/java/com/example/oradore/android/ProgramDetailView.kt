@@ -87,13 +87,25 @@ fun ProgramDetailView(
             text = entry.description,
             style = typo.body1,
         )
-        Text(
-            text = "Speaker",
-            style = typo.h5,
-            modifier = Modifier.padding(bottom = 4.dp, top = 8.dp)
-        )
-        entry.speakers.forEachIndexed { index, speaker ->
-            SpeakerPreviewView(speaker, index == entry.speakers.size - 1)
+        if(entry.speakers.any { it.second == Role.SPEAKER }) {
+            Text(
+                text = "Speaker",
+                style = typo.h5,
+                modifier = Modifier.padding(bottom = 4.dp, top = 8.dp)
+            )
+            entry.speakers.filter { it.second == Role.SPEAKER }.forEachIndexed { index, speaker ->
+                SpeakerPreviewView(speaker, index == entry.speakers.size - 1)
+            }
+        }
+        if(entry.speakers.any { it.second == Role.MODERATOR }) {
+            Text(
+                text = "Moderation",
+                style = typo.h5,
+                modifier = Modifier.padding(bottom = 4.dp, top = 8.dp)
+            )
+            entry.speakers.filter { it.second == Role.MODERATOR }.forEachIndexed { index, speaker ->
+                SpeakerPreviewView(speaker, index == entry.speakers.size - 1)
+            }
         }
     }
 }
