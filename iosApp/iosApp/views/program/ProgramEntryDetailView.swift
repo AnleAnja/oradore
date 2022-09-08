@@ -15,7 +15,7 @@ struct ProgramEntryDetailView: View {
     
     var body: some View {
         let formatColor = Color(hexStringToUIColor(hex: entry.format.hexColor))
-
+        
         ScrollView {
             VStack (alignment: .leading) {
                 HStack {
@@ -45,9 +45,24 @@ struct ProgramEntryDetailView: View {
                 Text(entry.description_)
                     .font(.callout)
                 Divider()
-                Text("Speaker")
-                    .font(.title2)
-                SpeakerPreviewView(speakers: entry.speakerWithRoles)
+                if entry.speakerWithRoles.contains { speaker in
+                    speaker.role == Role.speaker
+                } {
+                    Text("Speaker")
+                        .font(.title2)
+                    SpeakerPreviewView(speakers: entry.speakerWithRoles.filter({ speaker in
+                        speaker.role == Role.speaker
+                    }))
+                }
+                if entry.speakerWithRoles.contains { speaker in
+                    speaker.role == Role.moderator
+                } {
+                    Text("Moderation")
+                        .font(.title2)
+                    SpeakerPreviewView(speakers: entry.speakerWithRoles.filter({ speaker in
+                        speaker.role == Role.moderator
+                    }))
+                }
             }
             .padding(.leading)
             .padding(.trailing)
