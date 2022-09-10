@@ -22,6 +22,7 @@ struct SpeakerDetailView: View {
         speakerBioView()
       }
       .padding()
+      .navigationBarTitleDisplayMode(.inline)
     }
   }
   

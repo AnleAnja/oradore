@@ -62,13 +62,13 @@ private fun SpeakerBioView(
 
     Divider(
         thickness = 2.dp,
-        modifier = Modifier.padding(top = 8.dp)
+        modifier = Modifier.padding(top = MaterialTheme.paddingDefault())
     )
 
     Text(
         text = speaker.bio,
         style = MaterialTheme.fontBody(),
-        modifier = Modifier.padding(top = 8.dp)
+        modifier = Modifier.padding(top = MaterialTheme.paddingDefault())
     )
 }
 
