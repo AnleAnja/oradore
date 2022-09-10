@@ -161,7 +161,7 @@ private fun ProgramEntryPreviewView(
 }
 
 @Composable
-private fun SpeakerPreviewView(speakers: Pair<Speaker, Role>, isLast: Boolean) {
+fun SpeakerPreviewView(speakers: Pair<Speaker, Role>, isLast: Boolean) {
     val speaker = speakers.first
 
     Row(

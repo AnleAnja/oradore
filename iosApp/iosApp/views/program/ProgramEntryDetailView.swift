@@ -21,7 +21,7 @@ struct ProgramEntryDetailView: View {
                 HStack {
                     Text(entry.format.label)
                         .foregroundColor(formatColor)
-                        .font(.caption)
+                        .font(.footnote.bold())
                     Spacer()
                     Image(systemName: viewModel.getFavStateIcon(entryId: entry.id))
                         .foregroundColor(.yellow)
@@ -29,21 +29,24 @@ struct ProgramEntryDetailView: View {
                             viewModel.toggleFav(programEntry: entry)
                         }
                 }
-                Text(entry.name).font(.title)
-                HStack {
-                    Image(systemName: "clock")
-                    Text(timeFormatter(time: entry.timeRange.start) + " - " + timeFormatter(time: entry.timeRange.end) + " Uhr")
-                        .font(.caption2)
+                Text(entry.name)
+                    .font(.title)
+                VStack {
+                    HStack {
+                        Image(systemName: "clock")
+                        Text(timeFormatter(time: entry.timeRange.start) + " - " + timeFormatter(time: entry.timeRange.end) + " Uhr")
+                            .font(.footnote)
+                    }
+                    HStack {
+                        Image(systemName: "location")
+                        Text(entry.room.name)
+                            .font(.footnote)
+                    }
                 }
-                .padding(.top)
-                HStack {
-                    Image(systemName: "location")
-                    Text(entry.room.name)
-                        .font(.caption2)
-                }
-                .padding(.bottom)
+                .padding(.bottom, 4)
+                .padding(.top, 1)
                 Text(entry.description_)
-                    .font(.callout)
+                    .font(.body)
                 Divider()
                 if entry.speakerWithRoles.contains { speaker in
                     speaker.role == Role.speaker
@@ -67,5 +70,6 @@ struct ProgramEntryDetailView: View {
             .padding(.leading)
             .padding(.trailing)
         }
+        .navigationBarTitleDisplayMode(.inline)
     }
 }
