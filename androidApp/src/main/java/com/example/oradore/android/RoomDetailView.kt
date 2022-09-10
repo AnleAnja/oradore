@@ -12,6 +12,9 @@ import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import coil.compose.SubcomposeAsyncImage
+import com.example.oradore.android.styling.fontSubheadline
+import com.example.oradore.android.styling.fontTitle
+import com.example.oradore.android.styling.paddingDefault
 import com.example.oradore.models.Room
 import com.example.oradore.models.RoomLocation
 
@@ -36,17 +39,17 @@ private fun RoomInfoView(room: Room, buildingInfo: String?) {
         Spacer(modifier = Modifier.fillMaxWidth())
         Text(
             text = room.name,
-            style = MaterialTheme.typography.h5
+            style = MaterialTheme.fontTitle()
         )
         if (room.desc.isNotEmpty())
             Text(
                 text = room.desc,
-                style = MaterialTheme.typography.subtitle2
+                style = MaterialTheme.fontSubheadline()
             )
         if (buildingInfo != null)
             Text(
                 text = buildingInfo,
-                style = MaterialTheme.typography.subtitle2
+                style = MaterialTheme.fontSubheadline()
             )
         Spacer(modifier = Modifier.fillMaxWidth())
     }
@@ -57,7 +60,7 @@ private fun RoomInfoWithLocationView(room: Room, location: RoomLocation, maxImag
     Column(
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier.padding(8.dp)
+        modifier = Modifier.padding(MaterialTheme.paddingDefault())
     ) {
         RoomInfoView(room, location.buildingInfo)
         SubcomposeAsyncImage(
