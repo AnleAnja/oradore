@@ -26,9 +26,12 @@ class AppViewModel: ObservableObject {
     private(set) var rooms: [Room] = []
     
     let api: NetworkApi
+    let storage: FavoritesStorage
     
-    init(api: NetworkApi) {
+    init(api: NetworkApi, storage: FavoritesStorage) {
         self.api = api
+        self.storage = storage
+        self.favoriteProgramEntryIds = storage.getFavorites()
     }
     
     func fetchProgramEntries() {
@@ -61,11 +64,13 @@ class AppViewModel: ObservableObject {
     
     private func fav(programEntry: ProgramEntry) {
         favoriteProgramEntryIds.append(programEntry.id)
+        storage.saveFavorites(favorites: favoriteProgramEntryIds)
     }
     
     private func unFav(programEntry: ProgramEntry) {
         if let index = favoriteProgramEntryIds.firstIndex(of: programEntry.id) {
             favoriteProgramEntryIds.remove(at: index)
+            storage.saveFavorites(favorites: favoriteProgramEntryIds)
         }
     }
     

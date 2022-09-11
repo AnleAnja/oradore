@@ -3,7 +3,6 @@ package com.example.oradore.android
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
-import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.oradore.api.GroupProgramEntries
@@ -11,13 +10,13 @@ import com.example.oradore.api.NetworkApi
 import com.example.oradore.models.ProgramEntry
 import com.example.oradore.models.Room
 import com.example.oradore.models.Speaker
+import com.example.oradore.storage.FavoritesStorage
 import kotlinx.coroutines.launch
 
-class AppViewModel(
-    private val savedState: SavedStateHandle,
-) : ViewModel() {
+class AppViewModel() : ViewModel() {
 
     lateinit var api: NetworkApi
+    lateinit var storage: FavoritesStorage
 
     var screen by mutableStateOf(0)
 
@@ -31,6 +30,10 @@ class AppViewModel(
 
     var speakers by mutableStateOf(emptyList<Speaker>())
         private set
+
+    fun init() {
+        favoriteProgramEntries = storage.getFavorites().toSet()
+    }
 
     fun fetchProgramEntries() {
         viewModelScope.launch {
@@ -56,10 +59,12 @@ class AppViewModel(
 
     private fun fav(programEntryId: String) {
         favoriteProgramEntries = favoriteProgramEntries + programEntryId
+        storage.saveFavorites(favoriteProgramEntries.toList())
     }
 
     private fun unFav(programEntryId: String) {
         favoriteProgramEntries = favoriteProgramEntries - programEntryId
+        storage.saveFavorites(favoriteProgramEntries.toList())
     }
 
     fun toggleFav(programEntryId: String) {
