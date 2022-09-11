@@ -30,7 +30,7 @@ struct MainView: View {
         .onAppear {
           viewModel.fetchRooms()
         }
-      FavoritesView(favorites: viewModel.favorites())
+      FavoritesView(favorites: viewModel.favorites)
         .tabItem {
           Label("Favoriten", systemImage: "star")
         }

@@ -25,6 +25,7 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import coil.compose.SubcomposeAsyncImage
+import com.example.oradore.android.styling.spacingBetweenText
 import com.example.oradore.api.GroupProgramEntries
 import com.example.oradore.models.ProgramEntry
 import com.example.oradore.models.Role
@@ -49,6 +50,7 @@ fun ProgramListView(
     }
 
     val collapsed = remember { mutableStateOf(emptySet<Long>()) }
+    val hline = "──────────────────────────────────────────────────────"
 
     LazyColumn( // LazyVStack / List
         modifier = Modifier.fillMaxWidth()
@@ -64,14 +66,26 @@ fun ProgramListView(
                         horizontalArrangement = Arrangement.Center,
                         verticalAlignment = Alignment.CenterVertically
                     ) {
-                        Spacer(modifier = Modifier.weight(1f))
                         Text(
-                            text = "··· ab ${start.formated} ···",
+                            text = hline,
+                            modifier = Modifier
+                                .weight(1f)
+                                .padding(start = 10.dp, end = MaterialTheme.spacingBetweenText()),
+                            maxLines = 1
+                        )
+                        Text(
+                            text = start.formated,
                             textAlign = TextAlign.Center,
                             style = MaterialTheme.typography.body2,
                             fontWeight = FontWeight.Bold
                         )
-                        Spacer(modifier = Modifier.weight(1f))
+                        Text(
+                            text = hline,
+                            modifier = Modifier
+                                .weight(1f)
+                                .padding(start = MaterialTheme.spacingBetweenText()),
+                            maxLines = 1
+                        )
                         IconButton(
                             modifier = Modifier
                                 .padding(end = 10.dp)
