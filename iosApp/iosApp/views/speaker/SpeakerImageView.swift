@@ -18,6 +18,6 @@ struct SpeakerImageView: View {
       ProgressView()
     }
     .clipShape(Circle())
-    .frame(width: 64, height: 64)
+    .frame(width: 55, height: 55)
   }
 }

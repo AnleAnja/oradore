@@ -86,16 +86,15 @@ struct ProgramEntryView : View {
             HStack {
                 Text(programEntry.format.label)
                     .foregroundColor(formatColor)
-                    .font(.caption)
+                    .font(.footnote.bold())
                 Spacer()
                 Image(systemName: viewModel.getFavStateIcon(entryId: programEntry.id))
                     .foregroundColor(.yellow)
             }
-            VStack (alignment: .leading) {
-                Text(timeFormatter(time: programEntry.timeRange.start) + " - " + timeFormatter(time: programEntry.timeRange.end) + " Uhr")
-                Text(programEntry.room.name)
-            }.font(.caption2)
-            Text(programEntry.name).font(.title)
+            Text(timeFormatter(time: programEntry.timeRange.start) + " - " + timeFormatter(time: programEntry.timeRange.end) + " Uhr" + " in \(programEntry.room.name)")
+                .font(.footnote)
+            Text(programEntry.name)
+                .font(.title)
         }
         Spacer()
         SpeakerPreviewView(speakers: programEntry.speakerWithRoles)

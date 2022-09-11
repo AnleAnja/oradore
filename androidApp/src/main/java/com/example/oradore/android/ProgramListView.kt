@@ -26,7 +26,7 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import coil.compose.SubcomposeAsyncImage
-import com.example.oradore.android.styling.spacingBetweenText
+import com.example.oradore.android.styling.*
 import com.example.oradore.api.GroupProgramEntries
 import com.example.oradore.models.ProgramEntry
 import com.example.oradore.models.Role
@@ -64,8 +64,8 @@ fun ProgramListView(
                     Row(
                         modifier = Modifier
                             .fillParentMaxWidth()
-                            .background(headerBackground)
-                            .height(25.dp),
+                            .height(MaterialTheme.iconButtonSize()),
+                            .background(headerBackground),
                         horizontalArrangement = Arrangement.Center,
                         verticalAlignment = Alignment.CenterVertically
                     ) {
@@ -80,7 +80,7 @@ fun ProgramListView(
                         Text(
                             text = start.formated,
                             textAlign = TextAlign.Center,
-                            style = MaterialTheme.typography.body2,
+                            style = MaterialTheme.fontHeadline(),
                             fontWeight = FontWeight.Bold,
                             color = headerForeground
                         )
@@ -95,7 +95,7 @@ fun ProgramListView(
                         IconButton(
                             modifier = Modifier
                                 .padding(end = 10.dp)
-                                .size(30.dp),
+                                .size(MaterialTheme.iconButtonSize()),
                             onClick = {
                                 if (collapsed.value.contains(start)) {
                                     collapsed.value -= start
@@ -130,12 +130,10 @@ private fun ProgramEntryPreviewView(
     viewModel: AppViewModel,
     onClick: (ProgramEntry) -> Unit
 ) {
-    val typo = MaterialTheme.typography
-
     Row( // HStack
         modifier = Modifier
             .clickable(onClick = { onClick(programEntry) })
-            .padding(8.dp)
+            .padding(MaterialTheme.paddingDefault())
             .fillMaxWidth()
             .height(IntrinsicSize.Min),
         horizontalArrangement = Arrangement.SpaceBetween
@@ -146,15 +144,16 @@ private fun ProgramEntryPreviewView(
                 .fillMaxHeight(1f)
                 .width(2.dp)
         )
-        Column(Modifier.padding(start = 8.dp)) { // VStack
+        Column(Modifier.padding(start = MaterialTheme.paddingDefault())) { // VStack
             Row(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Text(
                     text = programEntry.format.label,
-                    style = typo.body2,
-                    modifier = Modifier.padding(bottom = 4.dp),
+                    style = MaterialTheme.fontFootnote(),
+                    modifier = Modifier
+                        .padding(bottom = MaterialTheme.spacingBetweenText()),
                     color = programEntry.format.hexColor.color,
                     fontWeight = FontWeight.Bold
                 )
@@ -163,13 +162,15 @@ private fun ProgramEntryPreviewView(
 
             Text(
                 text = "${programEntry.timeRange.formated} in ${programEntry.room.name}",
-                style = typo.body2,
-                modifier = Modifier.padding(bottom = 4.dp)
+                style = MaterialTheme.fontFootnote(),
+                modifier = Modifier
+                    .padding(bottom = MaterialTheme.spacingBetweenText())
             )
             Text(
                 text = programEntry.name,
-                style = typo.h6,
-                modifier = Modifier.padding(bottom = 4.dp)
+                style = MaterialTheme.fontTitle(),
+                modifier = Modifier
+                    .padding(bottom = MaterialTheme.spacingBetweenText())
             )
             programEntry.speakers.forEachIndexed { index, speaker ->
                 SpeakerPreviewView(speaker, index == programEntry.speakers.size - 1)
@@ -180,36 +181,38 @@ private fun ProgramEntryPreviewView(
 }
 
 @Composable
-private fun SpeakerPreviewView(speakers: Pair<Speaker, Role>, isLast: Boolean) {
-    val typo = MaterialTheme.typography
+fun SpeakerPreviewView(speakers: Pair<Speaker, Role>, isLast: Boolean) {
     val speaker = speakers.first
 
     Row(
         modifier = Modifier
-            .padding(top = 4.dp)
+            .padding(top = MaterialTheme.spacingBetweenText())
             .fillMaxWidth(),
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
         Column(Modifier.weight(1f)) {
             Text(
                 text = "${speaker.firstName} ${speaker.lastName}",
-                style = typo.body1,
-                modifier = Modifier.padding(bottom = 4.dp),
+                style = MaterialTheme.fontHeadline(),
+                modifier = Modifier
+                    .padding(bottom = MaterialTheme.spacingBetweenText()),
             )
             if (speaker.company.isNotEmpty()) {
                 Text(
                     text = speaker.company,
-                    style = typo.caption,
-                    modifier = Modifier.padding(bottom = 4.dp),
-                    color = Color.Gray
+                    style = MaterialTheme.fontCaption(),
+                    modifier = Modifier
+                        .padding(bottom = MaterialTheme.spacingBetweenText()),
+                    color = MaterialTheme.foregroundColorSecondary()
                 )
             }
             if (speaker.jobTitle.isNotEmpty()) {
                 Text(
                     text = speaker.jobTitle,
-                    style = typo.caption,
-                    modifier = Modifier.padding(bottom = if (isLast) 0.dp else 4.dp),
-                    color = Color.Gray
+                    style = MaterialTheme.fontCaption(),
+                    modifier = Modifier
+                        .padding(bottom = if (isLast) 0.dp else MaterialTheme.spacingBetweenText()),
+                    color = MaterialTheme.foregroundColorSecondary()
                 )
             }
         }

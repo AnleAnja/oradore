@@ -13,10 +13,7 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
-import com.example.oradore.android.styling.fontBody
-import com.example.oradore.android.styling.fontCaption
-import com.example.oradore.android.styling.fontHeadline
-import com.example.oradore.android.styling.fontSubheadline
+import com.example.oradore.android.styling.*
 import com.example.oradore.models.Room
 
 @Composable
@@ -48,7 +45,7 @@ fun RoomView(
     Column(
         modifier = Modifier
             .clickable(onClick = { onClick(room) })
-            .padding(8.dp)
+            .padding(MaterialTheme.paddingDefault())
     ) {
         Text(
             text = room.name,
@@ -57,7 +54,8 @@ fun RoomView(
         if (room.desc.isNotEmpty()) {
             Text(
                 text = room.desc,
-                style = MaterialTheme.fontBody()
+                style = MaterialTheme.fontBody(),
+                color = MaterialTheme.foregroundColorSecondary()
             )
         }
     }

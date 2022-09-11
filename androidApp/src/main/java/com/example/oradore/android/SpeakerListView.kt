@@ -17,6 +17,10 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import coil.compose.SubcomposeAsyncImage
+import com.example.oradore.android.styling.fontCaption
+import com.example.oradore.android.styling.fontHeadline
+import com.example.oradore.android.styling.foregroundColorSecondary
+import com.example.oradore.android.styling.spacingBetweenText
 import com.example.oradore.models.Speaker
 
 @Composable
@@ -50,7 +54,6 @@ fun SpeakerView(
     speaker: Speaker,
     onClick: (Speaker) -> Unit
 ) {
-    val typo = MaterialTheme.typography
     Row(
         modifier = Modifier
             .padding(top = 10.dp, start = 10.dp)
@@ -69,23 +72,35 @@ fun SpeakerView(
         Column {
             Text(
                 text = "${speaker.firstName} ${speaker.lastName}",
-                style = typo.body1,
-                modifier = Modifier.padding(bottom = 4.dp, start = 10.dp),
+                style = MaterialTheme.fontHeadline(),
+                modifier = Modifier.
+                padding(
+                    bottom = MaterialTheme.spacingBetweenText(),
+                    start = 10.dp
+                ),
             )
             if (speaker.company.isNotEmpty()) {
                 Text(
                     text = speaker.company,
-                    style = typo.caption,
-                    modifier = Modifier.padding(bottom = 4.dp, start = 10.dp),
-                    color = Color.Gray
+                    style = MaterialTheme.fontCaption(),
+                    modifier = Modifier.
+                    padding(
+                        bottom = MaterialTheme.spacingBetweenText(),
+                        start = 10.dp
+                    ),
+                    color = MaterialTheme.foregroundColorSecondary()
                 )
             }
             if (speaker.jobTitle.isNotEmpty()) {
                 Text(
                     text = speaker.jobTitle,
-                    style = typo.caption,
-                    modifier = Modifier.padding(bottom = 4.dp, start = 10.dp),
-                    color = Color.Gray
+                    style = MaterialTheme.fontCaption(),
+                    modifier = Modifier.
+                    padding(
+                        bottom = MaterialTheme.spacingBetweenText(),
+                        start = 10.dp
+                    ),
+                    color = MaterialTheme.foregroundColorSecondary()
                 )
             }
         }

@@ -22,6 +22,8 @@ import androidx.navigation.compose.rememberNavController
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
+import com.example.oradore.android.styling.fontCaption
+import com.example.oradore.android.styling.fontFootnote
 
 sealed class BottomNavigationScreens(val route: String, val icon: ImageVector, val index: Int) {
     object Program : BottomNavigationScreens("Programm", Icons.Rounded.List, 0)
@@ -55,7 +57,7 @@ fun BottomBar(
                 navItems.forEach { screen ->
                     BottomNavigationItem(
                         icon = { Icon(screen.icon, "Icon") },
-                        label = { Text(screen.route) },
+                        label = { Text(screen.route, style = MaterialTheme.fontCaption()) },
                         selected = currentRoute == screen.route,
                         onClick = {
                             viewModel.screen = screen.index

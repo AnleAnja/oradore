@@ -14,11 +14,13 @@ struct RoomDetailView: View {
   let room: Room
   
   var body: some View {
-    if let location = room.roomLocation {
-      viewWithLocation(location)
-    } else {
-      roomInfo(buildingInfo: nil)
-    }
+    Group {
+      if let location = room.roomLocation {
+        viewWithLocation(location)
+      } else {
+        roomInfo(buildingInfo: nil)
+      }
+    }.navigationBarTitleDisplayMode(.inline)
   }
   
   private func roomInfo(buildingInfo: String?) -> some View {
