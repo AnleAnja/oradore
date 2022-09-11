@@ -3,6 +3,7 @@ package com.example.oradore.android
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -50,6 +51,9 @@ fun ProgramListView(
     }
 
     val collapsed = remember { mutableStateOf(emptySet<Long>()) }
+    val hline = "──────────────────────────────────────────────────────"
+    val headerBackground = if (isSystemInDarkTheme()) Color.Black else Color.White
+    val headerForeground = if (isSystemInDarkTheme()) Color.White else Color.Black
 
     LazyColumn( // LazyVStack / List
         modifier = Modifier.fillMaxWidth()
@@ -60,18 +64,34 @@ fun ProgramListView(
                     Row(
                         modifier = Modifier
                             .fillParentMaxWidth()
-                            .background(Color.White)
                             .height(MaterialTheme.iconButtonSize()),
+                            .background(headerBackground),
                         horizontalArrangement = Arrangement.Center,
                         verticalAlignment = Alignment.CenterVertically
                     ) {
-                        Spacer(modifier = Modifier.weight(1f))
                         Text(
-                            text = "··· ab ${start.formated} ···",
-                            textAlign = TextAlign.Center,
-                            style = MaterialTheme.fontHeadline()
+                            text = hline,
+                            modifier = Modifier
+                                .weight(1f)
+                                .padding(start = 10.dp, end = MaterialTheme.spacingBetweenText()),
+                            maxLines = 1,
+                            color = headerForeground
                         )
-                        Spacer(modifier = Modifier.weight(1f))
+                        Text(
+                            text = start.formated,
+                            textAlign = TextAlign.Center,
+                            style = MaterialTheme.fontHeadline(),
+                            fontWeight = FontWeight.Bold,
+                            color = headerForeground
+                        )
+                        Text(
+                            text = hline,
+                            modifier = Modifier
+                                .weight(1f)
+                                .padding(start = MaterialTheme.spacingBetweenText()),
+                            maxLines = 1,
+                            color = headerForeground
+                        )
                         IconButton(
                             modifier = Modifier
                                 .padding(end = 10.dp)
@@ -170,7 +190,7 @@ fun SpeakerPreviewView(speakers: Pair<Speaker, Role>, isLast: Boolean) {
             .fillMaxWidth(),
         horizontalArrangement = Arrangement.SpaceBetween
     ) {
-        Column {
+        Column(Modifier.weight(1f)) {
             Text(
                 text = "${speaker.firstName} ${speaker.lastName}",
                 style = MaterialTheme.fontHeadline(),

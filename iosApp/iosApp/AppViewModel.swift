@@ -11,10 +11,10 @@ import SwiftUI
 import shared
 
 
-class AppViewModel: ObservableObject {
-  
+class AppViewModel: ObservableObject, ViewModelObserver {
+
     @Published
-    private(set) var favoriteProgramEntryIds : [String] = []
+    private(set) var favorites : [GroupProgramEntries] = []
     
     @Published
     private(set) var programEntries: [GroupProgramEntries] = []
@@ -25,56 +25,51 @@ class AppViewModel: ObservableObject {
     @Published
     private(set) var rooms: [Room] = []
     
-    let api: NetworkApi
+    let viewModel: SharedViewModel
     
-    init(api: NetworkApi) {
-        self.api = api
+    init(api: NetworkApi, storage: FavoritesStorage) {
+        self.viewModel = SharedViewModel(api: api, storage: storage)
+        self.viewModel.registerObserver(observer: self)
+    }
+    
+    deinit {
+        self.viewModel.unregisterObserver(observer: self)
+    }
+    
+    func updateFavorites(favorites: [GroupProgramEntries]) {
+        self.favorites = favorites
+    }
+    
+    func updateProgramEntries(entries: [GroupProgramEntries]) {
+        self.programEntries = entries
+    }
+    
+    func updateRooms(rooms: [Room]) {
+        self.rooms = rooms
+    }
+    
+    func updateSpeakers(speakers: [Speaker]) {
+        self.speakers = speakers
     }
     
     func fetchProgramEntries() {
-        api.fetchProgramEntries { entries, _ in
-            if let entries = entries {
-                self.programEntries = entries
-            }
-        }
+        viewModel.fetchProgramEntries()
     }
     
     func fetchSpeakers() {
-        api.fetchSpeakers { speakers, _ in
-            if let speakers = speakers {
-                self.speakers = speakers
-            }
-        }
+        viewModel.fetchSpeakers()
     }
     
     func fetchRooms() {
-        api.fetchRooms { rooms, _ in
-            if let rooms = rooms {
-                self.rooms = rooms
-            }
-        }
+        viewModel.fetchRooms()
     }
     
     func isFavorite(entryId: String) -> Bool {
-        return favoriteProgramEntryIds.contains(entryId)
-    }
-    
-    private func fav(programEntry: ProgramEntry) {
-        favoriteProgramEntryIds.append(programEntry.id)
-    }
-    
-    private func unFav(programEntry: ProgramEntry) {
-        if let index = favoriteProgramEntryIds.firstIndex(of: programEntry.id) {
-            favoriteProgramEntryIds.remove(at: index)
-        }
+        viewModel.isFavorite(programEntryId: entryId)
     }
     
     func toggleFav(programEntry: ProgramEntry) {
-        if (isFavorite(entryId: programEntry.id)) {
-            unFav(programEntry: programEntry)
-        } else {
-            fav(programEntry: programEntry)
-        }
+        viewModel.toggleFav(programEntryId: programEntry.id)
     }
     
     func getFavStateIcon(entryId: String) -> String {
@@ -87,18 +82,7 @@ class AppViewModel: ObservableObject {
         return iconName
     }
   
-    func filterProgramEntries(`where` predicate: (ProgramEntry) -> Bool) -> [GroupProgramEntries] {
-        programEntries.reduce(into: []) { acc, group in
-            let start = group.start
-            let entries = group.entries
-            let newEntries = entries.filter(predicate)
-            if !newEntries.isEmpty {
-                acc.append(GroupProgramEntries(start: start, entries: newEntries))
-            }
-        }
-    }
-    
-    func favorites() -> [GroupProgramEntries] {
-        filterProgramEntries(where: { isFavorite(entryId: $0.id) })
+    func filterProgramEntries(`where` predicate: @escaping (ProgramEntry) -> Bool) -> [GroupProgramEntries] {
+        viewModel.filterProgramEntries { predicate($0) ? true : false }
     }
 }

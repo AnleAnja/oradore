@@ -23,22 +23,26 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.example.oradore.api.NetworkApi
+import com.example.oradore.storage.FavoritesStorage
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        val api = NetworkApi("http://advp44.gm.fh-koeln.de:9090/")
+        val storage = FavoritesStorage(this)
+
         setContent {
             OradoreTheme {
-                Content()
+                val viewModel: AppViewModel = viewModel()
+                viewModel.init(api, storage)
+                Content(viewModel)
             }
         }
     }
 }
 
 @Composable
-fun Content() {
-    val viewModel: AppViewModel = viewModel()
-    viewModel.api = NetworkApi("http://advp44.gm.fh-koeln.de:9090/")
+fun Content(viewModel: AppViewModel) {
     Scaffold(
         topBar = { TopBar(viewModel) }
     ) { padding -> // We need to pass scaffold's inner padding to content. That's why we use Box.
@@ -136,7 +140,7 @@ fun MainScreen(navController: NavController, viewModel: AppViewModel) {
             }
             composable(BottomNavigationScreens.Favorites.route) {
                 textState.value = TextFieldValue("")
-                ProgramListView(viewModel.favorites(), textState, viewModel) { programEntry ->
+                ProgramListView(viewModel.favorites, textState, viewModel) { programEntry ->
                     navigateToProgramDetailScreen(navController, programEntry.id)
                 }
             }
