@@ -33,19 +33,16 @@ class MainActivity : AppCompatActivity() {
 
         setContent {
             OradoreTheme {
-                Content(api, storage)
+                val viewModel: AppViewModel = viewModel()
+                viewModel.init(api, storage)
+                Content(viewModel)
             }
         }
     }
 }
 
 @Composable
-fun Content(api: NetworkApi, storage: FavoritesStorage) {
-    val viewModel: AppViewModel = viewModel()
-    viewModel.api = api
-    viewModel.storage = storage
-    viewModel.init()
-
+fun Content(viewModel: AppViewModel) {
     Scaffold(
         topBar = { TopBar(viewModel) }
     ) { padding -> // We need to pass scaffold's inner padding to content. That's why we use Box.
@@ -143,7 +140,7 @@ fun MainScreen(navController: NavController, viewModel: AppViewModel) {
             }
             composable(BottomNavigationScreens.Favorites.route) {
                 textState.value = TextFieldValue("")
-                ProgramListView(viewModel.favorites(), textState, viewModel) { programEntry ->
+                ProgramListView(viewModel.favorites, textState, viewModel) { programEntry ->
                     navigateToProgramDetailScreen(navController, programEntry.id)
                 }
             }
