@@ -64,7 +64,7 @@ fun ProgramListView(
                     Row(
                         modifier = Modifier
                             .fillParentMaxWidth()
-                            .height(MaterialTheme.iconButtonSize()),
+                            .height(MaterialTheme.iconButtonSize())
                             .background(headerBackground),
                         horizontalArrangement = Arrangement.Center,
                         verticalAlignment = Alignment.CenterVertically
