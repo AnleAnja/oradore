@@ -2,7 +2,7 @@
 
 ## Beschreibung
 
-In diesem Repository sind der Source Code und die Folien zu dem Vortrag **"Fullstack Mobile Development mit Kotlin Multiplatform"** von Anja Bertels und Alex Dobrynin auf der [Digital XChange 2022](https://digital-xchange.de/programm-2022/) zu finden.
+In diesem Repository sind der Source Code und die [Folien](https://github.com/AnleAnja/oradore/blob/main/slides.pdf) zu dem Vortrag **"Fullstack Mobile Development mit Kotlin Multiplatform"** von Anja Bertels und Alex Dobrynin auf der [Digital XChange 2022](https://digital-xchange.de/programm-2022/) zu finden.
 
 In dem Vortrag wurde die Technologie [Kotlin Multiplatform](https://kotlinlang.org/docs/multiplatform.html) als ein Ansatz zur Cross-Platform Entwicklung vorgestellt. Dies wurde anhand einer Anwendung gezeigt, die das gesamte Koferenzprogramm, alle Speaker und alle Räume der Digital XChange mit allen relevanten Informationen darstellt. Außerdem wurden einige zusätzliche Features umgesetzt.
 
