@@ -31,7 +31,7 @@ struct ProgramEntryDetailView: View {
                 }
                 Text(entry.name)
                     .font(.title)
-                VStack {
+                VStack(alignment: .leading) {
                     HStack {
                         Image(systemName: "clock")
                         Text(timeFormatter(time: entry.timeRange.start) + " - " + timeFormatter(time: entry.timeRange.end) + " Uhr")
